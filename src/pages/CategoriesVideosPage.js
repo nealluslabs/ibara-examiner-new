@@ -24,7 +24,7 @@ export default function CategoriesVideoPage() {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const { allCategories } = useSelector((state) => state.group);
-   console.log("CATEGORIES ARE ALLS:",allCategories)
+   console.log("TREATMENTS ARE AL:",allCategories)
  
    const dummyData = [
     {uid: 1, imageUrl: '', title: "Finance", body: "lorem ard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompani"},
@@ -96,13 +96,13 @@ const allIncubatorVideos = data?.length ? (
                
                  navigate('/dashboard/add-course')
               }}>
-                {"ADD COURSE"}
+                {"ADD TREATMENT"}
             </Button>
 
         </div>
 
 
-      <h1 style={{position:"relative",left:"15px",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>COURSES</h1>
+      <h1 style={{position:"relative",left:"15px",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>TREATMENTS</h1>
       {/* <SearchBox style={{ width: '100%' }} /> */}
       <br/>
       {/* <Grid  container direction="row" justifyContent="flex-end" alignItems="flex-end">

@@ -8,59 +8,10 @@ import { isItLoading, saveAllGroup ,saveEmployeer,
           saveCategoryVideos,saveCategoryChapters,
         saveChapterSessions,saveChapterQuizzes,
         saveSubjectInfo,saveLessonInfo,saveQuizInfo,
-        saveChapterInfo,saveTeacherInfo} from '../reducers/group.slice';
+        saveChapterInfo,saveTeacherInfo,saveComplaintInfo} from '../reducers/group.slice';
 import firebase from "firebase/app";
 
 import { getTeachers } from './job.action';
-
-export const createGroup = (groupData, user, file, navigate, setLoading, url) => async (dispatch) => {
-  var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  var today  = new Date();
-   
-  db.collection("groups").add({
-    groupName: groupData.groupName,
-    noOfSavers: groupData.noOfSavers,
-    pin: groupData.pin,
-    startDate: groupData.startDate,
-    amount: groupData.amount,
-    status: groupData.status.toLowerCase(),
-    imageUrl: url,
-    admins: [user.id],
-    members: [user.id],
-    accountCreated: today.toLocaleDateString("en-US", options),
-}).then((res)=>{
-    console.log("RESPONSE ID: ", res.id);
-    return db.collection('groups').doc(res.id).update({
-      groupId: res.id,
-    }).then(() => {
-        db.collection('groups').doc(res.id).collection('membersCollection').add({
-            memberName: user.name,
-            memberEmail: user.email,
-            memberImageUrl: user.profileImg,
-            invitedBy: user.id,
-            invite: 0,
-            paid: 0,
-            users: [user.id, user.id],
-            sentAt: today.toLocaleDateString("en-US", options),
-          }).then((resp) => {
-            console.log("membersCollection RESPONSE: ", resp);
-            setLoading(false);
-            db.collection('groups').doc(res.id).collection('membersCollection').doc(resp.id).update({
-              id: resp.id,
-            })
-          }).then(() => {
-            notifySuccessFxn("Group Created")
-            setLoading(false);
-            navigate('/dashboard/home', { replace: true });
-          }).catch((err) => {
-            console.error("Error creating group: ", err);
-            var errorMessage = err.message;
-            notifyErrorFxn(errorMessage);
-            setLoading(false);
-          })
-    })
-  })
-}
 
 
 export const uploadUserSettings = (groupData = 0, file = 0, user = 0) => async (dispatch) => {
@@ -205,8 +156,6 @@ if(file.length === 0 && groupData.newPassword){
 
 
 
-
-
 }
 
 export const fetchMyGroups = (coolers) => async (dispatch) => {
@@ -240,33 +189,7 @@ export const fetchMyGroups = (coolers) => async (dispatch) => {
 };
 
 
-// export const fetchMyGroups = (coolers) => async (dispatch) => {
-//   console.log("Cilcked...")
-//   dispatch(isItLoading(true));
-//     if(coolers.length){
-//       db.collection("groups")
-//       . where('groupId', 'in', coolers)
-//        .get()
-//        .then((snapshot) => {
-//         const myGroups = snapshot.docs.map((doc) => ({ ...doc.data() }));
-//         console.log("DATA::: ", myGroups);
-//         // return
-//       if (myGroups.length) {
-//         dispatch(isItLoading(false));
-//         console.log("My Groups Data:", myGroups);
-//         dispatch(saveMyGroup(myGroups));
-//       } else {
-//           dispatch(isItLoading(false));
-//       }
-//      }).catch((error) => {
-//        console.log("Error getting document:", error);
-//        dispatch(isItLoading(false));
-//      });
-//     }else{
-//       dispatch(saveMyGroup(coolers));
-//       dispatch(isItLoading(false));
-//     }
-//  };
+
 
 
 export const fetchGroups = (adminID) => async (dispatch) => {
@@ -295,8 +218,8 @@ export const fetchGroups = (adminID) => async (dispatch) => {
  export const fetchVideoSection = (chosenSection)=> async(dispatch) =>{
 
   //dispatch(isItLoading(true));
-  db.collection("sections")
-  .where('category', '==', chosenSection)
+  db.collection("TreatmentTests")
+  .where('treatmentId', '==', chosenSection)
    .get()
    .then((snapshot) => {
      const allSectionVids = snapshot.docs.map((doc) => ({ ...doc.data() }));
@@ -313,12 +236,12 @@ export const fetchGroups = (adminID) => async (dispatch) => {
 
    if (allSectionVids.length > 0) {
      //dispatch(isItLoading(false));
-     console.log("ALL sections FROM DATABASE(FOR THIS CATEGORY):", sortedSectionVids);
+     console.log("ALL treatment tests for this TREATMENT:", sortedSectionVids);
      dispatch(saveCategoryVideos(sortedSectionVids));
    } else {
       // dispatch(isItLoading(false));
       dispatch(saveCategoryVideos(sortedSectionVids));
-       console.log("No sections for this category!");
+       console.log("No TREATMENT tests for this TREATMENT!");
    }
  }).catch((error) => {
    console.log("Error getting document:", error);
@@ -489,10 +412,22 @@ export const fetchQuizInfo = (uid) =>async (dispatch) => {
 
 
 export const fetchTeacherInfo = (uid) =>async (dispatch) => {
+  db.collection("Patients").doc(uid).get().then((doc) => {
+ 
+  
+    dispatch(saveTeacherInfo(doc.data()))
+ }).catch((error) => {
+  console.log("Error fetching a particular PATIENT from PATIENTS collection:", error);
+
+});
+};
+
+
+export const fetchComplaintInfo = (uid) =>async (dispatch) => {
   db.collection("teachers").doc(uid).get().then((doc) => {
   console.log()
   
-    dispatch(saveTeacherInfo(doc.data()))
+    dispatch(saveComplaintInfo(doc.data()))
  }).catch((error) => {
   console.log("Error fetching a particular TEACHER from teachers collection:", error);
 
@@ -530,7 +465,7 @@ export const fetchTeacherInfo = (uid) =>async (dispatch) => {
  export const addTeacher = (addObject,navigate) => async (dispatch) => {
 
 
-  db.collection("teachers")
+  db.collection("Patients")
   .where("firstName", "==", addObject.firstName)
   .where("lastName", "==", addObject.lastName)
   .get()
@@ -538,33 +473,35 @@ export const fetchTeacherInfo = (uid) =>async (dispatch) => {
     const existingTeacher = snapshot.docs.map((doc) => ({ ...doc.data() }));
   if (existingTeacher.length) {
    
-    notifyErrorFxn(`This teacher already exists,consider changing the name(s)`)
+    notifyErrorFxn(`This Patient already exists,consider changing the name(s)`)
 
   } else {
      
     
-    db.collection("teachers").add(
+    db.collection("Patients").add(
       {
-        bio:addObject.body,
-        firstName:addObject.firstName,
-        lastName:addObject.lastName,
-        level:addObject.level,
-        imageUrl:addObject.imageUrl,
+        
+      firstName:addObject.firstName,
+      lastName:addObject.lastName,
+      icon:addObject.icon,
+      history:addObject.history,
+      complaint:addObject.complaint,
+      screenTime:addObject.screenTime,
         registeredOn:new Date()
 
       }
     ).then((doc) => {
        //const publicGroups = snapshot.docs.map((doc) => ({ ...doc.data() }));
-       db.collection("teachers").doc(doc.id).update({
+       db.collection("Patients").doc(doc.id).update({
       uid:doc.id
        })
   
-      console.log("the new  teacher's id is",doc.id)
+      console.log("the new  Patient's id is",doc.id)
       dispatch(getTeachers())
-       notifySuccessFxn(`new Teacher ${addObject.firstName + " " + addObject.lastName} added!`)
+       notifySuccessFxn(`new Patient ${addObject.firstName + " " + addObject.lastName} added!`)
        setTimeout(()=>{navigate('/dashboard/teacher-list')},1000)
    }).catch((error) => {
-     console.log("Error adding teacher:", error);
+     console.log("Error adding Patient:", error);
      notifyErrorFxn(error)
   
   
@@ -586,47 +523,48 @@ export const fetchTeacherInfo = (uid) =>async (dispatch) => {
 
 
 
+ export const addComplaint = (addObject,navigate) => async (dispatch) => {
 
 
-
-
-
- export const addSubject = (addObject) => async (dispatch) => {
-
-
-  db.collection("sections")
-  .where("title", "==", addObject.title)
-  .where("category", "==", addObject.category)
+  db.collection("Complaints")
+  .where("name", "==", addObject.complaint)
   .get()
   .then((snapshot) => {
-    const existingSubject = snapshot.docs.map((doc) => ({ ...doc.data() }));
-  if (existingSubject.length) {
+    const existingTeacher = snapshot.docs.map((doc) => ({ ...doc.data() }));
+  if (existingTeacher.length) {
    
-    notifyErrorFxn(`This subject already exists,consider changing the subject name`)
+    notifyErrorFxn(`This complaint already exists,consider changing the name(s)`)
 
   } else {
      
     
-    db.collection("sections").add(
+    db.collection("Complaints").add(
       {
-        body:addObject.body,
-        category:addObject.category,
-        title:addObject.title,
-        subLevel:addObject.level,
-        categoryId:addObject.categoryId,
-        instructor:addObject.instructor
+        
+      complaint:addObject.complaint,
+      treatment:{
+        intervention:addObject.intervention,
+        bloodInvestigation:addObject.bloodInvestigation,
+        referral:addObject.referral,
+        radiology:addObject.radiology,
+        prescription:addObject.prescription
+
+      },
+        registeredOn:new Date()
+
       }
     ).then((doc) => {
        //const publicGroups = snapshot.docs.map((doc) => ({ ...doc.data() }));
-       db.collection("sections").doc(doc.id).update({
+       db.collection("Complaints").doc(doc.id).update({
       uid:doc.id
        })
   
-      console.log("the documents id is",doc.id)
-       notifySuccessFxn(`new subject ${addObject.title} added!`)
-  
+      console.log("the new  Complaints id is",doc.id)
+      dispatch(getTeachers())
+       notifySuccessFxn(`new Complaint ${addObject.complaint} added!`)
+       setTimeout(()=>{navigate('/dashboard/complaint-list')},1000)
    }).catch((error) => {
-     console.log("Error adding subject:", error);
+     console.log("Error adding cOMPLAINT:", error);
      notifyErrorFxn(error)
   
   
@@ -638,7 +576,61 @@ export const fetchTeacherInfo = (uid) =>async (dispatch) => {
 
   }
 }).catch((error) => {
-  console.log("Error adding subject:", error);
+  console.log("Error adding complaint OUTER ERROR:", error);
+  notifyErrorFxn(error)
+
+
+});
+
+ };
+
+
+
+
+
+
+ export const addSubject = (addObject) => async (dispatch) => {
+
+
+  db.collection("TreatmentTests")
+  .where("title", "==", addObject.title)
+  .where("treatmentId", "==", addObject.treatmentId)
+  .get()
+  .then((snapshot) => {
+    const existingSubject = snapshot.docs.map((doc) => ({ ...doc.data() }));
+  if (existingSubject.length) {
+   
+    notifyErrorFxn(`This test already exists,consider changing the subject name`)
+
+  } else {
+     
+    
+    db.collection("TreatmentTests").add(
+      {
+        body:addObject.body?addObject.body:"lorem ipsum",
+        title:addObject.title,
+        treatmentId:addObject.treatmentId,
+        specific:addObject.specific?addObject.specific:"lorem ipsum"
+      }
+    ).then((doc) => {
+       //const publicGroups = snapshot.docs.map((doc) => ({ ...doc.data() }));
+       db.collection("TreatmentTests").doc(doc.id).update({
+      uid:doc.id
+       })
+  
+      console.log("the documents id is",doc.id)
+       notifySuccessFxn(` ${addObject.title} added!`)
+  
+   }).catch((error) => {
+     console.log(`Error adding ${addObject.title} :`, error);
+     notifyErrorFxn(error)
+  
+  
+   });
+
+  }
+}).catch((error) => {
+  console.log("Error adding treatment test OUTSIDE ERROR:", error);
   notifyErrorFxn(error)
 
 
@@ -649,21 +641,23 @@ export const fetchTeacherInfo = (uid) =>async (dispatch) => {
 
  export const updateTeacher = (uid,updateObject,navigate) => async (dispatch) => {
  
-  db.collection("teachers").doc(uid.trim()).update(
+  db.collection("Patients").doc(uid.trim()).update(
     {
-      body:updateObject.body,
+     
       firstName:updateObject.firstName,
       lastName:updateObject.lastName,
-      imageUrl:updateObject.imageUrl,
-      level:updateObject.level,
+      icon:updateObject.icon,
+      history:updateObject.history,
+      complaint:updateObject.complaint,
+      screenTime:updateObject.screenTime,
     }
   ).then((snapshot) => {
      //const publicGroups = snapshot.docs.map((doc) => ({ ...doc.data() }));
      dispatch(getTeachers())
-     notifySuccessFxn("updated Teacher successfully")
+     notifySuccessFxn("updated Patient successfully")
      setTimeout(()=>{navigate('/dashboard/teacher-list')},1000)
  }).catch((error) => {
-   console.log("Error updating document:", error);
+   console.log("Error updating patient:", error);
    notifyErrorFxn(error)
 
 
@@ -1046,17 +1040,17 @@ export const fetchTeacherInfo = (uid) =>async (dispatch) => {
 /*========== do group fetching of categories HERE ======================= */
 
 export const fetchAllCategories = () => async (dispatch) => {
-  var categories = db.collection("categories");
+  var categories = db.collection("Treatments");
   categories.get().then((snapshot) => {
     const groupMembers = snapshot.docs.map((doc) => ({ ...doc.data() }));
-    console.log("ALL CATEGORIES ARE:",groupMembers)
+    console.log("ALL Treatments ARE:",groupMembers)
     if (groupMembers.length) {
     dispatch(saveCategories(groupMembers));
   } else {
-      console.log("No categories in database!");
+      console.log("No treatments in database!");
   }
 }).catch((error) => {
-  console.log("Error getting categories:", error);
+  console.log("Error getting treatments:", error);
 });
 //return user;
 };

@@ -25,10 +25,10 @@ function AddSubject() {
  const [teachersArr,setTeacherArr]=useState([...teachers.map((item)=>(item.firstName + " " + item.lastName))])
   const [loading,setLoading] = useState(false)
   const [title,setTitle] = useState('')
-  const [level,setLevel] = useState(location.state && location.state.levelName?location.state.levelName:" cannot change this field")
-  const [body,setBody] = useState('')
-  const [categoryId,setCategoryId] =useState('')
-  const [instructor,setInstructor]  = useState('')
+  const [treatment,setTreatment] = useState(location.state && location.state.treatment?location.state.treatment:" cannot change this field")
+  const [body,setBody] = useState('lorem ipsum dolor')
+  const [response,setResponse] =useState('')
+  const [specific,setSpecific]  = useState('')
   const [subjectImageUrl,setSubjectImageUrl] = useState('')
 
   const { user } = useSelector((state) => state.auth);
@@ -42,16 +42,14 @@ function AddSubject() {
   const addObject ={
     title,
     body,
-    level:level,
-    categoryId:location.state.uid,
-    category:location.state.levelName,
-    instructor,
-    subjectImageUrl
+    treatmentId:location.state.uid,
+    treatment:location.state.treatment,
+    specific,
   }
 
   const addThisSubject = async(addObject) => {
     
-    if(!title || !body ||!level ||!location.state.levelName||!location.state.uid){
+    if(!title||!location.state.treatment||!location.state.uid){
       notifyErrorFxn("Please make sure to fill in all fields.")
     }
     else{
@@ -85,12 +83,12 @@ function AddSubject() {
 
 
 
-    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>NEW SUBJECT</h1>
+    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>NEW {treatment}</h1>
 
     <Grid item xs={12} sx={{ display: 'flex' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Typography variant="h4" component="p">
-              ADD DETAILS BELOW
+              ADD {treatment.toUpperCase()}
               </Typography>
               <div style={{height:"2px", width:"80%",borderBottom:"1px solid black",position:"absolute",left:"20rem",top:"18rem"}}></div>
             </Box>
@@ -100,12 +98,12 @@ function AddSubject() {
 
      <Grid container spacing={2}>
 
-
+        {/*
          <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
-             LEVEL
+             TREATMENT TYPE
              </div>
       
             </Typography>
@@ -119,7 +117,7 @@ function AddSubject() {
             variant="outlined"
             multiline
             maxRows={2}
-            value= {level}
+            value= {treatment}
             
             disabled={true}
             />
@@ -127,7 +125,7 @@ function AddSubject() {
             
           </Grid>
         </Grid>
-
+          */}
 
 
        
@@ -135,7 +133,7 @@ function AddSubject() {
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
-             TITLE
+             NAME
              </div>
       
             </Typography>
@@ -158,11 +156,22 @@ function AddSubject() {
           </Grid>
         </Grid>
 
+       
+
+    {treatment === "Blood Investigation" &&
+        
+       
+    <Grid container item xs={12} style={{position:"relative",marginTop:"3rem"}} spacing={2}>
+
+       <br/><br/><br/>
+       <div style={{height:"2px", width:"100%",position:"absolute",borderBottom:"1px solid black",left:"0rem",top:"0rem"}}></div>
+
         <Grid container item xs={12} spacing={2}>
+  
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
-             DESCRIPTION
+             SPECIFIC
              </div>
       
             </Typography>
@@ -172,40 +181,12 @@ function AddSubject() {
           <Grid item xs={7}>
             <TextField
             fullWidth
-            placeholder=" enter description"
-            variant="outlined"
-            multiline
-            rows={8}
-            value= {body}
-            onChange = {(e)=>{setBody(e.target.value)}}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-
-
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             IMAGE URL
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" e.g www.amazons3/image.jpeg."
+            placeholder=" "
             variant="outlined"
             multiline
             maxRows={1}
-            value= {subjectImageUrl}
-            onChange = {(e)=>{setSubjectImageUrl(e.target.value)}}
+            value= {specific}
+            onChange = {(e)=>{setSpecific(e.target.value)}}
             
             />
             
@@ -214,8 +195,38 @@ function AddSubject() {
         </Grid>
 
 
-   
         <Grid container item xs={12} spacing={2}>
+          <Grid item xs={3}>
+            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+             <div >
+             RESPONSE (Mins)
+             </div>
+      
+            </Typography>
+          
+          </Grid>
+
+          <Grid item xs={7}>
+            <TextField
+            fullWidth
+            placeholder=" please enter a number"
+            variant="outlined"
+            type="number"
+            multiline
+            maxRows={1}
+            value= {response}
+            onChange = {(e)=>{setResponse(e.target.value)}}
+            
+            />
+            
+            
+          </Grid>
+        </Grid>
+
+      </Grid>
+       }
+   
+       {/*<Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
@@ -246,7 +257,7 @@ function AddSubject() {
             
             
           </Grid>
-        </Grid>
+        </Grid>*/}
        
   
       

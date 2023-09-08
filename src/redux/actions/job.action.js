@@ -1,27 +1,40 @@
 import { db } from "../../config/firebase";
-import { fetchJobs,fetchTeachers,fetchCourses, fetchSingleJob,fetchSingleStudent,saveUserCourses,saveAllLessonsOneStudent,saveAllQuizzesOneStudent } from "../reducers/job.slice";
+import { fetchJobs,fetchTeachers,fetchComplaints,fetchCourses, fetchSingleJob,fetchSingleStudent,saveUserCourses,saveAllLessonsOneStudent,saveAllQuizzesOneStudent } from "../reducers/job.slice";
 import { useDispatch, useSelector } from "react-redux";
 
 export const getJobs = (uid) => async (dispatch) => {
-    db.collection('users').get().then((snapshot) => {
+    db.collection('Candidates').get().then((snapshot) => {
         const jobs = snapshot.docs.map((doc) => ({id: doc.id, ...doc.data() }));
         // console.log('Jobs: ', jobs);
         dispatch(fetchJobs(jobs));
 }).catch((error) => {
         var errorMessage = error.message;
-        console.log('Error fetching students', errorMessage);
+        console.log('Error fetching candidates', errorMessage);
 });
 
 };
 
 export const getTeachers = ( ) => async (dispatch) => {
-    db.collection('teachers').get().then((snapshot) => {
+    db.collection('Patients').get().then((snapshot) => {
         const allTeachers = snapshot.docs.map((doc) => ({id: doc.id, ...doc.data() }));
         // console.log('Jobs: ', jobs);
         dispatch(fetchTeachers(allTeachers));
 }).catch((error) => {
         var errorMessage = error.message;
-        console.log('Error fetching teachers', errorMessage);
+        console.log('Error fetching patient', errorMessage);
+});
+
+};
+
+
+export const getComplaints = ( ) => async (dispatch) => {
+    db.collection('Complaints').get().then((snapshot) => {
+        const allComplaints = snapshot.docs.map((doc) => ({id: doc.id, ...doc.data() }));
+        // console.log('Jobs: ', jobs);
+        dispatch(fetchComplaints(allComplaints));
+}).catch((error) => {
+        var errorMessage = error.message;
+        console.log('Error fetching complaints', errorMessage);
 });
 
 };
@@ -96,7 +109,7 @@ export const getSingleJob = (id) => async (dispatch) => {
 
 
 export const getSingleStudent = (id) => async (dispatch) => {
-    var job = db.collection("users").doc(id);
+    var job = db.collection("Candidates").doc(id);
 
     job.get().then((doc) => {
     if (doc.exists) {
@@ -104,10 +117,10 @@ export const getSingleStudent = (id) => async (dispatch) => {
 
         dispatch(fetchSingleStudent(doc.data()));
 
-        if(doc.data().lessonsWatched ){
+       /* if(doc.data().lessonsWatched ){
             let allLessonsOneStudent = []
             doc.data().lessonsWatched.forEach((element) => {
-              var oneLesson  = db.collection("boneCourses").doc(element.lessonId);
+              var oneLesson  = db.collection("Treatments").doc(element.lessonId);
              
               oneLesson.get().then((shrew) => {allLessonsOneStudent = [...allLessonsOneStudent,shrew.data()]})
               
@@ -116,9 +129,9 @@ export const getSingleStudent = (id) => async (dispatch) => {
           
           setTimeout(()=>{
           if(allLessonsOneStudent.length > 0){
-          dispatch(saveAllLessonsOneStudent(allLessonsOneStudent));console.log("ALL LESSONS ONE STUDENT", allLessonsOneStudent)
+          dispatch(saveAllLessonsOneStudent(allLessonsOneStudent));console.log("ALL LESSONS ONE CANDIDATES", allLessonsOneStudent)
           }else{
-            dispatch(saveAllLessonsOneStudent([ ]));console.log("ALL LESSONS  ONE STUDENT", allLessonsOneStudent)
+            dispatch(saveAllLessonsOneStudent([ ]));console.log("ALL LESSONS  ONE CANDIDATE", allLessonsOneStudent)
           }
         }
         ,2000)
@@ -126,26 +139,26 @@ export const getSingleStudent = (id) => async (dispatch) => {
 
         }else{
             dispatch(saveAllLessonsOneStudent([ ]))
-        }
+        }*/
 
 
 
-        if(doc.data().quizzesTaken){                 
+        if(doc.data().testsTaken){                 
               let allQuizzesOneStudent = []
-              doc.data().quizzesTaken.forEach((element) => {
-                var oneQuiz  = db.collection("quizzes").doc(element.quizId);
+              doc.data().testsTaken.forEach((element) => {
+                var oneQuiz  = db.collection("Treatments").doc(element.testId);
                
                 oneQuiz.get().then((shrew) => {allQuizzesOneStudent = [...allQuizzesOneStudent,shrew.data()]})
                 
             })
-            console.log("what i am fetching for quizzes is",allQuizzesOneStudent )
+            console.log("what i am fetching for candidate tests is",allQuizzesOneStudent )
             
             setTimeout(()=>{
                
             if(allQuizzesOneStudent.length > 0){
-           dispatch(saveAllQuizzesOneStudent(allQuizzesOneStudent));console.log("ALL QUIZZES  ONE STUDENT", allQuizzesOneStudent)
+           dispatch(saveAllQuizzesOneStudent(allQuizzesOneStudent));console.log("ALL TESTS  ONE candY", allQuizzesOneStudent)
             }else{
-               dispatch(saveAllQuizzesOneStudent([ ]));console.log("ALL QUIZZES ONE STUDENT", allQuizzesOneStudent)
+               dispatch(saveAllQuizzesOneStudent([ ]));console.log("ALL TESTS ONE CANDIDATE", allQuizzesOneStudent)
             }
 
               }
@@ -159,7 +172,7 @@ export const getSingleStudent = (id) => async (dispatch) => {
         console.log("No such student!");
     }
 }).catch((error) => {
-    console.log("Error getting the student data:", error);
+    console.log("Error getting the CANDIDATES data:", error);
 });
 
 };

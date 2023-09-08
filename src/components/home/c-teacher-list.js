@@ -231,7 +231,7 @@ export default function TeacherList({teachers}) {
       </div>*/}
       
       <br/>
-      <p style={{fontSize: '26px', marginLeft: '5px',marginBottom:"1rem", color: 'black',display:"flex",justifyContent:"space-between"}}><b>ALL TEACHERS</b>   <Button
+      <p style={{fontSize: '26px', marginLeft: '5px',marginBottom:"1rem", color: 'black',display:"flex",justifyContent:"space-between"}}><b>ALL PATIENTS</b>   <Button
                    
                    type="button"
                     // fullWidth
@@ -246,7 +246,7 @@ export default function TeacherList({teachers}) {
                     sx={{ mt: 7, mb: 2 }}
                     onClick={() => {navigate('/dashboard/add-teacher')}}
                   >
-                    ADD TEACHER
+                    ADD PATIENT
                   </Button></p><br/>
       <hr />
       <TableContainer component={Paper}>
@@ -254,13 +254,13 @@ export default function TeacherList({teachers}) {
           <TableHead>
             <TableRow>
               <StyledTableCell>Name</StyledTableCell>
-              <StyledTableCell align="right">Level</StyledTableCell>
-              <StyledTableCell align="right">Registered</StyledTableCell>
+              <StyledTableCell align="right">Complaint</StyledTableCell>
+              <StyledTableCell align="right">Screen Time</StyledTableCell>
               
               {/*<StyledTableCell align="right">Industry</StyledTableCell>
               <StyledTableCell align="center">State</StyledTableCell>
               <StyledTableCell align="right"></StyledTableCell>*/}
-              <StyledTableCell align="right"></StyledTableCell>
+              <StyledTableCell align="center">Action</StyledTableCell>
              
             </TableRow>
           </TableHead>
@@ -277,7 +277,7 @@ export default function TeacherList({teachers}) {
                   {row.firstName + " " + row.lastName}
                 </TableCell>
                 <TableCell style={{ width: 140 }} align="right">
-                  {row.level}
+                  {row.complaint}
                 </TableCell>
                 {/*<TableCell style={{ width: 140 }} align="right">
                 {row.accountCreated &&typeof(row.accountCreated) !== "string"  ?(new Date(row.accountCreated.seconds*1000)).toDateString():row.accountCreated}

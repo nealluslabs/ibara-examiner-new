@@ -2,7 +2,7 @@ import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,
 import { useRef, useState} from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
-import { addTeacher} from 'src/redux/actions/group.action';
+import { addTeacher,addComplaint} from 'src/redux/actions/group.action';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { notifyErrorFxn } from 'src/utils/toast-fxn';
@@ -16,33 +16,24 @@ function AddTeacher() {
   const location = useLocation()
  // console.log("location is",location.state.levelName,location.state.uid)
 
-  const [file, setFile] = useState();
-  const [file2, setFile2] = useState();
-  const [fileSize, setFileSize] = useState();
-  const [fileSize2, setFileSize2] = useState();
-  const [selectedFile, setSelectedFile] = useState({selectedFile: [], selectedFileName: []});
-  const [selectedFile2, setSelectedFile2] = useState({selectedFile2: [], selectedFileName2: []});
+  
   const dispatch = useDispatch();
 
-  const [newPassword,setNewPassword] =useState('')
-  const [confirmPassword,setConfirmPassword] =useState('')
-  const [companySize,setCompanySize] =useState('')
+
 
 
   const [loading,setLoading] = useState(false)
 
-  const [level,setLevel] = useState('')
-  const [body,setBody] = useState('')
-  const [imageUrl,setImageUrl] =useState('')
+  const [firstName,setFirstName] =useState('')
 
-  const [screenTime,setScreenTime] = useState()
-  const [history,setHistory] = useState()
-  const [firstName,setFirstName] =useState()
-  const [lastName,setLastName] =useState()
-  const [icon,setIcon]=useState()
-  const [complaint,setComplaint] =useState()
 
- 
+  const [complaint,setComplaint] = useState('')
+  const [bloodInvestigation,setBloodInvestigation] = useState('')
+  const [referral,setReferral] = useState('')
+  const [prescription,setPrescription] = useState('')
+  const [radiology,setRadiology] = useState('')
+  const [intervention,setIntervention]=useState('')
+
 
   const { user } = useSelector((state) => state.auth);
 
@@ -50,23 +41,23 @@ function AddTeacher() {
 
 
   const addObject ={
-    firstName,
-    lastName,
-    history,
-    screenTime,
-    icon,
-    complaint
+    complaint,
+    bloodInvestigation,
+    referral,
+    prescription,
+    radiology,
+    intervention
   }
 
-  const addThisTeacher = async(addObject,navigate) => {
+  const addThisComplaint = async(addObject,navigate) => {
     
-    if(!firstName||!lastName||!history || !screenTime ||!icon||!complaint ){
+    if(!intervention||!complaint||!bloodInvestigation||!referral || !prescription ||!radiology ){
       notifyErrorFxn("Please make sure to fill in all fields.")
     }
     else{
     
     setLoading(true)
-    dispatch(addTeacher(addObject,navigate))
+    dispatch(addComplaint(addObject,navigate))
    
     // console.log("identity is",identity)
     // console.log("update this subject is updating.........")
@@ -89,12 +80,12 @@ function AddTeacher() {
 
 
 
-    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>NEW PATIENT</h1>
+    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>NEW COMPLAINT</h1>
 
     <Grid item xs={12} sx={{ display: 'flex' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Typography variant="h4" component="p">
-              ADD DETAILS BELOW
+              ADD COMPLAINT BELOW
               </Typography>
               <div style={{height:"2px", width:"80%",borderBottom:"1px solid black",position:"absolute",left:"20rem",top:"18rem"}}></div>
             </Box>
@@ -105,89 +96,7 @@ function AddTeacher() {
      <Grid container spacing={2}>
 
 
-
-     <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             FIRST NAME
-             </div>
       
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" Add first name."
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {firstName}
-            onChange = {(e)=>{setFirstName(e.target.value)}}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-
-
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             LAST NAME
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" Add last name"
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {lastName}
-            onChange = {(e)=>{setLastName(e.target.value)}}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-
-
-         <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             SCREEN TIME
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" add screen time"
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {screenTime}
-            onChange = {(e)=>{setScreenTime(e.target.value)}}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
 
 
 
@@ -196,7 +105,7 @@ function AddTeacher() {
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
-              ICON
+               COMPLAINT NAME
              </div>
       
             </Typography>
@@ -206,12 +115,12 @@ function AddTeacher() {
           <Grid item xs={7}>
             <TextField
             fullWidth
-            placeholder=" choose icon."
+            placeholder=" enter complaint."
             variant="outlined"
             multiline
             maxRows={2}
-            value= {icon}
-            onChange = {(e)=>{setIcon(e.target.value)}}
+            value= {complaint}
+            onChange = {(e)=>{setComplaint(e.target.value)}}
             
             />
             
@@ -221,11 +130,24 @@ function AddTeacher() {
 
 
 
+
+        <Grid item xs={12} sx={{ display: 'flex',position:"relative",marginTop:"2rem",width:"22rem" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <Typography variant="h4" component="p">
+              ADD TREATMENT
+              </Typography>
+             
+            </Box>
+            <br/> <br/> <br/>
+        </Grid>
+
+
+
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
-             HISTORY
+             BLOOD INVESTIGATION
              </div>
       
             </Typography>
@@ -235,12 +157,37 @@ function AddTeacher() {
           <Grid item xs={7}>
             <TextField
             fullWidth
-            placeholder=" hospital history"
+            placeholder=" "
             variant="outlined"
             multiline
-            rows={8}
-            value= {history}
-            onChange = {(e)=>{setHistory(e.target.value)}}
+            maxRows={2}
+            value= {bloodInvestigation}
+            onChange = {(e)=>{setBloodInvestigation(e.target.value)}}
+            
+            />
+          </Grid>
+        </Grid>
+
+        <Grid container item xs={12} spacing={2}>
+          <Grid item xs={3}>
+            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+             <div >
+             RADIOLOGY
+             </div>
+      
+            </Typography>
+          
+          </Grid>
+
+          <Grid item xs={7}>
+            <TextField
+            fullWidth
+            placeholder=" "
+            variant="outlined"
+            multiline
+            rows={1}
+            value= {radiology}
+            onChange = {(e)=>{setRadiology(e.target.value)}}
             
             />
             
@@ -254,7 +201,7 @@ function AddTeacher() {
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
-             COMPLAINT
+             INREVENTIONS
              </div>
       
             </Typography>
@@ -264,12 +211,65 @@ function AddTeacher() {
           <Grid item xs={7}>
             <TextField
             fullWidth
-            placeholder=" add complaint"
+            placeholder=" "
             variant="outlined"
             multiline
             maxRows={2}
-            value= {complaint}
-            onChange = {(e)=>{setComplaint(e.target.value)}}
+            value= {intervention}
+            onChange = {(e)=>{setIntervention(e.target.value)}}
+            
+            />
+          </Grid>
+        </Grid>
+
+
+
+        <Grid container item xs={12} spacing={2}>
+          <Grid item xs={3}>
+            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+             <div >
+             REFERRALS
+             </div>
+      
+            </Typography>
+          
+          </Grid>
+
+          <Grid item xs={7}>
+            <TextField
+            fullWidth
+            placeholder=" "
+            variant="outlined"
+            multiline
+            maxRows={2}
+            value= {referral}
+            onChange = {(e)=>{setReferral(e.target.value)}}
+            
+            />
+          </Grid>
+        </Grid>
+      
+
+        <Grid container item xs={12} spacing={2}>
+          <Grid item xs={3}>
+            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+             <div >
+             PRESCRIPTIONS
+             </div>
+      
+            </Typography>
+          
+          </Grid>
+
+          <Grid item xs={7}>
+            <TextField
+            fullWidth
+            placeholder=""
+            variant="outlined"
+            multiline
+            maxRows={2}
+            value= {prescription}
+            onChange = {(e)=>{setPrescription(e.target.value)}}
             
             />
           </Grid>
@@ -292,7 +292,7 @@ function AddTeacher() {
     CANCEL
   </Button>
  
-  <Button  onClick={() => { addThisTeacher(addObject,navigate)}} variant="contained" 
+  <Button  onClick={() => { addThisComplaint(addObject,navigate)}} variant="contained" 
   style={{ backgroundColor: "#000000"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >

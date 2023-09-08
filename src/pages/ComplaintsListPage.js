@@ -5,9 +5,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Grid, Box, Typography, Paper, Button, Stack } from '@mui/material';
 import { useNavigate,Link } from 'react-router-dom';
-import CJobList from "../components/home/c-job-list";
-import CTeacherList from "../components/home/c-teacher-list";
-import { getTeachers } from "../redux/actions/job.action";
+
+import ComplaintList from "../components/home/c-complaint-list";
+import { getComplaints } from "../redux/actions/job.action";
 import {Skeleton} from '@mui/material';
 import ReactApexChart from 'react-apexcharts';
 
@@ -16,10 +16,10 @@ const theme = createTheme();
 
 
 
-export default function TeacherListPage() {
+export default function ComplaintsListPage() {
   const dispatch = useDispatch();
-  const { teachers } = useSelector((state) => state.jobs);
-  const [teacherArr, setTeacherArr] = useState([]/*teachers*/);
+  const { complaints } = useSelector((state) => state.jobs);
+  const [complaintArr, setComplaintArr] = useState([]/*teachers*/);
   const navigate = useNavigate()
 
   //const { userDetails, error,message, isLoading } = useSelector((state) => state.loggedIn);
@@ -40,18 +40,18 @@ export default function TeacherListPage() {
  
  
  useEffect(() => {
-   dispatch(getTeachers());  
-   setTimeout(setTeacherArr(teachers), 1000);
+   dispatch(getComplaints());  
+   setTimeout(setComplaintArr(complaints), 1000);
   }, [])
 
 
   useEffect(() => {
-    if(teacherArr.length === 0 ){
-      setTeacherArr(teachers);
+    if(complaintArr.length === 0 ){
+      setComplaintArr(complaints);
        }  
-     }, [teachers])
+     }, [complaints])
 
-  console.log('IBARA PATIENT data IS: ', teacherArr);
+  console.log('ibara complaints data IS: ', complaintArr);
 
   return (
       
@@ -60,9 +60,9 @@ export default function TeacherListPage() {
        {/*<h1 style={{position:"relative",fontWeight:"bold",left:"0px",marginBottom:"40px",fontSize:"30px"}}>STUDENT DASHBOARD</h1>*/}
       
 
-       {teacherArr && teacherArr.length ?
+       {complaintArr && complaintArr.length ?
            
-           <CTeacherList teachers={teachers} />
+           <ComplaintList complaints={complaints} />
            :
            <center>
            <Box sx={{ width: 300 }}>

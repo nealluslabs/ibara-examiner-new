@@ -27,11 +27,12 @@ function EditTeacher() {
 
 
   const [loading,setLoading] = useState(false)
-  const [level,setLevel] = useState(teacherInfo.level)
-  const [body,setBody] = useState(teacherInfo.bio)
+  const [screenTime,setScreenTime] = useState(teacherInfo.screenTime && teacherInfo.screenTime)
+  const [history,setHistory] = useState(teacherInfo.history)
   const [firstName,setFirstName] =useState(teacherInfo.firstName)
   const [lastName,setLastName] =useState(teacherInfo.lastName)
-  const [imageUrl,setImageUrl] =useState(teacherInfo.imageUrl)
+  const [icon,setIcon]=useState(teacherInfo.icon && teacherInfo.icon)
+  const [complaint,setComplaint] =useState(teacherInfo.complaint)
 
 
   
@@ -46,9 +47,10 @@ function EditTeacher() {
   const updateObject ={
     firstName,
     lastName,
-    body,
-    level:level,
-    imageUrl
+    icon,
+    history,
+    screenTime:screenTime,
+    complaint
   }
 
   const updateThisSubject = async(identity,updateObject,navigate) => {
@@ -77,12 +79,12 @@ function EditTeacher() {
 
        </div>
 
-    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>TEACHER - {firstName + " " + lastName}</h1>
+    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>PATIENT - {firstName + " " + lastName}</h1>
 
     <Grid item xs={12} sx={{ display: 'flex', flexDirection: 'row',justifyContent:"space-between"}}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Typography variant="h4" component="p">
-              EDIT TEACHER
+              EDIT PATIENT
               </Typography>
 
             
@@ -120,7 +122,7 @@ function EditTeacher() {
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
-             LEVEL
+             SCREEN TIME
              </div>
       
             </Typography>
@@ -134,8 +136,8 @@ function EditTeacher() {
             variant="outlined"
             multiline
             maxRows={2}
-            value= {level}
-            onChange = {(e)=>{setLevel(e.target.value)}}
+            value= {screenTime}
+            onChange = {(e)=>{setScreenTime(e.target.value)}}
             
             />
             
@@ -173,11 +175,14 @@ function EditTeacher() {
           </Grid>
         </Grid>
 
+
+
+
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
-             LAST NAME
+              LAST NAME
              </div>
       
             </Typography>
@@ -195,16 +200,16 @@ function EditTeacher() {
             onChange = {(e)=>{setLastName(e.target.value)}}
             
             />
+            
+            
           </Grid>
         </Grid>
-
-
 
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
-             ABOUT
+             ICON
              </div>
       
             </Typography>
@@ -214,12 +219,39 @@ function EditTeacher() {
           <Grid item xs={7}>
             <TextField
             fullWidth
-            placeholder=" years of experience, motivation for teaching etc"
+            placeholder=" enter last name."
+            variant="outlined"
+            multiline
+            maxRows={2}
+            value= {icon}
+            onChange = {(e)=>{setIcon(e.target.value)}}
+            
+            />
+          </Grid>
+        </Grid>
+
+
+
+        <Grid container item xs={12} spacing={2}>
+          <Grid item xs={3}>
+            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+             <div >
+              HISTORY
+             </div>
+      
+            </Typography>
+          
+          </Grid>
+
+          <Grid item xs={7}>
+            <TextField
+            fullWidth
+            placeholder=" Hospital history"
             variant="outlined"
             multiline
             rows={8}
-            value= {body}
-            onChange = {(e)=>{setBody(e.target.value)}}
+            value= {history}
+            onChange = {(e)=>{setHistory(e.target.value)}}
             
             />
             
@@ -232,7 +264,7 @@ function EditTeacher() {
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
-             IMAGE URL
+             COMPLAINT
              </div>
       
             </Typography>
@@ -246,8 +278,8 @@ function EditTeacher() {
             variant="outlined"
             multiline
             maxRows={2}
-            value= {imageUrl}
-            onChange = {(e)=>{setImageUrl(e.target.value)}}
+            value= {complaint}
+            onChange = {(e)=>{setComplaint(e.target.value)}}
             
             />
           </Grid>

@@ -54,7 +54,7 @@ export default function CustomSearchBar({}) {
   return (
     <div className={classes.root}>
       <TextField
-        placeholder="Type in a video name"
+        placeholder="Type in a treatment"
         className={classes.searchInput}
         InputProps={{
           disableUnderline: true,

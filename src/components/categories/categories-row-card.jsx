@@ -78,6 +78,7 @@ function CategoriesRowCard ({ uid, title, body, img}) {
     const [isOpen, setIsOpen] = useState(false);
     const [dropDown, setDropDown] = useState(false);
     const [loading,setLoading] = useState(false);
+    const [wait,setWait] =useState(false)
     const classes = useStyles();
     //const [uid, setUid] = useState(null)
     let today = new Date().toISOString().slice(0, 10);
@@ -95,7 +96,7 @@ function CategoriesRowCard ({ uid, title, body, img}) {
 
     useEffect(()=>{ 
       //this code is responsible for the right section appearing in the dropdown
-      if(presentOpenMenu !== title){setTimeout(()=>{setDropDown(false)},300)}
+      if(presentOpenMenu !== uid){setTimeout(()=>{setDropDown(false)},300)}
      
       setData(categoryVideos)
       },[categoryVideos,presentOpenMenu])
@@ -117,15 +118,15 @@ function CategoriesRowCard ({ uid, title, body, img}) {
    
     const [data,setData] = useState(categoryVideos?categoryVideos:dummyData)
 
-    const fetchSubSectionAndDropDown  = (title)=> {
-      console.log("TITLE BEING PASSED IN IS",title)
+    const fetchSubSectionAndDropDown  = (uid)=> {
+      console.log("uid BEING PASSED IN IS",uid)
  if(!dropDown){
       setLoading(true)
-      dispatch(fetchVideoSection(title))
-      dispatch(savePresentOpenMenu(title))
+      dispatch(fetchVideoSection(uid))
+      dispatch(savePresentOpenMenu(uid))
      const makeRequest = async()=>{
      
-      dispatch(fetchVideoSection(title))}
+      dispatch(fetchVideoSection(uid))}
   
     makeRequest().then(()=>(setTimeout(()=>{setLoading(false);setDropDown(true)},600)))
      }
@@ -134,6 +135,16 @@ function CategoriesRowCard ({ uid, title, body, img}) {
      }
 
 
+    }
+
+
+
+    const sendToAddTreatment = (treatment="6eme Annee",identity="hi")=>{
+
+      setWait(true)
+      //dispatch(fetchSubjectInfo(identity))
+
+     setTimeout(()=> {navigate('/dashboard/add-subject',{state:{uid:identity,treatment}})}, 1000)
     }
 
 
@@ -154,9 +165,9 @@ function CategoriesRowCard ({ uid, title, body, img}) {
           }}
         >
           <Grid container spacing={2}>
-          <Grid item >
+         {/* <Grid item >
           <h2 style={{ fontSize: '19px', display: 'flex',flexDirection:"row",justifyContent:"center",alignItems:"center"}}><b>{title.toUpperCase()}</b></h2>
-          </Grid>
+          </Grid> */}
 
 
           <Grid item container spacing={2}>
@@ -171,9 +182,9 @@ function CategoriesRowCard ({ uid, title, body, img}) {
 
                 <Grid item xs container direction="column" spacing={0}>
                 <Grid item xs>
-                    <div style={{display: 'flex', flexDirection: 'column', border: '0px solid red', marginBottom: '-20px'}}>
-                    <h2 style={{ fontSize: '19px', margin: '0',opacity:'0%' }}><b>{title}</b></h2>
-                    <p style={{ fontSize: '17px', margin: '0',  }}>{body}</p>
+                  <div style={{display: 'flex',justifyContent:"center" ,alignItems:"flex-start",flexDirection: 'column', border: '0px solid red',marginLeft: '4rem', marginTop: '40px'}}>
+                  
+                    <h2 style={{ fontSize: '22px', margin: '0',  }}>{title.toUpperCase()}</h2>
                     </div>
                 </Grid>
                 </Grid>
@@ -186,9 +197,17 @@ function CategoriesRowCard ({ uid, title, body, img}) {
             <Button variant="contained" style={{minHeight: '45px', minWidth: '145px', backgroundColor: 'black', }}
               onClick={() => {
                
-                  fetchSubSectionAndDropDown(title)
+                  fetchSubSectionAndDropDown(uid)
               }}>
                 {loading?"Loading...":"View"}
+            </Button>
+
+            <Button variant="contained" style={{minHeight: '45px', minWidth: '145px', backgroundColor: 'white',color:"black" ,border:"1px solid black",marginTop:"0.5rem"}}
+              onClick={() => {
+               
+                  sendToAddTreatment(title,uid)
+              }}>
+                {wait?"Please Wait...":<span><b style={{fontSize:"1.5rem"}}>+</b> Add</span> }
             </Button>
               </Grid> 
               </Grid>
@@ -223,11 +242,11 @@ function CategoriesRowCard ({ uid, title, body, img}) {
              
                  <center>
                   <br/> <br/>
-                  No Subjects available for this sub section.
+                  No tests available for this treatment.
                   </center>
                   
                   }
-                 <AddSubSectionCard categoryId={uid} topLevelName={title}/>
+                 {/*<AddSubSectionCard categoryId={uid} topLevelName={title}/>*/}
 
                 
               </Grid>

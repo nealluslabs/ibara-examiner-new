@@ -6,7 +6,7 @@ import { clearGroup } from '../reducers/group.slice';
 
 
   export const signin = (user, navigate,) => async (dispatch) => {
-    console.log("all is still well at this point")
+    console.log("all is still well at this point ibara")
     fb.auth().signInWithEmailAndPassword(user.email, user.password)
     .then((userCredential) => {
       // Signed in
@@ -64,7 +64,7 @@ export const signup = (user,navigate) => async (dispatch) => {
       user.email,
       user.password
   ).then((res)=>{
-     db.collection('users').doc(res.user.uid).set({
+     db.collection('Admins').doc(res.user.uid).set({
       uid: res.user.uid,
       firstName: user.fName,
       lastName:user.lName,
@@ -72,14 +72,6 @@ export const signup = (user,navigate) => async (dispatch) => {
       phone: user.phone,
       password: user.password,
       registeredOn:new Date(),
-      businessName:user.bName,
-      companySize:user.companySize, 
-      regType:user.regType, 
-      country:user.country,
-      certified:user.certified,
-      state:user.state,
-      industry:user.industry,
-      city:user.city,
        profileImage:'src/assets/images/rec.png'
     })
     
@@ -126,7 +118,7 @@ export const uploadImage = (user, file, navigate, setLoading) => async (dispatch
 
 
 export const fetchUserData = (id, type, navigate) => async (dispatch) => {
-  var user = db.collection("users").doc(id);
+  var user = db.collection("Admins").doc(id);
   user.get().then((doc) => {
   if (doc.exists) {
     // console.log("User Data:", doc.data());

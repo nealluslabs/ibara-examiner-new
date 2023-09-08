@@ -47,9 +47,11 @@ import AddLesson from './pages/AddLessonAlso';
 //import AddChapter from './pages/AddChapter';
 import AddChapter from './pages/AddChapterAlso';
 import EditChapter from './pages/EditChapter';
+import AddComplaint from './pages/AddComplaint';
 import AddQuiz from './pages/AddQuiz';
 import StudentListPage from './pages/StudentListPage';
 import TeacherListPage from './pages/TeacherListPage';
+import ComplaintsListPage from './pages/ComplaintsListPage';
 
 import EditLesson from './pages/EditLesson';
 import EditQuiz from './pages/EditQuiz';
@@ -80,12 +82,14 @@ export default function Router() {
         { path: 'docs', element: <DocsPage /> },
         { path: 'courses', element: <CategoriesVideoPage /> },
         { path: 'teacher-list', element: <TeacherListPage /> },
-        
+        { path: 'complaint-list', element: <ComplaintsListPage /> },
+
         { path: 'chat', element: <InboxPage /> },
         { path: 'add-course', element: <AddCourse /> },
         { path: 'add-subject', element: <AddSubject /> },
         { path: 'edit-subject', element: <EditCourse /> },
         { path: 'add-lesson', element: <AddLesson /> },
+        { path: 'add-complaint', element: <AddComplaint /> },
         { path: 'edit-lesson', element: <EditLesson /> },
         { path: 'add-chapter', element: <AddChapter /> },
         { path: 'add-quiz', element: <AddQuiz /> },

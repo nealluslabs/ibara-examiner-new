@@ -21,7 +21,7 @@ import { Button, Grid, makeStyles } from "@material-ui/core";
 import { Link, NavLink, useNavigate} from "react-router-dom";
 //import SearchBar from "material-ui-search-bar";
 //import useRequest from "../../hooks/use-request";
-import { fetchJobs } from "../../redux/actions/job.action";
+import { fetchTeachers } from "../../redux/actions/job.action";
 import Skeleton from '@mui/material/Skeleton';
 import {Typography,CardMedia,} from '@material-ui/core';
 //import CoolerBoxIMG from '../../assets/images/save-money.png';
@@ -32,6 +32,7 @@ import { notifyErrorFxn, notifySuccessFxn } from 'src/utils/toast-fxn';
 import { useDispatch, useSelector } from "react-redux";
 
 import { deleteSingleJob } from "../../redux/actions/job.action";
+import {fetchComplaintInfo} from 'src/redux/actions/group.action'
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -114,7 +115,11 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-
+const originalJobList = [
+  { id: 1, title: "Java Developer", fulldate: "01/01/2022" },
+  { id: 2, title: "MERN Stack Developer", fulldate: "01/01/2022"},
+  { id: 3, title: "Flutter Developer", fulldate: "01/01/2022"},
+].sort((a, b) => (a.title < b.title ? -1 : 1));
 
 const useStyles = makeStyles({
   table: {
@@ -122,38 +127,18 @@ const useStyles = makeStyles({
   },
 });
 
-export default function QuizStatsList({student,allQuizzes}) {
+export default function ComplaintList({complaints}) {
   //search function
-
   const dispatch = useDispatch();
-  /*const mixedArray =[...( allQuizzes.map((item,i)=>({...item,resultPercentage:student.quizzesTaken[i].resultPercentage,takenOn:student.quizzesTaken[i].takenOn})))]
-  console.log("mixed array is",mixedArray)*/
-
-  const [jobList, setJobList] = useState(allQuizzes.length> 0 && student.quizzesTaken?allQuizzes:
-                                        [ ]
-                                          
-                                        );
-
-
-       useEffect(()=>{
-   
-      setJobList(allQuizzes.length> 0?allQuizzes:
-        [ ]
-          )
-
-     },[allQuizzes])
-                                                      
-
-
-  console.log("all tests taken  are yo!!:",allQuizzes)
-  console.log("the candidate  is:",student)
+  const [complaintList, setComplaintList] = useState(complaints);
+  console.log("all complaints are:",complaints)
   const [searched, setSearched] = useState("");
   const classes = useStyles();
   const requestSearch = (searchedVal) => {
-    const filteredRows = allQuizzes?.filter((row) => {
+    const filteredRows = complaints?.filter((row) => {
       return row.title.toLowerCase().includes(searchedVal.toLowerCase());
     });
-    setJobList(filteredRows);
+    setComplaintList(filteredRows);
   };
 
   const cancelSearch = () => {
@@ -164,10 +149,11 @@ export default function QuizStatsList({student,allQuizzes}) {
 
   const navigate = useNavigate();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [wait,setWait] =useState(false)
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - jobList.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - complaintList.length) : 0;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -177,11 +163,15 @@ export default function QuizStatsList({student,allQuizzes}) {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  const viewallQuizzesFxn = (id) => {
-    navigate(`/dashboard/student-stats/`,{ state: { id:id } });
+  const viewComplaintsFxn = (id) => {
+   
+    setWait(true)
+    dispatch(fetchComplaintInfo(id))
+
+   setTimeout(()=> {navigate('/dashboard/edit-complaint',{state:{uid:id}})}, 1500)
   };
 
-  const deleteJobFxn = (id) => {
+  const deleteComplaintFxn = (id) => {
    const preserveId = id
     
   if(window.confirm("are you sure you want to delete this user?")){
@@ -215,7 +205,7 @@ export default function QuizStatsList({student,allQuizzes}) {
   return (
     <>
         {
-          allQuizzes ? 
+          complaints ? 
           <>
        
 
@@ -225,15 +215,15 @@ export default function QuizStatsList({student,allQuizzes}) {
            
             variant="contained"
             style={{
-              backgroundColor: '#000000' "#60A1EC",
+              backgroundColor: '#000000' ,
               color: "white",
               fontSize: "15px",
             }}
             sx={{ mt: 7, mb: 2 }}
              
-            onClick={() => {console.log("this button is supposed to move you to an add user page")window.location.href = "/company/add-allQuizzes"}}
+            onClick={() => {console.log("this button is supposed to move you to an add user page")}}
           >
-            ADD USER
+            ADD complaint
           </Button>
             
 
@@ -241,62 +231,65 @@ export default function QuizStatsList({student,allQuizzes}) {
       </div>*/}
       
       <br/>
-      {/*
-        <>
-        <p style={{fontSize: '26px', marginLeft: '5px', color: 'black'}}><b>Results</b></p><br/>
+      <p style={{fontSize: '26px', marginLeft: '5px',marginBottom:"1rem", color: 'black',display:"flex",justifyContent:"space-between"}}><b>ALL COMPLAINTS</b>   <Button
+                   
+                   type="button"
+                    // fullWidth
+                    variant="contained"
+                    style={{
+                      backgroundColor: '#000000' ,
+                      color: "white",
+                      width: "17%",
+
+                      fontSize: "15px",
+                    }}
+                    sx={{ mt: 7, mb: 2 }}
+                    onClick={() => {navigate('/dashboard/add-complaint')}}
+                  >
+                    ADD COMPLAINT
+                  </Button></p><br/>
       <hr />
-        </>
-      
-    */}
-     <TableContainer component={Paper}>
+      <TableContainer component={Paper}>
         <Table sx={{ maxWidth: 1500,tableLayout:"fixed" }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Treatments</StyledTableCell>
-              <StyledTableCell align="right">Grade</StyledTableCell>
-              <StyledTableCell align="right">Taken On</StyledTableCell>
-              <StyledTableCell align="right"></StyledTableCell>
+              <StyledTableCell>Complaint</StyledTableCell>
+              <StyledTableCell align="right">Blood Investigation</StyledTableCell>
+              <StyledTableCell align="right">Referrals</StyledTableCell>
+              <StyledTableCell align="right">Registered On</StyledTableCell>
               
               {/*<StyledTableCell align="right">Industry</StyledTableCell>
-              <StyledTableCell align="center">State</StyledTableCell>
-              <StyledTableCell align="right"></StyledTableCell>*/}
+              <StyledTableCell align="center">State</StyledTableCell>*/}
+              
               <StyledTableCell align="center">Action</StyledTableCell>
              
             </TableRow>
           </TableHead>
           <TableBody>
-            { jobList.length>0?
-            ((rowsPerPage > 0
-              ? jobList.slice(
+            {(rowsPerPage > 0
+              ? complaintList.slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )
-              : jobList
-            ).map((row,index) => (
-              <TableRow key={row.uid}>
+              : complaintList
+            ).map((row) => (
+              <TableRow key={row.id}>
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {row.complaint}
                 </TableCell>
                 <TableCell style={{ width: 140 }} align="right">
-                  {row.intervention}
+                  {row.treatment.bloodInvestigation}
                 </TableCell>
-
                 <TableCell style={{ width: 140 }} align="right">
-                  { row.takenOn ? (new Date((row.takenOn.seconds)*1000)).toDateString():row.radiology}
-                  
+                  {row.treatment.referral}
                 </TableCell>
-
-                <TableCell style={{ width: 140 }} align="right">
-                  {row.resultPercentage > 50? ("pass" /*`${student.quizzesTaken[index].resultPercentage}%`*/):" "}
-                </TableCell>
-
                 {/*<TableCell style={{ width: 140 }} align="right">
                 {row.accountCreated &&typeof(row.accountCreated) !== "string"  ?(new Date(row.accountCreated.seconds*1000)).toDateString():row.accountCreated}
                 </TableCell>*/}
                 
-                {/*<TableCell style={{ width: 140 }} align="right">
+                <TableCell style={{ width: 140 }} align="right">
                 {row.registeredOn &&typeof(row.registeredOn) !== "string"  ?(new Date(row.registeredOn.seconds*1000)).toDateString():row.accountCreated}
-                </TableCell>*/}
+                </TableCell>
 
                
 
@@ -312,9 +305,9 @@ export default function QuizStatsList({student,allQuizzes}) {
                       fontSize: "15px",
                     }}
                     sx={{ mt: 7, mb: 2 }}
-                    onClick={() => viewallQuizzesFxn(row.uid.trim())}
+                    //onClick={() => viewComplaintsFxn(row.uid.trim())}
                   >
-                    EXPAND 
+                   VIEW
                   </Button>
                 </TableCell>
 
@@ -337,15 +330,7 @@ export default function QuizStatsList({student,allQuizzes}) {
                   </Button>
                 </TableCell>*/}
               </TableRow>
-            ))):
-           
-             <TableRow>
-            <TableCell style={{ width: 140 }} align="right">
-                  No tests taken for this user
-                </TableCell>
-                </TableRow>
-            
-            }
+            ))}
 
             {/*emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
@@ -358,7 +343,7 @@ export default function QuizStatsList({student,allQuizzes}) {
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                 colSpan={3}
-                count={jobList.length}
+                count={complaintList.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 SelectProps={{

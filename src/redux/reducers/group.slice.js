@@ -16,6 +16,7 @@ const initialState = {
        subjectInfo:{},
        chapterInfo:{},
        teacherInfo:{},
+       complaintInfo:{},
        lessonInfo:{},
        quizInfo:{},
        publicGroups: [], 
@@ -74,6 +75,9 @@ saveSubjectInfo: (state, action) => {
 saveTeacherInfo: (state, action) => {
   state.teacherInfo = action.payload;
 },
+saveComplaintInfo: (state, action) => {
+  state.complaintInfo = action.payload;
+},
 saveChapterInfo: (state, action) => {
   state.chapterInfo = action.payload;
 },
@@ -125,6 +129,7 @@ export const {
  saveSubjectInfo,
  saveChapterInfo,
  saveTeacherInfo,
+ saveComplaintInfo,
  saveLessonInfo,
  savePrivateGroup,
  saveGroupMembers,

@@ -108,7 +108,7 @@ export default function CJobs() {
         
        <div>
        <Typography color="textPrimary" variant="p" component="p">
-        <b>NEW STUDENTS</b>
+        <b>NEW CANDIDATES</b>
       </Typography>
        <ReactApexChart options={state.options} series={state.series} type="bar" height={250} />
          
@@ -128,7 +128,7 @@ export default function CJobs() {
       >
        <div>
        <Typography color="textPrimary" variant="p" component="p">
-        <b>COURSES TAKEN</b>
+        <b>CANDIDATE TESTS</b>
       </Typography>
        <ReactApexChart options={state.options} series={state.series} type="bar" height={250} />
        

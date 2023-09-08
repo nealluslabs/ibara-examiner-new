@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor:'#F8FFEECC',
+    backgroundColor:'#f2ecfe',
     border:'1px solid lightgrey',
     borderRadius:'5pxyyy',
     width: '100%',
@@ -133,7 +133,7 @@ const SubSectionCard = ({data,index,user}) => {
                   dispatch(setRequestedSection(data.title))
                   dispatch(fetchVideoSubsection(data.title))}
                 makeRequest().then(()=>(setTimeout(()=>{navigate('/dashboard/view-incubator', { state: { title:data.title } })},1300)))*/
-                fetchChaptersAndDropDown(data.uid)
+                //fetchChaptersAndDropDown(data.uid)
               }}>
                 {loading?"Loading...":"View"}
             </Button>
@@ -142,7 +142,7 @@ const SubSectionCard = ({data,index,user}) => {
             <Button variant="contained" style={{minHeight: '45px', minWidth: '145px', backgroundColor:'black' }}
               onClick={() => {
              
-               populateEditSubject(data.uid)
+              // populateEditSubject(data.uid)
               }}>
                 {wait?"Please Wait...":"Edit"}
             </Button>
@@ -155,7 +155,7 @@ const SubSectionCard = ({data,index,user}) => {
           
      <SlideDown style={{width:"100%"}}>
      {dropDown &&
-    <Grid item xs container direction="column" spacing={6} style={{marginLeft:"0px",marginTop:"0px",backgroundColor:"#f2ecfe",display:"flex",flexDirection:"column",alignItems:"center" }}>
+    <Grid item xs container direction="column" spacing={6} style={{marginLeft:"0px",marginTop:"0px",backgroundColor:"#F8FFEECC",display:"flex",flexDirection:"column",alignItems:"center" }}>
          <br/><br/>
         {categoryData.length?
        

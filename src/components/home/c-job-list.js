@@ -217,7 +217,7 @@ export default function CJobList({jobs}) {
       </div>*/}
       
       <br/>
-      <p style={{fontSize: '26px', marginLeft: '5px',marginBottom:"1rem", color: 'black',display:"flex",justifyContent:"space-between"}}><b>ALL STUDENTS</b>   <Button
+      <p style={{fontSize: '26px', marginLeft: '5px',marginBottom:"1rem", color: 'black',display:"flex",justifyContent:"space-between"}}><b>ALL CANDIDATES</b>   <Button
                    
                    type="button"
                     // fullWidth
@@ -246,7 +246,7 @@ export default function CJobList({jobs}) {
               {/*<StyledTableCell align="right">Industry</StyledTableCell>
               <StyledTableCell align="center">State</StyledTableCell>
               <StyledTableCell align="right"></StyledTableCell>*/}
-              <StyledTableCell align="right"></StyledTableCell>
+              <StyledTableCell align="center">Action</StyledTableCell>
              
             </TableRow>
           </TableHead>

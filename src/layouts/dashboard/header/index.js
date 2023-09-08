@@ -14,7 +14,7 @@ import Searchbar2 from './Searchbar2';
 
 // ----------------------------------------------------------------------
 
-const NAV_WIDTH = 280;
+const NAV_WIDTH = 245;
 
 const HEADER_MOBILE = 64;
 
@@ -33,6 +33,8 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   [theme.breakpoints.up('lg')]: {
     minHeight: HEADER_DESKTOP,
     padding: theme.spacing(0, 5),
+    backgroundColor: '#000000' /*"#13013C"*/
+
   },
 }));
 
@@ -46,16 +48,7 @@ export default function Header({ onOpenNav }) {
   return (
     <StyledRoot>
       <StyledToolbar>
-        <IconButton
-          onClick={onOpenNav}
-          sx={{
-            mr: 1,
-            color: 'text.primary',
-            display: { lg: 'none' },
-          }}
-        >
-          <Iconify icon="eva:menu-2-fill" />
-        </IconButton>
+        
 
         {/* <Searchbar /> */}
         {/* <Searchbar2 /> */}

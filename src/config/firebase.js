@@ -4,8 +4,8 @@ import "firebase/storage";
 import "firebase/auth";
 
 
-
-
+/* bonecole WEB*/
+/*
 const firebaseConfig = {
   apiKey: "AIzaSyCoJ09cJKy5Vx4kql4eaqsF5Ft5Op8zQVc",
   authDomain: "bonecole-2f0f4.firebaseapp.com",
@@ -15,6 +15,19 @@ const firebaseConfig = {
   appId: "1:314467559669:web:295c9a98a021390e897dbc",
   measurementId: "G-D0LW2Q5E1L"
 };
+*/
+
+/* IBARA WEB*/
+const firebaseConfig = {
+  apiKey: "AIzaSyCdlxFQSkuSiCD80rJnuuOVLbfwdtyKPzs",
+  authDomain: "ibara-34497.firebaseapp.com",
+  projectId: "ibara-34497",
+  storageBucket: "ibara-34497.appspot.com",
+  messagingSenderId: "886817189981",
+  appId: "1:886817189981:web:f69ca549f78c1186cbddb4",
+  measurementId: "G-TNGY4Q8KYS"
+};
+
 
 // Initialize Firebase
 export const fb = firebase.initializeApp(firebaseConfig);

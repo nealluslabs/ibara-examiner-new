@@ -96,14 +96,14 @@ export default function ContractorStatsPage() {
       
         
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-       <h1 style={{position:"relative",fontWeight:"bold",left:"0px",marginBottom:"40px",fontSize:"30px"}}>STUDENT STATS</h1>
+       <h1 style={{position:"relative",fontWeight:"bold",left:"0px",marginBottom:"40px",fontSize:"30px"}}>CANDIDATE STATS</h1>
      
 
        {/*jobArr.length &&*/ userCourses ?
            <>
-           <LessonStatsList student={student}  allLessons={allLessonsOneStudent.length > 0?allLessonsOneStudent:[]}/>
+          {/* <LessonStatsList student={student}  allLessons={allLessonsOneStudent.length > 0?allLessonsOneStudent:[]}/>
 
-           <br/><br/><br/><br/>
+           <br/><br/><br/><br/>*/}
 
            <QuizStatsList student={student} allQuizzes = {allQuizzesOneStudent.length > 0?allQuizzesOneStudent:[]} />
            </>
