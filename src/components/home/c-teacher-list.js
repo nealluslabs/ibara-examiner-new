@@ -168,7 +168,7 @@ export default function TeacherList({teachers}) {
     setWait(true)
     dispatch(fetchTeacherInfo(id))
 
-   setTimeout(()=> {navigate('/dashboard/edit-teacher',{state:{uid:id}})}, 1500)
+   setTimeout(()=> {navigate('/dashboard/edit-patient',{state:{uid:id}})}, 1500)
   };
 
   const deleteTeacherFxn = (id) => {
@@ -244,7 +244,7 @@ export default function TeacherList({teachers}) {
                       fontSize: "15px",
                     }}
                     sx={{ mt: 7, mb: 2 }}
-                    onClick={() => {navigate('/dashboard/add-teacher')}}
+                    onClick={() => {navigate('/dashboard/add-patient')}}
                   >
                     ADD PATIENT
                   </Button></p><br/>

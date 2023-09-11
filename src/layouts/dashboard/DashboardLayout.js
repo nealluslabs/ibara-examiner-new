@@ -8,7 +8,7 @@ import Nav from './nav';
 
 // ----------------------------------------------------------------------
 
-const APP_BAR_MOBILE = 64;
+const APP_BAR_MOBILE = 54;
 const APP_BAR_DESKTOP = 92;
 
 const StyledRoot = styled('div')({

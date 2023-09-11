@@ -163,7 +163,7 @@ export default function ContractorStatsList({jobs}) {
     setPage(0);
   };
   const viewJobsFxn = (id) => {
-    navigate(`/dashboard/student-stats/`,{ state: { id:id } });
+    navigate(`/dashboard/candidate-stats/`,{ state: { id:id } });
   };
 
   const deleteJobFxn = (id) => {

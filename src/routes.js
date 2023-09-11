@@ -70,8 +70,8 @@ export default function Router() {
         { path: 'home', element:<UserListPage/>/*<HomePage1 />*/ },
         { path: 'feed', element: <FeedPage /> },
         { path: 'courses-stats', element: <CoursesStatsPage /> },
-        { path: 'student-list', element: <StudentListPage /> },
-        { path: 'student-stats', element: <ContractorStatsPage /> },
+        { path: 'candidate-list', element: <StudentListPage /> },
+        { path: 'candidate-stats', element: <ContractorStatsPage /> },
         { path: 'incubator-videos', element: <IncubatorVideoPage /> },
         { path: 'incu-videos-tech', element: <OperationsVideoPage /> },
         { path: 'incu-videos-ops', element: <OperationsVideoPage /> },
@@ -81,7 +81,7 @@ export default function Router() {
         { path: 'video-details', element: <VideoDetailsPage /> },
         { path: 'docs', element: <DocsPage /> },
         { path: 'courses', element: <CategoriesVideoPage /> },
-        { path: 'teacher-list', element: <TeacherListPage /> },
+        { path: 'patient-list', element: <TeacherListPage /> },
         { path: 'complaint-list', element: <ComplaintsListPage /> },
 
         { path: 'chat', element: <InboxPage /> },
@@ -95,8 +95,8 @@ export default function Router() {
         { path: 'add-quiz', element: <AddQuiz /> },
         { path: 'edit-quiz', element: <EditQuiz /> },
         { path: 'edit-chapter', element: <EditChapter /> },
-        { path: 'add-teacher', element: <AddTeacher /> },
-        { path: 'edit-teacher', element: <EditTeacher /> },
+        { path: 'add-patient', element: <AddTeacher /> },
+        { path: 'edit-patient', element: <EditTeacher /> },
         // { path: 'my-cooler', element: <MyCoolersPage /> },
        
        

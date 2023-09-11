@@ -7,38 +7,41 @@ import {AiOutlineHome} from 'react-icons/ai'
  import {AiOutlineInbox} from 'react-icons/ai'
  import {IoIosPerson} from 'react-icons/io'
  import {FaChalkboardTeacher} from 'react-icons/fa'
+ import {FaUserNurse} from 'react-icons/fa'
+ import {FaListAlt,FaSyringe} from 'react-icons/fa'
 
-const icon = (name) => <SvgColor src={`/assets/icons/navbar/${name}.svg`} sx={{ width: 1, height: 1 }} />;
+
+const icon = (name) => <SvgColor src={`/assets/icons/navbar/${name}.svg`} sx={{ width: 1, height: 1,paddingLeft:"20px" }} />;
 
 const navConfig = [
   {
     title: 'Dashboard',
     path: '/dashboard/home',
-    //icon:<AiOutlineHome/>
+    icon:<AiOutlineHome />
     // icon: icon('ic_analytics'),
   },
   {
     title: `Candidates`,
-    path: '/dashboard/student-list',
-   // icon:<IoIosPerson/>,
+    path: '/dashboard/candidate-list',
+     icon:<FaUserNurse/>,
     // icon: icon('ic_analytics'),
   },
   {
     title: `Patients`,
-    path: '/dashboard/teacher-list',
-   // icon:<FaChalkboardTeacher/>,
+    path: '/dashboard/patient-list',
+     icon:<IoIosPerson/>,
     // icon: icon('ic_analytics'),
   },
   {
     title: 'Complaints',
     path: '/dashboard/complaint-list',
-   // icon:<AiOutlineInbox/>
+    icon:<FaListAlt/>
     
 },
   {
     title: 'Treatments',
     path: '/dashboard/courses',
-   // icon:<AiOutlineBulb/>,
+    icon:<FaSyringe/>,
     
    /* children: [
       {

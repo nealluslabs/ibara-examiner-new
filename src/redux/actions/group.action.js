@@ -655,7 +655,7 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
      //const publicGroups = snapshot.docs.map((doc) => ({ ...doc.data() }));
      dispatch(getTeachers())
      notifySuccessFxn("updated Patient successfully")
-     setTimeout(()=>{navigate('/dashboard/teacher-list')},1000)
+     setTimeout(()=>{navigate('/dashboard/patient-list')},1000)
  }).catch((error) => {
    console.log("Error updating patient:", error);
    notifyErrorFxn(error)

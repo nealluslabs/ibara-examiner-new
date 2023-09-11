@@ -178,7 +178,7 @@ export default function QuizStatsList({student,allQuizzes}) {
     setPage(0);
   };
   const viewallQuizzesFxn = (id) => {
-    navigate(`/dashboard/student-stats/`,{ state: { id:id } });
+    navigate(`/dashboard/candidate-stats/`,{ state: { id:id } });
   };
 
   const deleteJobFxn = (id) => {

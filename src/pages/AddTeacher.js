@@ -235,7 +235,7 @@ function AddTeacher() {
           <Grid item xs={7}>
             <TextField
             fullWidth
-            placeholder=" hospital history"
+            placeholder=" Medical history"
             variant="outlined"
             multiline
             rows={8}

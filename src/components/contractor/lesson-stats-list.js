@@ -169,7 +169,7 @@ export default function LessonStatsList({student,allLessons}) {
     setPage(0);
   };
   const viewallLessonsFxn = (id) => {
-    navigate(`/dashboard/student-stats/`,{ state: { id:id } });
+    navigate(`/dashboard/candidate-stats/`,{ state: { id:id } });
   };
 
   const deleteJobFxn = (id) => {

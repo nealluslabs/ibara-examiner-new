@@ -201,7 +201,7 @@ function AddTeacher() {
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
-             INREVENTIONS
+             INTERVENTIONS
              </div>
       
             </Typography>

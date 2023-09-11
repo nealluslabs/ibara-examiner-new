@@ -168,7 +168,7 @@ export default function CJobList({jobs}) {
     setLoading(true)
     dispatch(getSingleStudent(id))
 
-   setTimeout(() =>{navigate(`/dashboard/student-stats/`,{ state: { id:id } })},2500);
+   setTimeout(() =>{navigate(`/dashboard/candidate-stats/`,{ state: { id:id } })},2500);
   };
 
   const deleteJobFxn = (id) => {
