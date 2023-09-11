@@ -8,7 +8,8 @@ import { isItLoading, saveAllGroup ,saveEmployeer,
           saveCategoryVideos,saveCategoryChapters,
         saveChapterSessions,saveChapterQuizzes,
         saveSubjectInfo,saveLessonInfo,saveQuizInfo,
-        saveChapterInfo,saveTeacherInfo,saveComplaintInfo} from '../reducers/group.slice';
+        saveChapterInfo,saveTeacherInfo,
+        saveComplaintInfo,saveAllTreatmentTests} from '../reducers/group.slice';
 import firebase from "firebase/app";
 
 import { getTeachers } from './job.action';
@@ -216,6 +217,60 @@ export const fetchGroups = (adminID) => async (dispatch) => {
 
 
  export const fetchVideoSection = (chosenSection)=> async(dispatch) =>{
+
+  //dispatch(isItLoading(true));
+  db.collection("TreatmentTests")
+  .where('treatmentId', '==', chosenSection)
+   .get()
+   .then((snapshot) => {
+     const allSectionVids = snapshot.docs.map((doc) => ({ ...doc.data() }));
+     const sortFunction = (array)=>{
+      if (array.length){
+        return  array.sort((a,b)=>(a.subLevel - b.subLevel))
+       }else{
+        return []
+       }
+     }
+     
+     const sortedSectionVids = sortFunction(allSectionVids)
+
+
+   if (allSectionVids.length > 0) {
+     //dispatch(isItLoading(false));
+     console.log("ALL treatment tests for this TREATMENT:", sortedSectionVids);
+     dispatch(saveCategoryVideos(sortedSectionVids));
+   } else {
+      // dispatch(isItLoading(false));
+      dispatch(saveCategoryVideos(sortedSectionVids));
+       console.log("No TREATMENT tests for this TREATMENT!");
+   }
+ }).catch((error) => {
+   console.log("Error getting document:", error);
+   dispatch(isItLoading(false));
+ });
+ };
+
+ export const fetchAllTreatmentTests = (chosenSection)=> async(dispatch) =>{
+
+
+  var categories = db.collection("TreatmentTests");
+  categories.get().then((snapshot) => {
+    const groupMembers = snapshot.docs.map((doc) => ({ ...doc.data() }));
+    console.log("ALL Treatments Tests ARE ACTIONS:",groupMembers)
+    if (groupMembers.length) {
+    dispatch(saveAllTreatmentTests(groupMembers))
+
+  } else {
+      console.log("No treatments tests in database!");
+  }
+}).catch((error) => {
+  console.log("Error getting treatments tests:", error);
+});
+
+
+
+
+
 
   //dispatch(isItLoading(true));
   db.collection("TreatmentTests")
@@ -648,7 +703,7 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
       lastName:updateObject.lastName,
       icon:updateObject.icon,
       history:updateObject.history,
-      complaint:updateObject.complaint,
+      complaintId:updateObject.complaint,
       screenTime:updateObject.screenTime,
     }
   ).then((snapshot) => {

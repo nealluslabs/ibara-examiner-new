@@ -42,7 +42,9 @@ function AddTeacher() {
   const [icon,setIcon]=useState()
   const [complaint,setComplaint] =useState()
 
- 
+  const { teachers } = useSelector((state) => state.jobs);
+
+ const [teachersArr,setTeacherArr]=useState([...teachers.map((item)=>(item.firstName + " " + item.lastName))])
 
   const { user } = useSelector((state) => state.auth);
 
@@ -204,16 +206,22 @@ function AddTeacher() {
           </Grid>
 
           <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" choose icon."
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {icon}
-            onChange = {(e)=>{setIcon(e.target.value)}}
-            
-            />
+          <Select
+         style={{width:"100%"}}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={icon}
+          label="icon"
+          onChange={(event) => {
+            setIcon(event.target.value);
+          }}
+        >
+       
+            <MenuItem value={"Male"}>{"Male"}</MenuItem>
+            <MenuItem value={"Female"}>{"Female"}</MenuItem>
+       
+       
+        </Select>
             
             
           </Grid>
@@ -262,16 +270,21 @@ function AddTeacher() {
           </Grid>
 
           <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" add complaint"
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {complaint}
-            onChange = {(e)=>{setComplaint(e.target.value)}}
-            
-            />
+          <Select
+         style={{width:"100%"}}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={complaint}
+          label="Referral"
+          onChange={(event) => {
+            setComplaint(event.target.value);
+          }}
+        >
+        {teachersArr.length >0  && teachersArr.map((item)=>(
+            <MenuItem value={item}>{item}</MenuItem>
+        ))}
+       
+        </Select>
           </Grid>
         </Grid>
       

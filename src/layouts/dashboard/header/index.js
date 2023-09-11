@@ -14,7 +14,7 @@ import Searchbar2 from './Searchbar2';
 
 // ----------------------------------------------------------------------
 
-const NAV_WIDTH = 245;
+const NAV_WIDTH = 220;
 
 const HEADER_MOBILE = 64;
 

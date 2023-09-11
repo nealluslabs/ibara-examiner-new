@@ -15,7 +15,7 @@ import { Divider, Chip, Grid, Paper, Typography, Box, Avatar, Button, ButtonBase
 import { borderRadius } from '@mui/system';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import RectangleIMG from '../../assets/images/incu.png';
+import RectangleIMG from '../../assets/images/form.png';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -173,7 +173,7 @@ function CategoriesRowCard ({ uid, title, body, img}) {
           <Grid item container spacing={2}>
             <Grid item>
             {/* <Avatar alt="Profile Pic" src={EmptyAvatar} style={{ width: '120px', height: '120px'}} /> */}
-              <ButtonBase sx={{ width: 128, height: 128 }}>
+              <ButtonBase sx={{ width: 100, height: 100 }}>
               <Img alt="complex" src={img ? img : RectangleIMG} />
               </ButtonBase>
               {/* <img src={RectangleIMG} /> */}

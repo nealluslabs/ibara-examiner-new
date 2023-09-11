@@ -1,8 +1,8 @@
 import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,Divider,Box} from '@mui/material';
-import { useRef, useState} from 'react';
+import { useRef, useState,useEffect} from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
-import { addTeacher,addComplaint} from 'src/redux/actions/group.action';
+import { addTeacher,addComplaint, fetchAllTreatmentTests, fetchAllCategories} from 'src/redux/actions/group.action';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { notifyErrorFxn } from 'src/utils/toast-fxn';
@@ -34,10 +34,22 @@ function AddTeacher() {
   const [radiology,setRadiology] = useState('')
   const [intervention,setIntervention]=useState('')
 
+  const { teachers } = useSelector((state) => state.jobs);
+
+ const [teachersArr,setTeacherArr]=useState([...teachers.map((item)=>(item.firstName + " " + item.lastName))])
+ 
+ const { allCategories,allTreatmentTests } = useSelector((state) => state.group);
+ console.log("all treatments  ARRE:",allCategories)
+ console.log("all tests are ",allTreatmentTests)
 
   const { user } = useSelector((state) => state.auth);
 
   console.log("user details are:",user)
+
+  useEffect(()=>{
+    dispatch(fetchAllCategories())
+    dispatch(fetchAllTreatmentTests())
+  },[])
 
 
   const addObject ={
@@ -142,7 +154,49 @@ function AddTeacher() {
         </Grid>
 
 
+       {allCategories.length > 0 && allCategories.map((item)=> (
 
+<Grid container item xs={12} spacing={2}>
+<Grid item xs={3}>
+  <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+   <div >
+   {item.title.toUpperCase()}
+   </div>
+
+  </Typography>
+
+</Grid>
+
+<Grid item xs={7}>
+<Select
+style={{width:"100%"}}
+labelId="demo-simple-select-label"
+id="demo-simple-select"
+value={bloodInvestigation}
+label="bloodInvestigation"
+onChange={(event) => {
+  setBloodInvestigation(event.target.value);
+}}
+>
+{allTreatmentTests && allTreatmentTests.length >0 && allTreatmentTests.filter((me)=>(me.treatmentId === item.uid)).length > 0 ? allTreatmentTests.filter((me)=>(me.treatmentId === item.uid)).map((kiwi)=>(
+  <MenuItem value={kiwi}>{kiwi.title}</MenuItem>
+)):
+<MenuItem value={null}>{"No items listed!"}</MenuItem>
+}
+
+</Select>
+</Grid>
+
+</Grid>
+
+       ))
+       }
+
+
+
+
+
+ {/*
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
@@ -153,19 +207,25 @@ function AddTeacher() {
             </Typography>
           
           </Grid>
-
+ 
           <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" "
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {bloodInvestigation}
-            onChange = {(e)=>{setBloodInvestigation(e.target.value)}}
-            
-            />
-          </Grid>
+          <Select
+         style={{width:"100%"}}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={bloodInvestigation}
+          label="bloodInvestigation"
+          onChange={(event) => {
+            setBloodInvestigation(event.target.value);
+          }}
+        >
+        {teachersArr.length >0  && teachersArr.map((item)=>(
+            <MenuItem value={item}>{item}</MenuItem>
+        ))}
+       
+        </Select>
+        </Grid>
+
         </Grid>
 
         <Grid container item xs={12} spacing={2}>
@@ -180,19 +240,23 @@ function AddTeacher() {
           </Grid>
 
           <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" "
-            variant="outlined"
-            multiline
-            rows={1}
-            value= {radiology}
-            onChange = {(e)=>{setRadiology(e.target.value)}}
-            
-            />
-            
-            
-          </Grid>
+          <Select
+         style={{width:"100%"}}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={radiology}
+          label="Radiology"
+          onChange={(event) => {
+            setRadiology(event.target.value);
+          }}
+        >
+        {teachersArr.length >0  && teachersArr.map((item)=>(
+            <MenuItem value={item}>{item}</MenuItem>
+        ))}
+       
+        </Select>
+        </Grid>
+
         </Grid>
 
 
@@ -209,17 +273,23 @@ function AddTeacher() {
           </Grid>
 
           <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" "
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {intervention}
-            onChange = {(e)=>{setIntervention(e.target.value)}}
-            
-            />
-          </Grid>
+          <Select
+         style={{width:"100%"}}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={intervention}
+          label="Intervention"
+          onChange={(event) => {
+            setIntervention(event.target.value);
+          }}
+        >
+        {teachersArr.length >0  && teachersArr.map((item)=>(
+            <MenuItem value={item}>{item}</MenuItem>
+        ))}
+       
+        </Select>
+        </Grid>
+
         </Grid>
 
 
@@ -236,19 +306,25 @@ function AddTeacher() {
           </Grid>
 
           <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" "
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {referral}
-            onChange = {(e)=>{setReferral(e.target.value)}}
-            
-            />
-          </Grid>
+          <Select
+         style={{width:"100%"}}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={referral}
+          label="Referral"
+          onChange={(event) => {
+            setReferral(event.target.value);
+          }}
+        >
+        {teachersArr.length >0  && teachersArr.map((item)=>(
+            <MenuItem value={item}>{item}</MenuItem>
+        ))}
+       
+        </Select>
         </Grid>
-      
+
+        </Grid>
+*/}
 
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
@@ -261,13 +337,39 @@ function AddTeacher() {
           
           </Grid>
 
-          <Grid item xs={7}>
+          <Grid item xs={2}>
             <TextField
             fullWidth
             placeholder=""
             variant="outlined"
             multiline
-            maxRows={2}
+            maxRows={3}
+            value= {prescription}
+            onChange = {(e)=>{setPrescription(e.target.value)}}
+            
+            />
+          </Grid>
+
+          <Grid item xs={2}>
+            <TextField
+            fullWidth
+            placeholder=""
+            variant="outlined"
+            multiline
+            maxRows={3}
+            value= {prescription}
+            onChange = {(e)=>{setPrescription(e.target.value)}}
+            
+            />
+          </Grid>
+
+          <Grid item xs={2}>
+            <TextField
+            fullWidth
+            placeholder=""
+            variant="outlined"
+            multiline
+            maxRows={3}
             value= {prescription}
             onChange = {(e)=>{setPrescription(e.target.value)}}
             

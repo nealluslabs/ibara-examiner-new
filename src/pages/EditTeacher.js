@@ -24,6 +24,8 @@ function EditTeacher() {
   const {teacherInfo} = useSelector((state) => state.group)
   const { user } = useSelector((state) => state.auth);
   //console.log("user details are:",user)
+  const { complaints } = useSelector((state) => state.jobs);
+  const [complaintArr, setComplaintArr] = useState(complaints?complaints:[]/*teachers*/);
 
 
   const [loading,setLoading] = useState(false)
@@ -54,13 +56,16 @@ function EditTeacher() {
   }
 
   const updateThisSubject = async(identity,updateObject,navigate) => {
+   if(!screenTime||!firstName||!lastName||!icon||!complaint||!history){
+    notifyErrorFxn("please make sure all fields are filled in")
+   }else{
     setLoading(true)
     dispatch(updateTeacher(identity,updateObject,navigate))
    
     // console.log("identity is",identity)
     // console.log("update this subject is updating.........")
     setTimeout(()=>{setLoading(false)},2100)
-    
+   } 
   }
 
 
@@ -132,7 +137,7 @@ function EditTeacher() {
           <Grid item xs={7}>
             <TextField
             fullWidth
-            placeholder=" 6eme Annee, 10eme Annee, etc."
+            placeholder=" add screen time"
             variant="outlined"
             multiline
             maxRows={2}
@@ -217,16 +222,22 @@ function EditTeacher() {
           </Grid>
 
           <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" enter last name."
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {icon}
-            onChange = {(e)=>{setIcon(e.target.value)}}
-            
-            />
+          <Select
+         style={{width:"100%"}}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={icon}
+          label="icon"
+          onChange={(event) => {
+            setIcon(event.target.value);
+          }}
+        >
+       
+            <MenuItem value={"Male"}>{"Male"}</MenuItem>
+            <MenuItem value={"Female"}>{"Female"}</MenuItem>
+       
+       
+        </Select>
           </Grid>
         </Grid>
 
@@ -272,16 +283,24 @@ function EditTeacher() {
           </Grid>
 
           <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" e.g www.amazons3/image.jpg"
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {complaint}
-            onChange = {(e)=>{setComplaint(e.target.value)}}
+          <Select
+         style={{width:"100%"}}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={complaint}
+          label="icon"
+          onChange={(event) => {
+            setComplaint(event.target.value);
+          }}
+        >
+       {complaintArr.map((item)=>(
+
+            <MenuItem value={item.uid}>{item.complaint}</MenuItem>
             
-            />
+       )
+       )}
+       
+        </Select>
           </Grid>
         </Grid>
         {/* upload section */}

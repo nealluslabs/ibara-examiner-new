@@ -18,6 +18,7 @@ function AddSubject() {
   console.log("location is",location.state.levelName,location.state.uid)
 
   const { teachers } = useSelector((state) => state.jobs);
+  const { categoryVideos,allTreatmentTests } = useSelector((state) => state.group);
 
   const dispatch = useDispatch();
 
@@ -141,16 +142,23 @@ function AddSubject() {
           </Grid>
 
           <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" Physique, Histoire, etc."
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {title}
-            onChange = {(e)=>{setTitle(e.target.value)}}
-            
-            />
+          <Select
+         style={{width:"100%"}}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={title}
+          label="name"
+          onChange={(event) => {
+            setTitle(event.target.value);
+          }}
+        >
+         { categoryVideos.map((item)=>(
+            <MenuItem value={item.uid}>{item.title}</MenuItem>
+           
+          )
+          )
+}
+        </Select>
             
             
           </Grid>

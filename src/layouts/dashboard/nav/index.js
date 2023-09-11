@@ -20,7 +20,7 @@ import {AiOutlineLock} from 'react-icons/ai'
 // ----------------------------------------------------------------------
 
 // const NAV_WIDTH = 280;
-const NAV_WIDTH = 246;
+const NAV_WIDTH = 230;
 
 
 const StyledAccount = styled('div')(({ theme }) => ({
