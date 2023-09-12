@@ -90,7 +90,7 @@ export default function ContractorStatsPage() {
        }  
      }, [userCourses])
 
-  console.log('cmc user data is: ', jobArr);
+  console.log('ibara users data is: ', jobArr);
 
   return (
       
@@ -105,7 +105,7 @@ export default function ContractorStatsPage() {
 
            <br/><br/><br/><br/>*/}
 
-           <QuizStatsList student={student} allQuizzes = {allQuizzesOneStudent.length > 0?allQuizzesOneStudent:[]} />
+           <QuizStatsList student={student} allQuizzes = {allQuizzesOneStudent} />
            </>
            :
            <center>

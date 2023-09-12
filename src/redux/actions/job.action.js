@@ -146,7 +146,7 @@ export const getSingleStudent = (id) => async (dispatch) => {
         if(doc.data().testsTaken){                 
               let allQuizzesOneStudent = []
               doc.data().testsTaken.forEach((element) => {
-                var oneQuiz  = db.collection("Treatments").doc(element.testId);
+                var oneQuiz  = db.collection("TreatmentTests").doc(element.testId);
                
                 oneQuiz.get().then((shrew) => {allQuizzesOneStudent = [...allQuizzesOneStudent,shrew.data()]})
                 
@@ -162,7 +162,7 @@ export const getSingleStudent = (id) => async (dispatch) => {
             }
 
               }
-            ,1000)
+            ,500)
         }else{
             dispatch(saveAllQuizzesOneStudent([ ]))
         }

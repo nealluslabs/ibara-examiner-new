@@ -40,7 +40,7 @@ const navConfig = [
 },
   {
     title: 'Treatments',
-    path: '/dashboard/courses',
+    path: '/dashboard/treatments',
     icon:<FaSyringe/>,
     
    /* children: [

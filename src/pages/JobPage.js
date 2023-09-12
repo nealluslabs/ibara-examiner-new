@@ -23,7 +23,7 @@ export default function JobPage() {
   return (
     <>
       <Helmet>
-        <title> CMC | Company Panel </title>
+        <title> Ibara |Company Panel </title>
       </Helmet>
 
       <Container maxWidth="xl">

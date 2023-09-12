@@ -129,23 +129,18 @@ export default function QuizStatsList({student,allQuizzes}) {
   /*const mixedArray =[...( allQuizzes.map((item,i)=>({...item,resultPercentage:student.quizzesTaken[i].resultPercentage,takenOn:student.quizzesTaken[i].takenOn})))]
   console.log("mixed array is",mixedArray)*/
 
-  const [jobList, setJobList] = useState(allQuizzes.length> 0 && student.quizzesTaken?allQuizzes:
-                                        [ ]
-                                          
-                                        );
+  const [jobList, setJobList] = useState(allQuizzes.length> 0 && student.testsTaken?allQuizzes:[ ]);
 
 
        useEffect(()=>{
    
-      setJobList(allQuizzes.length> 0?allQuizzes:
-        [ ]
-          )
+      setJobList(allQuizzes.length> 0?allQuizzes:[ ])
 
      },[allQuizzes])
                                                       
 
 
-  console.log("all tests taken  are yo!!:",allQuizzes)
+  console.log("all tests taken  are !!:",jobList)
   console.log("the candidate  is:",student)
   const [searched, setSearched] = useState("");
   const classes = useStyles();
@@ -273,21 +268,21 @@ export default function QuizStatsList({student,allQuizzes}) {
                 )
               : jobList
             ).map((row,index) => (
-              <TableRow key={row.uid}>
+              <TableRow key={row && row.uid}>
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {row && row.name}
                 </TableCell>
                 <TableCell style={{ width: 140 }} align="right">
-                  {row.intervention}
+                  {row &&row.intervention}
                 </TableCell>
 
                 <TableCell style={{ width: 140 }} align="right">
-                  { row.takenOn ? (new Date((row.takenOn.seconds)*1000)).toDateString():row.radiology}
+                  {row && row.takenOn ? (new Date((row.takenOn.seconds)*1000)).toDateString():row && row.radiology}
                   
                 </TableCell>
 
                 <TableCell style={{ width: 140 }} align="right">
-                  {row.resultPercentage > 50? ("pass" /*`${student.quizzesTaken[index].resultPercentage}%`*/):" "}
+                  {row && row.resultPercentage > 50? ("pass" /*`${student.quizzesTaken[index].resultPercentage}%`*/):" "}
                 </TableCell>
 
                 {/*<TableCell style={{ width: 140 }} align="right">

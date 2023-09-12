@@ -33,7 +33,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   [theme.breakpoints.up('lg')]: {
     minHeight: HEADER_DESKTOP,
     padding: theme.spacing(0, 5),
-    backgroundColor: /*'#000000'*/ "#13013C"
+    backgroundColor: /*'#000000'*/  "##D3D3D3" /*"#13013C"*/
 
   },
 }));
