@@ -2,7 +2,7 @@ import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,
 import { useRef, useState,useEffect} from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
-import { addTeacher,addComplaint, fetchAllTreatmentTests, fetchAllCategories} from 'src/redux/actions/group.action';
+import { addTeacher,addComplaint, fetchAllTreatmentCategories, fetchAllCategories} from 'src/redux/actions/group.action';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { notifyErrorFxn } from 'src/utils/toast-fxn';
@@ -38,9 +38,9 @@ function AddTeacher() {
 
  const [teachersArr,setTeacherArr]=useState([...teachers.map((item)=>(item.firstName + " " + item.lastName))])
  
- const { allCategories,allTreatmentTests } = useSelector((state) => state.group);
+ const { allCategories,allTreatmentCategories } = useSelector((state) => state.group);
  console.log("all treatments  ARRE:",allCategories)
- console.log("all tests are ",allTreatmentTests)
+ console.log("all tests are ",allTreatmentCategories)
 
   const { user } = useSelector((state) => state.auth);
 
@@ -48,7 +48,7 @@ function AddTeacher() {
 
   useEffect(()=>{
     dispatch(fetchAllCategories())
-    dispatch(fetchAllTreatmentTests())
+    dispatch(fetchAllTreatmentCategories())
   },[])
 
 
@@ -178,7 +178,7 @@ onChange={(event) => {
   setBloodInvestigation(event.target.value);
 }}
 >
-{allTreatmentTests && allTreatmentTests.length >0 && allTreatmentTests.filter((me)=>(me.treatmentId === item.uid)).length > 0 ? allTreatmentTests.filter((me)=>(me.treatmentId === item.uid)).map((kiwi)=>(
+{allTreatmentCategories && allTreatmentCategories.length >0 && allTreatmentCategories.filter((me)=>(me.treatmentId === item.uid)).length > 0 ? allTreatmentCategories.filter((me)=>(me.treatmentId === item.uid)).map((kiwi)=>(
   <MenuItem value={kiwi}>{kiwi.title}</MenuItem>
 )):
 <MenuItem value={null}>{"No items listed!"}</MenuItem>

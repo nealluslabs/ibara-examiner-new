@@ -13,7 +13,7 @@ const initialState = {
        presentOpenChapter:null,
        presentOpenSession:null,
        requestedSection:null,
-       allTreatmentTests:[],
+       allTreatmentCategories:[],
        subjectInfo:{},
        chapterInfo:{},
        teacherInfo:{},
@@ -38,8 +38,8 @@ const groupSlice = createSlice({
     saveAllGroup: (state, action) => {
         state.allGroups = action.payload;
     },
-    saveAllTreatmentTests: (state, action) => {
-      state.allTreatmentTests = action.payload;
+    saveAllTreatmentCategories: (state, action) => {
+      state.allTreatmentCategories = action.payload;
   },
     setRequestedSection: (state, action) => {
       state.requestedSection = action.payload;
@@ -119,7 +119,7 @@ const { actions, reducer } = groupSlice;
 export const {
  saveMyGroup,
  saveAllGroup,
- saveAllTreatmentTests,
+ saveAllTreatmentCategories,
  saveSectionVideos,
  saveCategoryVideos,
  saveCategoryChapters,

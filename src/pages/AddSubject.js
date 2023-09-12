@@ -18,7 +18,7 @@ function AddSubject() {
   console.log("location is",location.state.levelName,location.state.uid)
 
   const { teachers } = useSelector((state) => state.jobs);
-  const { categoryVideos,allTreatmentTests } = useSelector((state) => state.group);
+  const { categoryVideos,allTreatmentCategories } = useSelector((state) => state.group);
 
   const dispatch = useDispatch();
 

@@ -9,7 +9,7 @@ import { isItLoading, saveAllGroup ,saveEmployeer,
         saveChapterSessions,saveChapterQuizzes,
         saveSubjectInfo,saveLessonInfo,saveQuizInfo,
         saveChapterInfo,saveTeacherInfo,
-        saveComplaintInfo,saveAllTreatmentTests} from '../reducers/group.slice';
+        saveComplaintInfo,saveAllTreatmentCategories} from '../reducers/group.slice';
 import firebase from "firebase/app";
 
 import { getTeachers } from './job.action';
@@ -219,7 +219,7 @@ export const fetchGroups = (adminID) => async (dispatch) => {
  export const fetchVideoSection = (chosenSection)=> async(dispatch) =>{
 
   //dispatch(isItLoading(true));
-  db.collection("TreatmentTests")
+  db.collection("TreatmentCategory")
   .where('treatmentId', '==', chosenSection)
    .get()
    .then((snapshot) => {
@@ -250,21 +250,21 @@ export const fetchGroups = (adminID) => async (dispatch) => {
  });
  };
 
- export const fetchAllTreatmentTests = (chosenSection)=> async(dispatch) =>{
+ export const fetchAllTreatmentCategories = (chosenSection)=> async(dispatch) =>{
 
 
-  var categories = db.collection("TreatmentTests");
+  var categories = db.collection("TreatmentCategory");
   categories.get().then((snapshot) => {
     const groupMembers = snapshot.docs.map((doc) => ({ ...doc.data() }));
-    console.log("ALL Treatments Tests ARE ACTIONS:",groupMembers)
+    console.log("ALL Treatments categories ARE ACTIONS:",groupMembers)
     if (groupMembers.length) {
-    dispatch(saveAllTreatmentTests(groupMembers))
+    dispatch(saveAllTreatmentCategories(groupMembers))
 
   } else {
-      console.log("No treatments tests in database!");
+      console.log("No treatments categories in database!");
   }
 }).catch((error) => {
-  console.log("Error getting treatments tests:", error);
+  console.log("Error getting treatments categories:", error);
 });
 
 
@@ -273,7 +273,7 @@ export const fetchGroups = (adminID) => async (dispatch) => {
 
 
   //dispatch(isItLoading(true));
-  db.collection("TreatmentTests")
+  db.collection("TreatmentCategory")
   .where('treatmentId', '==', chosenSection)
    .get()
    .then((snapshot) => {

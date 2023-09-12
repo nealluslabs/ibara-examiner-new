@@ -8,7 +8,7 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import LockIcon from '@mui/icons-material/Lock';
 import HomeBox from '../components/home/home-box';
 import PublicCoolerRowCard from 'src/components/public-cooler/public-cooler-card';
-import { fetchAllCategories,fetchAllTreatmentTests } from 'src/redux/actions/group.action';
+import { fetchAllCategories } from 'src/redux/actions/group.action';
 import { useEffect,useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fCurrency } from '../utils/formatNumber';
@@ -43,7 +43,7 @@ export default function CategoriesVideoPage() {
 
 useEffect(()=>{
   dispatch(fetchAllCategories())
-  dispatch(fetchAllTreatmentTests())
+ 
 
   setData(allCategories)
 
