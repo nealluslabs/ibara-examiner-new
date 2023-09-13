@@ -422,12 +422,12 @@ export const fetchGroups = (adminID) => async (dispatch) => {
 
 
  export const fetchSubjectInfo = (uid) =>async (dispatch) => {
-  db.collection("sections").doc(uid).get().then((doc) => {
+  db.collection("Treatments").doc(uid).get().then((doc) => {
   console.log()
   
     dispatch(saveSubjectInfo(doc.data()))
  }).catch((error) => {
-  console.log("Error fetching a particular subject from sections collection:", error);
+  console.log("Error fetching a particular treatment from  Treatments collection:", error);
 
 });
 };
@@ -665,6 +665,7 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
         body:addObject.body?addObject.body:"lorem ipsum",
         title:addObject.title,
         treatmentId:addObject.treatmentId,
+        treatmentCategoryId:addObject.treatmentCategoryId,
         specific:addObject.specific?addObject.specific:"lorem ipsum"
       }
     ).then((doc) => {

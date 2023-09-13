@@ -26,7 +26,7 @@ import AddSubSectionCard from   'src/components/incubator/addSubSection-card';
 import ChapterCard from   'src/components/chapters/chapter-card';
 
 import { setRequestedSection,savePresentOpenMenu } from 'src/redux/reducers/group.slice';
-import { fetchVideoSection } from 'src/redux/actions/group.action';
+import { fetchVideoSection,fetchSubjectInfo } from 'src/redux/actions/group.action';
 import QuizCard from '../incubator/quiz-card';
 
 
@@ -142,7 +142,7 @@ function CategoriesRowCard ({ uid, title, body, img}) {
     const sendToAddTreatment = (treatment="6eme Annee",identity="hi")=>{
 
       setWait(true)
-      //dispatch(fetchSubjectInfo(identity))
+      dispatch(fetchSubjectInfo(identity))
 
      setTimeout(()=> {navigate('/dashboard/add-subject',{state:{uid:identity,treatment}})}, 1000)
     }

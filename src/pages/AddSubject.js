@@ -2,7 +2,7 @@ import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,
 import { useRef, useState,useEffect} from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
-import { addSubject} from 'src/redux/actions/group.action';
+import { addSubject, fetchAllTreatmentCategories} from 'src/redux/actions/group.action';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { notifyErrorFxn } from 'src/utils/toast-fxn';
@@ -18,7 +18,8 @@ function AddSubject() {
   console.log("location is",location.state.levelName,location.state.uid)
 
   const { teachers } = useSelector((state) => state.jobs);
-  const { categoryVideos,allTreatmentCategories } = useSelector((state) => state.group);
+  const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state) => state.group);
+  console.log("all treament categories",allTreatmentCategories)
 
   const dispatch = useDispatch();
 
@@ -27,6 +28,7 @@ function AddSubject() {
   const [loading,setLoading] = useState(false)
   const [title,setTitle] = useState('')
   const [treatment,setTreatment] = useState(location.state && location.state.treatment?location.state.treatment:" cannot change this field")
+  const [treatmentCategoryId,setTreatmentCategoryId] = useState('')
   const [body,setBody] = useState('lorem ipsum dolor')
   const [response,setResponse] =useState('')
   const [specific,setSpecific]  = useState('')
@@ -45,6 +47,7 @@ function AddSubject() {
     body,
     treatmentId:location.state.uid,
     treatment:location.state.treatment,
+    treatmentCategoryId,
     specific,
   }
 
@@ -68,7 +71,7 @@ function AddSubject() {
   useEffect(()=>{
 
     dispatch(getTeachers())
-
+    dispatch(fetchAllTreatmentCategories())
   },[])
 
   return (
@@ -134,7 +137,7 @@ function AddSubject() {
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
-             NAME
+             CATEGORY
              </div>
       
             </Typography>
@@ -146,18 +149,18 @@ function AddSubject() {
          style={{width:"100%"}}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={title}
+          value={treatmentCategoryId}
           label="name"
           onChange={(event) => {
-            setTitle(event.target.value);
+            setTreatmentCategoryId(event.target.value);
           }}
         >
-         { categoryVideos.map((item)=>(
-            <MenuItem value={item.uid}>{item.title}</MenuItem>
-           
-          )
-          )
+       {allTreatmentCategories && allTreatmentCategories.length >0 && allTreatmentCategories.filter((me)=>(me.treatmentId === location.state.uid)).length > 0 ? allTreatmentCategories.filter((me)=>(me.treatmentId === location.state.uid)).map((kiwi)=>(
+  <MenuItem value={kiwi.uid}>{kiwi.title}</MenuItem>
+)):
+<MenuItem value={null}>{"No items listed!"}</MenuItem>
 }
+
         </Select>
             
             
@@ -166,13 +169,45 @@ function AddSubject() {
 
        
 
-    {treatment === "Blood Investigation" &&
+    {
         
        
     <Grid container item xs={12} style={{position:"relative",marginTop:"3rem"}} spacing={2}>
 
        <br/><br/><br/>
        <div style={{height:"2px", width:"100%",position:"absolute",borderBottom:"1px solid black",left:"0rem",top:"0rem"}}></div>
+
+
+       <Grid container item xs={12} spacing={2}>
+  
+  <Grid item xs={3}>
+    <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+     <div >
+     NAME
+     </div>
+
+    </Typography>
+  
+  </Grid>
+
+  <Grid item xs={7}>
+    <TextField
+    fullWidth
+    placeholder=" "
+    variant="outlined"
+    multiline
+    maxRows={1}
+    value= {title}
+    onChange = {(e)=>{setTitle(e.target.value)}}
+    
+    />
+    
+    
+  </Grid>
+</Grid>
+
+
+
 
         <Grid container item xs={12} spacing={2}>
   
@@ -189,7 +224,7 @@ function AddSubject() {
           <Grid item xs={7}>
             <TextField
             fullWidth
-            placeholder=" "
+            placeholder="enter details about the test"
             variant="outlined"
             multiline
             maxRows={1}
