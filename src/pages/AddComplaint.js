@@ -40,12 +40,14 @@ function AddTeacher() {
      bloodInvestigation:'',
      referral:'',
     radiology:'',
-     prescription:"",
+     prescription1:"",
+     prescription2:"",
+     prescription3:"",
      ecg:''
         }
   )
 
-  console.log("state OBJECT",stateObject)
+  console.log("our state OBJECT",stateObject)
 
   const { teachers } = useSelector((state) => state.jobs);
 
@@ -71,7 +73,7 @@ function AddTeacher() {
 
   const addThisComplaint = async(addObject,navigate) => {
     
-    if(!stateObject.intervention||!stateObject.complaint||!stateObject.bloodInvestigation||!stateObject.referral || !stateObject.prescription ||!stateObject.radiology ){
+    if(!stateObject.intervention||!stateObject.complaint||!stateObject.bloodInvestigation||!stateObject.referral || !stateObject.prescription1 ||!stateObject.radiology ){
       notifyErrorFxn("Please make sure to fill in all fields.")
     }
     else{
@@ -184,12 +186,12 @@ function AddTeacher() {
 style={{width:"100%"}}
 labelId="demo-simple-select-label"
 id="demo-simple-select"
-value={Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))]}
+value={Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))] && Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))].title}
 name={item.title}       
 
 onChange = {(e)=>{setStateObject({
   ...stateObject,
-  [e.target.name]:e.target.value})}}
+  [e.target.name]:e.target.value.title})}}
 
 
 >
@@ -359,8 +361,12 @@ onChange = {(e)=>{setStateObject({
             variant="outlined"
             multiline
             maxRows={3}
-            value= {prescription}
-            onChange = {(e)=>{setPrescription(e.target.value)}}
+            value= {stateObject.prescription1}
+            onChange = {(e)=>{setStateObject(
+              {...stateObject,
+              prescription1:e.target.value
+              }
+              )}}
             
             />
           </Grid>
@@ -372,8 +378,12 @@ onChange = {(e)=>{setStateObject({
             variant="outlined"
             multiline
             maxRows={3}
-            value= {prescription}
-            onChange = {(e)=>{setPrescription(e.target.value)}}
+            value= {stateObject.prescription2}
+            onChange = {(e)=>{setStateObject(
+              {...stateObject,
+              prescription2:e.target.value
+              }
+              )}}
             
             />
           </Grid>
@@ -385,8 +395,12 @@ onChange = {(e)=>{setStateObject({
             variant="outlined"
             multiline
             maxRows={3}
-            value= {prescription}
-            onChange = {(e)=>{setPrescription(e.target.value)}}
+            value= {stateObject.prescription3}
+            onChange = {(e)=>{setStateObject(
+              {...stateObject,
+              prescription3:e.target.value
+              }
+              )}}
             
             />
           </Grid>

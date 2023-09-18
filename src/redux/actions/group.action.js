@@ -596,7 +596,9 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
         bloodInvestigation:addObject.bloodInvestigation,
         referral:addObject.referral,
         radiology:addObject.radiology,
-        prescription:addObject.prescription
+        prescription1:addObject.prescription1,
+        prescription2:addObject.prescription2,
+        prescription3:addObject.prescription3
 
       },
         registeredOn:new Date()
