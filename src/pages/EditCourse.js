@@ -23,7 +23,7 @@ function EditCourse() {
   const {subjectInfo} = useSelector((state) => state.group)
   const { user } = useSelector((state) => state.auth);
   const { teachers } = useSelector((state) => state.jobs);
-  //console.log("user details are:",user)
+  console.log("SUBJECT INFO details are!!:",subjectInfo)
 
   const [title,setTitle] =useState(subjectInfo && subjectInfo.title?subjectInfo.title:" ")
   const [body,setBody] =useState(subjectInfo && subjectInfo.body?subjectInfo.body:" ")
@@ -75,12 +75,12 @@ function EditCourse() {
 
        </div>
 
-    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>SUBJECT</h1>
+    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>{subjectInfo && subjectInfo.title?subjectInfo.title:"TREATMENT CATEGORY"}</h1>
 
     <Grid item xs={12} sx={{ display: 'flex', flexDirection: 'row',justifyContent:"space-between"}}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Typography variant="h4" component="p">
-              EDIT SUBJECT
+              EDIT TREATMENT CATEGORY
               </Typography>
 
             
@@ -113,7 +113,7 @@ function EditCourse() {
      <br/> <br/> <br/>
 
      <Grid container spacing={2}>
-         <Grid container item xs={12} spacing={2}>
+       {/*  <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
@@ -139,7 +139,7 @@ function EditCourse() {
             
             
           </Grid>
-        </Grid>
+        </Grid>*/}
 
 
 
@@ -200,7 +200,7 @@ function EditCourse() {
 
 
 
-        <Grid container item xs={12} spacing={2}>
+       {/* <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
@@ -226,11 +226,11 @@ function EditCourse() {
             
             
           </Grid>
-        </Grid>
+        </Grid>*/}
 
 
 
-        <Grid container item xs={12} spacing={2}>
+        {/*<Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
@@ -256,10 +256,10 @@ function EditCourse() {
             
             
           </Grid>
-        </Grid>
+        </Grid>*/}
 
 
-        <Grid container item xs={12} spacing={2}>
+       {/* <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
@@ -290,7 +290,7 @@ function EditCourse() {
             
             
           </Grid>
-        </Grid>
+        </Grid>*/}
         {/* upload section */}
         
 

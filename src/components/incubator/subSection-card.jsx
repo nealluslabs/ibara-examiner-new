@@ -91,7 +91,7 @@ const SubSectionCard = ({data,index,user}) => {
       setLoading(true)
       dispatch(fetchSubjectChapters(id))
       dispatch(savePresentOpenChapter(id))
-      console.log("I WANNA SEE CATEGORY CAHPTERS", categoryData)
+      console.log("I WANNA SEE treatment TESTS ", categoryData)
      setTimeout(()=>{setLoading(false);setDropDown(true)},600)
      }
      else{
@@ -133,7 +133,7 @@ const SubSectionCard = ({data,index,user}) => {
                   dispatch(setRequestedSection(data.title))
                   dispatch(fetchVideoSubsection(data.title))}
                 makeRequest().then(()=>(setTimeout(()=>{navigate('/dashboard/view-incubator', { state: { title:data.title } })},1300)))*/
-                //fetchChaptersAndDropDown(data.uid)
+                fetchChaptersAndDropDown(data.uid)
               }}>
                 {loading?"Loading...":"View"}
             </Button>
@@ -142,7 +142,7 @@ const SubSectionCard = ({data,index,user}) => {
             <Button variant="contained" style={{minHeight: '45px', minWidth: '145px', backgroundColor:'black' }}
               onClick={() => {
              
-              // populateEditSubject(data.uid)
+              populateEditSubject(data.uid)
               }}>
                 {wait?"Please Wait...":"Edit"}
             </Button>
@@ -157,7 +157,7 @@ const SubSectionCard = ({data,index,user}) => {
      {dropDown &&
     <Grid item xs container direction="column" spacing={6} style={{marginLeft:"0px",marginTop:"0px",backgroundColor:"#F8FFEECC",display:"flex",flexDirection:"column",alignItems:"center" }}>
          <br/><br/>
-        {categoryData.length?
+        {categoryData && categoryData.length?
        
         categoryData.map(((dt,i) => {
          return (
@@ -169,11 +169,11 @@ const SubSectionCard = ({data,index,user}) => {
            
           <center>
            <br/> <br/>
-           No Chapter(s) available for this subject.
+           No Test(s) available for this category.
            </center>
          
            }
-           <QuizCard subject ={data.title} sectionId={data.uid}  category={data.category} /> 
+           
       
        </Grid>
          }

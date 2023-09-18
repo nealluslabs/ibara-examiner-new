@@ -310,33 +310,27 @@ export const fetchGroups = (adminID) => async (dispatch) => {
  export const fetchSubjectChapters = (chosenSection)=> async(dispatch) =>{
 
   //dispatch(isItLoading(true));
-  db.collection("chapters")
-  .where('sectionId', '==', chosenSection)
+  db.collection("TreatmentTests")
+  .where('treatmentCategoryId', '==', chosenSection)
    .get()
    .then((snapshot) => {
      const allSectionChapters = snapshot.docs.map((doc) => ({ ...doc.data() }));
-     const sortFunction = (array)=>{
-      if (array.length){
-        return  array.sort((a,b)=>(Number(a.chapterNumber) - Number(b.chapterNumber)))
-       }else{
-        return []
-       }
-     }
+    
      
-     const sortedSectionChapters = sortFunction(allSectionChapters)
+    
 
 
    if (allSectionChapters.length > 0) {
      //dispatch(isItLoading(false));
-     console.log("ALL sections FROM DATABASE(FOR THIS CATEGORY):", sortedSectionChapters);
-     dispatch(saveCategoryChapters(sortedSectionChapters));
+     
+     dispatch(saveCategoryChapters(allSectionChapters));
    } else {
       // dispatch(isItLoading(false));
-      dispatch(saveCategoryChapters(sortedSectionChapters));
-       console.log("No sections for this category!");
+      dispatch(saveCategoryChapters(allSectionChapters));
+       console.log("No treatment tests for this treatment category!");
    }
  }).catch((error) => {
-   console.log("Error getting document:", error);
+   console.log("Error getting treatment tests:", error);
    dispatch(isItLoading(false));
  });
  };
@@ -422,7 +416,7 @@ export const fetchGroups = (adminID) => async (dispatch) => {
 
 
  export const fetchSubjectInfo = (uid) =>async (dispatch) => {
-  db.collection("Treatments").doc(uid).get().then((doc) => {
+  db.collection("TreatmentCategory").doc(uid).get().then((doc) => {
   console.log()
   
     dispatch(saveSubjectInfo(doc.data()))
@@ -433,7 +427,7 @@ export const fetchGroups = (adminID) => async (dispatch) => {
 };
 
 export const fetchChapterInfo = (uid) =>async (dispatch) => {
-  db.collection("chapters").doc(uid).get().then((doc) => {
+  db.collection("TreatmentTests").doc(uid).get().then((doc) => {
   console.log("FRESHLY FETCHED FROM CHAPTERZ",doc.data())
   
     dispatch(saveChapterInfo(doc.data()))
@@ -649,7 +643,7 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
 
   db.collection("TreatmentTests")
   .where("title", "==", addObject.title)
-  .where("treatmentId", "==", addObject.treatmentId)
+  .where("treatmentCategoryId", "==", addObject.treatmentCategoryId)
   .get()
   .then((snapshot) => {
     const existingSubject = snapshot.docs.map((doc) => ({ ...doc.data() }));
@@ -666,7 +660,8 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
         title:addObject.title,
         treatmentId:addObject.treatmentId,
         treatmentCategoryId:addObject.treatmentCategoryId,
-        specific:addObject.specific?addObject.specific:"lorem ipsum"
+        specific:addObject.specific?addObject.specific:"lorem ipsum",
+        responseTime:addObject.response
       }
     ).then((doc) => {
        //const publicGroups = snapshot.docs.map((doc) => ({ ...doc.data() }));

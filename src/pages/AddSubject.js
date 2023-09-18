@@ -45,6 +45,7 @@ function AddSubject() {
   const addObject ={
     title,
     body,
+    response,
     treatmentId:location.state.uid,
     treatment:location.state.treatment,
     treatmentCategoryId,
