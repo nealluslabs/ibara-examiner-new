@@ -34,6 +34,19 @@ function AddTeacher() {
   const [radiology,setRadiology] = useState('')
   const [intervention,setIntervention]=useState('')
 
+  const [stateObject,setStateObject]=useState(
+    {
+     complaint:" ",
+     bloodInvestigation:'',
+     referral:'',
+    radiology:'',
+     prescription:"",
+     ecg:''
+        }
+  )
+
+  console.log("state OBJECT",stateObject)
+
   const { teachers } = useSelector((state) => state.jobs);
 
  const [teachersArr,setTeacherArr]=useState([...teachers.map((item)=>(item.firstName + " " + item.lastName))])
@@ -53,17 +66,12 @@ function AddTeacher() {
 
 
   const addObject ={
-    complaint,
-    bloodInvestigation,
-    referral,
-    prescription,
-    radiology,
-    intervention
+   ...stateObject
   }
 
   const addThisComplaint = async(addObject,navigate) => {
     
-    if(!intervention||!complaint||!bloodInvestigation||!referral || !prescription ||!radiology ){
+    if(!stateObject.intervention||!stateObject.complaint||!stateObject.bloodInvestigation||!stateObject.referral || !stateObject.prescription ||!stateObject.radiology ){
       notifyErrorFxn("Please make sure to fill in all fields.")
     }
     else{
@@ -131,8 +139,12 @@ function AddTeacher() {
             variant="outlined"
             multiline
             maxRows={2}
-            value= {complaint}
-            onChange = {(e)=>{setComplaint(e.target.value)}}
+            name="complaint"
+          
+            value= {stateObject.complaint}
+            onChange = {(e)=>{setStateObject({
+              ...stateObject,
+              [e.target.name]:e.target.value})}}
             
             />
             
@@ -172,11 +184,14 @@ function AddTeacher() {
 style={{width:"100%"}}
 labelId="demo-simple-select-label"
 id="demo-simple-select"
-value={bloodInvestigation}
-label="bloodInvestigation"
-onChange={(event) => {
-  setBloodInvestigation(event.target.value);
-}}
+value={Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))]}
+name={item.title}       
+
+onChange = {(e)=>{setStateObject({
+  ...stateObject,
+  [e.target.name]:e.target.value})}}
+
+
 >
 {allTreatmentCategories && allTreatmentCategories.length >0 && allTreatmentCategories.filter((me)=>(me.treatmentId === item.uid)).length > 0 ? allTreatmentCategories.filter((me)=>(me.treatmentId === item.uid)).map((kiwi)=>(
   <MenuItem value={kiwi}>{kiwi.title}</MenuItem>

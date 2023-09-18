@@ -132,7 +132,7 @@ const ChapterCard = ({data,index,user}) => {
         <span style={{ marginLeft: '20px' }}>{data && data.body}</span>
       </div>
       <div style={{display:"flex",flexDirection:"column",gap:"10px"}}>
-      <Button variant="contained" style={{minHeight: '45px', minWidth: '145px', backgroundColor: 'black', }}
+      {/*<Button variant="contained" style={{minHeight: '45px', minWidth: '145px', backgroundColor: 'black' }}
               onClick={() => {
                
             
@@ -140,10 +140,10 @@ const ChapterCard = ({data,index,user}) => {
                 fetchSessionsAndDropDown(data.uid)
               }}>
                 {loading?"Loading...":"View"}
-            </Button>
+            </Button>*/}
 
 
-            <Button variant="contained" style={{minHeight: '45px', minWidth: '145px', backgroundColor: 'black', }}
+            <Button variant="contained" style={{minHeight: '45px', minWidth: '145px', backgroundColor: 'black'}}
               onClick={() => {
                 
                 populateEditChapter(data.uid)
@@ -156,7 +156,7 @@ const ChapterCard = ({data,index,user}) => {
     </div>
     
         {/*=================THE DROPDOWN ICON =============================*/}
-          
+         {/*
         <SlideDown style={{width:"100%"}}>
             {dropDown &&
             <>
@@ -214,12 +214,12 @@ const ChapterCard = ({data,index,user}) => {
               }
               <AddSessionCard chapterId={data.uid} category={data.category} subject={data.subject}  />
               <AddSessionQuizCard chapterId={data.uid} category={data.category} subject={data.subject}  />
-            </Grid>
+            </Grid>  
 
             </>
-                }
+              }
               </SlideDown>
-            
+            */}
             {/*=================THE DROPDOWN ICON END=============================*/}
 
    

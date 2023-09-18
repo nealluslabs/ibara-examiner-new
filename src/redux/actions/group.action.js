@@ -253,18 +253,18 @@ export const fetchGroups = (adminID) => async (dispatch) => {
  export const fetchAllTreatmentCategories = (chosenSection)=> async(dispatch) =>{
 
 
-  var categories = db.collection("TreatmentCategory");
+  var categories = db.collection("TreatmentTests");
   categories.get().then((snapshot) => {
     const groupMembers = snapshot.docs.map((doc) => ({ ...doc.data() }));
-    console.log("ALL Treatments categories ARE ACTIONS:",groupMembers)
+    console.log("ALL Treatmentstests ARE ACTIONS:",groupMembers)
     if (groupMembers.length) {
     dispatch(saveAllTreatmentCategories(groupMembers))
 
   } else {
-      console.log("No treatments categories in database!");
+      console.log("No treatments tests in database!");
   }
 }).catch((error) => {
-  console.log("Error getting treatments categories:", error);
+  console.log("Error getting treatments tests:", error);
 });
 
 

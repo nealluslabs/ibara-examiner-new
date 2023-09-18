@@ -94,7 +94,7 @@ function EditChapter() {
 
 
 
-    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>UPDATE CHAPTER</h1>
+    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>UPDATE TREATMENT</h1>
 
     <Grid item xs={12} sx={{ display: 'flex' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -110,7 +110,7 @@ function EditChapter() {
      <Grid container spacing={2}>
 
     
-     <Grid container item xs={12} spacing={2}>
+     {/*<Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
@@ -134,13 +134,13 @@ function EditChapter() {
             />
             
           </Grid>
-        </Grid>
+        </Grid>*/}
 
 
 
 
 
-         <Grid container item xs={12} spacing={2}>
+        {/* <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
@@ -165,7 +165,7 @@ function EditChapter() {
             
             
           </Grid>
-        </Grid>
+        </Grid>*/}
 
 
 
@@ -199,7 +199,7 @@ function EditChapter() {
 
 
 
-        <Grid container item xs={12} spacing={2}>
+        {/*<Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
@@ -225,10 +225,10 @@ function EditChapter() {
             
             
           </Grid>
-        </Grid>
+        </Grid>*/}
 
 
-        <Grid container item xs={12} spacing={2}>
+        {/*<Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
@@ -253,7 +253,7 @@ function EditChapter() {
             
             
           </Grid>
-        </Grid>
+        </Grid>*/}
 
 
         <Grid container item xs={12} spacing={2}>
