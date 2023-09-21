@@ -60,7 +60,7 @@ const loginPageData = {
       
       <div className="login-content" >
      
-      <h2 style={{position:"absolute" ,top:"35%"}}>Admin Login</h2>
+      <h2 style={{position:"absolute" ,top:"35%"}}>Examiner Login</h2>
        <LoginForm />
        
 
