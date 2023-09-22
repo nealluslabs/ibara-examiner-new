@@ -129,7 +129,7 @@ export default function QuizStatsList({student,allQuizzes}) {
   /*const mixedArray =[...( allQuizzes.map((item,i)=>({...item,resultPercentage:student.quizzesTaken[i].resultPercentage,takenOn:student.quizzesTaken[i].takenOn})))]
   console.log("mixed array is",mixedArray)*/
 
-  const [jobList, setJobList] = useState(allQuizzes.length> 0 && student.testsTaken?allQuizzes:[ ]);
+  const [jobList, setJobList] = useState(allQuizzes.length> 0 && student.response.length?allQuizzes:[ ]);
 
 
        useEffect(()=>{
@@ -140,7 +140,7 @@ export default function QuizStatsList({student,allQuizzes}) {
                                                       
 
 
-  console.log("all tests taken  are !!:",jobList)
+  console.log("all responses for all patients are!:",jobList)
   console.log("the candidate  is:",student)
   const [searched, setSearched] = useState("");
   const classes = useStyles();
@@ -172,8 +172,8 @@ export default function QuizStatsList({student,allQuizzes}) {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  const viewallQuizzesFxn = (id) => {
-    navigate(`/dashboard/candidate-stats/`,{ state: { id:id } });
+  const viewPatientExpandedFxn = (id) => {
+    navigate(`/dashboard/patient-expanded/`,{ state: { patientId:id } });
   };
 
   const deleteJobFxn = (id) => {
@@ -247,7 +247,7 @@ export default function QuizStatsList({student,allQuizzes}) {
         <Table sx={{ maxWidth: 1500,tableLayout:"fixed" }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Treatments</StyledTableCell>
+              <StyledTableCell>Patient Name</StyledTableCell>
               <StyledTableCell align="right">Grade</StyledTableCell>
               <StyledTableCell align="right">Taken On</StyledTableCell>
               <StyledTableCell align="right"></StyledTableCell>
@@ -270,7 +270,7 @@ export default function QuizStatsList({student,allQuizzes}) {
             ).map((row,index) => (
               <TableRow key={row && row.uid}>
                 <TableCell component="th" scope="row">
-                  {row && row.name}
+                  {row && row.firstName + " " + " "+  row.lastName}
                 </TableCell>
                 <TableCell style={{ width: 140 }} align="right">
                   {row &&row.intervention}
@@ -307,7 +307,7 @@ export default function QuizStatsList({student,allQuizzes}) {
                       fontSize: "15px",
                     }}
                     sx={{ mt: 7, mb: 2 }}
-                    onClick={() => viewallQuizzesFxn(row.uid.trim())}
+                    onClick={() => viewPatientExpandedFxn(row.patientId.trim())}
                   >
                     EXPAND 
                   </Button>

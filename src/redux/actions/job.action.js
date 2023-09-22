@@ -143,12 +143,12 @@ export const getSingleStudent = (id) => async (dispatch) => {
 
 
 
-        if(doc.data().testsTaken){                 
+      /*  if(doc.data().testsTaken){                 
               let allQuizzesOneStudent = []
               doc.data().testsTaken.forEach((element) => {
                 var oneQuiz  = db.collection("TreatmentTests").doc(element.testId);
                
-                oneQuiz.get().then((shrew) => {allQuizzesOneStudent = [...allQuizzesOneStudent,shrew.data()]})
+                oneQuiz.get().then((shrew) => {allQuizzesOneStudent = [...allQuizzesOneStudent,{shrew.data()}]})
                 
             })
             console.log("what i am fetching for candidate tests is",allQuizzesOneStudent )
@@ -165,14 +165,42 @@ export const getSingleStudent = (id) => async (dispatch) => {
             ,500)
         }else{
             dispatch(saveAllQuizzesOneStudent([ ]))
+        }*/
+
+          if(doc.data().response){                 
+              let allQuizzesOneStudent = []
+               
+             
+              doc.data().response.forEach((element) => {
+                var oneQuiz  = db.collection("Patients").doc(element.patientId);
+               
+                oneQuiz.get().then((shrew) => {allQuizzesOneStudent = [...allQuizzesOneStudent,{...element,...shrew.data()}]})
+                
+            })
+            
+            console.log("what i am fetching for candidate tests of one patient -->",allQuizzesOneStudent )
+            
+            setTimeout(()=>{
+               
+            if(allQuizzesOneStudent.length > 0){
+           dispatch(saveAllQuizzesOneStudent(allQuizzesOneStudent));console.log("ALL patients for ONE candidate's tests-->", allQuizzesOneStudent)
+            }else{
+               dispatch(saveAllQuizzesOneStudent([ ]));console.log("ALL patients for ONE candidate's tests", allQuizzesOneStudent)
+            }
+
+              }
+            ,700)
+        }else{
+            dispatch(saveAllQuizzesOneStudent([ ]))
         }
+
 
         
     } else {
-        console.log("No such student!");
+        console.log("No such candidate!");
     }
 }).catch((error) => {
-    console.log("Error getting the CANDIDATES data:", error);
+    console.log("Error getting the candidate and the response->CANDIDATE'S patient data:", error);
 });
 
 };

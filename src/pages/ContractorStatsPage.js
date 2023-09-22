@@ -96,7 +96,7 @@ export default function ContractorStatsPage() {
       
         
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-       <h1 style={{position:"relative",fontWeight:"bold",left:"0px",marginBottom:"40px",fontSize:"30px"}}>CANDIDATE STATS</h1>
+       <h1 style={{position:"relative",fontWeight:"bold",left:"0px",marginBottom:"40px",fontSize:"30px"}}>CANDIDATE RESPONSES</h1>
      
 
        {/*jobArr.length &&*/ userCourses ?

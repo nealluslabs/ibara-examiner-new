@@ -256,7 +256,7 @@ export const fetchGroups = (adminID) => async (dispatch) => {
   var categories = db.collection("TreatmentTests");
   categories.get().then((snapshot) => {
     const groupMembers = snapshot.docs.map((doc) => ({ ...doc.data() }));
-    console.log("ALL Treatmentstests ARE ACTIONS:",groupMembers)
+    console.log("ALL Treatments tests ARE :",groupMembers)
     if (groupMembers.length) {
     dispatch(saveAllTreatmentCategories(groupMembers))
 
