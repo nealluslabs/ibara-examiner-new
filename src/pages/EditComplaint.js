@@ -34,7 +34,7 @@ function EditComplaint() {
   
   useEffect(()=>{
 
-    console.log("INFO FOR THE SELECTED  complaint IS ACTUALLY",complaintInfo)
+    console.log("INFO FOR THE SELECTED  complaint IS ",complaintInfo)
  
    },[])
 
@@ -180,8 +180,8 @@ function EditComplaint() {
 style={{width:"100%"}}
 labelId="demo-simple-select-label"
 id="demo-simple-select"
-value={Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))]>-1 && Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))]}
-placeholder={Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))]>-1 && Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))]}
+value={Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))]>-1 && Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))].title}
+placeholder={Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))]>-1 && Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))].title}
 name={item.title}       
 
 onChange = {(e)=>{setStateObject({

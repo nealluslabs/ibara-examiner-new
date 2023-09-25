@@ -593,7 +593,7 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
       treatment:{
         ECG:addObject["ECG"],
         bloodInvestigation:addObject["Blood Investigation"],
-        referral:"no referral for now"/*addObject.referral*/,
+        referral:addObject.Referral,
         radiology:addObject.Radiology,
         prescription1:addObject.prescription1,
         prescription2:addObject.prescription2,
@@ -832,12 +832,17 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
     {
      
      
-      title:updateObject.title,
-      section:updateObject.section,
-      duration:updateObject.duration,
-      body:updateObject.body,
-      lessonNumber:updateObject.lessonNumber,
-      lessonUrl:updateObject.lessonUrl,
+      complaint:updateObject.complaint,
+      treatment:{
+        ECG:Object["ECG"],
+        bloodInvestigation:updateObject["Blood Investigation"],
+        referral:updateObject.Referrals,
+        radiology:updateObject.Radiology,
+        prescription1:updateObject.prescription1,
+        prescription2:updateObject.prescription2,
+        prescription3:updateObject.prescription3
+
+      },
     
     }
   ).then((snapshot) => {
