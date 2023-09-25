@@ -305,7 +305,7 @@ export default function ComplaintList({complaints}) {
                       fontSize: "15px",
                     }}
                     sx={{ mt: 7, mb: 2 }}
-                    //onClick={() => viewComplaintsFxn(row.uid.trim())}
+                    onClick={() => viewComplaintsFxn(row.uid.trim())}
                   >
                    VIEW
                   </Button>

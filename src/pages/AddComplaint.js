@@ -47,7 +47,7 @@ function AddTeacher() {
         }
   )
 
-  console.log("our state OBJECT",stateObject)
+  console.log("our state OBJECT-->",stateObject)
 
   const { teachers } = useSelector((state) => state.jobs);
 
@@ -73,10 +73,10 @@ function AddTeacher() {
 
   const addThisComplaint = async(addObject,navigate) => {
     
-    if(!stateObject.intervention||!stateObject.complaint||!stateObject.bloodInvestigation||!stateObject.referral || !stateObject.prescription1 ||!stateObject.radiology ){
+    /*if(!stateObject.complaint||!stateObject.bloodInvestigation||!stateObject.referral || !stateObject.prescription1 ||!stateObject.radiology){
       notifyErrorFxn("Please make sure to fill in all fields.")
-    }
-    else{
+    }*/
+    /*else{*/
     
     setLoading(true)
     dispatch(addComplaint(addObject,navigate))
@@ -84,7 +84,7 @@ function AddTeacher() {
     // console.log("identity is",identity)
     // console.log("update this subject is updating.........")
     setTimeout(()=>{setLoading(false)},1800)
-    }
+   /* }*/
   }
  
 

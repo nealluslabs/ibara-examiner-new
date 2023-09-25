@@ -54,7 +54,7 @@ import StudentListPage from './pages/StudentListPage';
 import TeacherListPage from './pages/TeacherListPage';
 import ComplaintsListPage from './pages/ComplaintsListPage';
 
-import EditLesson from './pages/EditLesson';
+import EditComplaint from './pages/EditComplaint';
 import EditQuiz from './pages/EditQuiz';
 
 export default function Router() {
@@ -91,12 +91,13 @@ export default function Router() {
         { path: 'edit-subject', element: <EditCourse /> },
         { path: 'add-lesson', element: <AddLesson /> },
         { path: 'add-complaint', element: <AddComplaint /> },
-        { path: 'edit-lesson', element: <EditLesson /> },
+        { path: 'edit-complaint', element: <EditComplaint /> },
         { path: 'add-chapter', element: <AddChapter /> },
         { path: 'add-quiz', element: <AddQuiz /> },
         { path: 'edit-quiz', element: <EditQuiz /> },
         { path: 'edit-chapter', element: <EditChapter /> },
         { path: 'add-patient', element: <AddTeacher /> },
+        { path: 'edit-patient', element: <EditTeacher /> },
         { path: 'patient-expanded', element: <PatientExpanded/> },
         // { path: 'my-cooler', element: <MyCoolersPage /> },
        

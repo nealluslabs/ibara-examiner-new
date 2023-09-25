@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { notifyErrorFxn } from 'src/utils/toast-fxn';
 import users from 'src/_mock/user';
 
-function EditLesson() {
+function EditComplaint() {
   const navigate = useNavigate();
   const location = useLocation()
  
@@ -87,7 +87,7 @@ function EditLesson() {
 
 
 
-    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>EDIT LESSON</h1>
+    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>EDIT COMPLAINT</h1>
 
     <Grid item xs={12} sx={{ display: 'flex' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -333,4 +333,4 @@ function EditLesson() {
   );
 }
 
-export default EditLesson;
+export default EditComplaint;

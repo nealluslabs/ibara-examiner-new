@@ -123,7 +123,7 @@ function AddTeacher() {
           <Grid item xs={7}>
             <TextField
             fullWidth
-            placeholder=" add screen time"
+            placeholder=" "
             variant="outlined"
             multiline
             disabled
@@ -159,7 +159,7 @@ function AddTeacher() {
           <Grid item xs={7}>
           <TextField
             fullWidth
-            placeholder=" add screen time"
+            placeholder=" "
             variant="outlined"
             multiline
             disabled
@@ -194,7 +194,7 @@ function AddTeacher() {
           <Grid item xs={7}>
             <TextField
             fullWidth
-            placeholder=" Medical history"
+            placeholder=" "
             variant="outlined"
             multiline
             disabled
@@ -229,7 +229,7 @@ function AddTeacher() {
           <Grid item xs={7}>
             <TextField
             fullWidth
-            placeholder=" Medical history"
+            placeholder=" "
             variant="outlined"
             multiline
             disabled
@@ -263,7 +263,7 @@ function AddTeacher() {
           <Grid item xs={7}>
             <TextField
             fullWidth
-            placeholder=" Medical history"
+            placeholder=" "
             variant="outlined"
             multiline
             disabled
@@ -297,7 +297,7 @@ function AddTeacher() {
           <Grid item xs={7}>
             <TextField
             fullWidth
-            placeholder=" Medical history"
+            placeholder=" "
             variant="outlined"
             multiline
             disabled
@@ -331,7 +331,7 @@ function AddTeacher() {
           <Grid item xs={7}>
             <TextField
             fullWidth
-            placeholder=" Medical history"
+            placeholder=" "
             variant="outlined"
             multiline
             disabled

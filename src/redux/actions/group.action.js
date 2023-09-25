@@ -592,10 +592,10 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
         
       complaint:addObject.complaint,
       treatment:{
-        intervention:addObject.intervention,
-        bloodInvestigation:addObject.bloodInvestigation,
-        referral:addObject.referral,
-        radiology:addObject.radiology,
+        ECG:addObject["ECG"],
+        bloodInvestigation:addObject["Blood Investigation"],
+        referral:"no referral for now"/*addObject.referral*/,
+        radiology:addObject.Radiology,
         prescription1:addObject.prescription1,
         prescription2:addObject.prescription2,
         prescription3:addObject.prescription3
@@ -829,7 +829,7 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
 
  export const updateLesson = (uid,updateObject) => async (dispatch) => {
  
-  db.collection("boneCourses").doc(uid).update(
+  db.collection("Complaint").doc(uid).update(
     {
      
      
@@ -844,11 +844,11 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
   ).then((snapshot) => {
      //const publicGroups = snapshot.docs.map((doc) => ({ ...doc.data() }));
      
-     notifySuccessFxn("updated  Lesson successfully")
+     notifySuccessFxn("updated  Complaint successfully")
 
  }).catch((error) => {
-   console.log("Error updating document:", error);
-   notifyErrorFxn("Problem Updating subject, please try again")
+   console.log("Error updating complaint:", error);
+   notifyErrorFxn("Problem Updating complaint, please try again")
 
 
  });
