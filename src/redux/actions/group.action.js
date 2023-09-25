@@ -274,7 +274,6 @@ export const fetchGroups = (adminID) => async (dispatch) => {
 
   //dispatch(isItLoading(true));
   db.collection("TreatmentCategory")
-  .where('treatmentId', '==', chosenSection)
    .get()
    .then((snapshot) => {
      const allSectionVids = snapshot.docs.map((doc) => ({ ...doc.data() }));
@@ -438,12 +437,12 @@ export const fetchChapterInfo = (uid) =>async (dispatch) => {
 };
 
 export const fetchLessonInfo = (uid) =>async (dispatch) => {
-  db.collection("boneCourses").doc(uid).get().then((doc) => {
+  db.collection("Complaints").doc(uid).get().then((doc) => {
   console.log()
   
     dispatch(saveLessonInfo(doc.data()))
  }).catch((error) => {
-  console.log("Error fetching a particular lesson from boneCourses collection:", error);
+  console.log("Error fetching a particular complaint from complaints collection:", error);
 
 });
 };
@@ -473,12 +472,12 @@ export const fetchTeacherInfo = (uid) =>async (dispatch) => {
 
 
 export const fetchComplaintInfo = (uid) =>async (dispatch) => {
-  db.collection("teachers").doc(uid).get().then((doc) => {
+  db.collection("Complaints").doc(uid).get().then((doc) => {
   console.log()
   
     dispatch(saveComplaintInfo(doc.data()))
  }).catch((error) => {
-  console.log("Error fetching a particular TEACHER from teachers collection:", error);
+  console.log("Error fetching a particular Complaint from complaints collection:", error);
 
 });
 };

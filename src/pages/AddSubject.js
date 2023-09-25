@@ -15,11 +15,12 @@ import { getTeachers } from 'src/redux/actions/job.action';
 function AddSubject() {
   const navigate = useNavigate();
   const location = useLocation()
-  console.log("location is",location.state.levelName,location.state.uid)
+  console.log("location is",location.state.uid)
 
   const { teachers } = useSelector((state) => state.jobs);
   const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state) => state.group);
-  console.log("all treament categories",allTreatmentCategories)
+  //console.log("all treament categories",allTreatmentCategories)
+  console.log("all treament  CATS",categoryVideos)
 
   const dispatch = useDispatch();
 
@@ -156,7 +157,7 @@ function AddSubject() {
             setTreatmentCategoryId(event.target.value);
           }}
         >
-       {allTreatmentCategories && allTreatmentCategories.length >0 && allTreatmentCategories.filter((me)=>(me.treatmentId === location.state.uid)).length > 0 ? allTreatmentCategories.filter((me)=>(me.treatmentId === location.state.uid)).map((kiwi)=>(
+       {categoryVideos && categoryVideos.length >0 && categoryVideos.filter((me)=>(me.treatmentId === location.state.uid)).length > 0 ? categoryVideos.filter((me)=>(me.treatmentId === location.state.uid)).map((kiwi)=>(
   <MenuItem value={kiwi.uid}>{kiwi.title}</MenuItem>
 )):
 <MenuItem value={null}>{"No items listed!"}</MenuItem>

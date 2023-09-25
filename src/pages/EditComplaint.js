@@ -8,6 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { notifyErrorFxn } from 'src/utils/toast-fxn';
 import users from 'src/_mock/user';
 
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+
+
 function EditComplaint() {
   const navigate = useNavigate();
   const location = useLocation()
@@ -21,44 +25,24 @@ function EditComplaint() {
 
   const [loading,setLoading] =useState(false)
 
-  const {lessonInfo} = useSelector((state) => state.group)
+  const {complaintInfo} = useSelector((state) => state.group)
   const { user } = useSelector((state) => state.auth);
  
   
 
-  const [title,setTitle] =useState(lessonInfo && lessonInfo.title ?lessonInfo.title:" ")
-  const [body,setBody] =useState(lessonInfo && lessonInfo.body ?lessonInfo.body:" ")
-  
-
-  const [section,setSection] =useState(lessonInfo && lessonInfo.section ?lessonInfo.section:" ")
-  const [chapter,setChapter] =useState(lessonInfo && lessonInfo.chapter ?lessonInfo.chapter:" ")
-
-  const [category,setCategory] = useState(lessonInfo && lessonInfo.category ?lessonInfo.category:" ")
-  const [lessonUrl,setLessonUrl] = useState(lessonInfo && lessonInfo.lessonUrl ?lessonInfo.lessonUrl:" ")
-  const [duration,setDuration] = useState(lessonInfo && lessonInfo.duration ?lessonInfo.duration:" ")
-  const [lessonNumber,setLessonNumber] = useState(lessonInfo && lessonInfo.lessonNumber ?lessonInfo.lessonNumber:" ")
-  
+ 
   
   useEffect(()=>{
 
-    console.log("INFO FOR THE SELECTED LESSON IS ACTUALLY",lessonInfo)
+    console.log("INFO FOR THE SELECTED  complaint IS ACTUALLY",complaintInfo)
  
    },[])
 
 
-  const updateObject ={
-    title,
-    body,
-    chapterId:lessonInfo.chapterId,
-    category:lessonInfo.category,
-    section:lessonInfo.section,
-    duration:duration,
-    lessonUrl:lessonUrl,
-    lessonNumber:lessonNumber
-  }
 
 
-  const updateThisLesson= (uid,updateObject) => {
+
+  const updateThisComplaint= (uid,updateObject) => {
     setLoading(true)
     dispatch(updateLesson(uid,updateObject))
 
@@ -68,10 +52,35 @@ function EditComplaint() {
   }
 
 
+  const [stateObject,setStateObject]=useState(
+    {
+     complaint:complaintInfo && complaintInfo.complaint?complaintInfo.complaint:" ",
+     'Blood Investigation':complaintInfo && complaintInfo.treatment.bloodInvestigation ?complaintInfo.treatment.bloodInvestigation:" ",
+     'Referrals':complaintInfo && complaintInfo.treatment.referral ?complaintInfo.treatment.referral:" ",
+    'Radiology':complaintInfo && complaintInfo.treatment.radiology ?complaintInfo.treatment.radiology:" ",
+    'Prescription':complaintInfo && complaintInfo.treatment.prescription ?complaintInfo.treatment.prescription:" ",
+     prescription1:complaintInfo && complaintInfo.treatment.prescription1 ?complaintInfo.treatment.prescription1:" ",
+     prescription2:complaintInfo && complaintInfo.treatment.prescription2 ?complaintInfo.treatment.prescription2:" ",
+     prescription3:complaintInfo && complaintInfo.treatment.prescription3 ?complaintInfo.treatment.prescription3:" ",
+     ECG:complaintInfo && complaintInfo.treatment.ecg ?complaintInfo.treatment.ecg:" ",
+        }
+  )
 
 
+  console.log("our experiment",Object.values(stateObject)[Object.keys(stateObject).indexOf(('Radiology'))])
+   console.log("our experiment values",Object.values(stateObject)[1])
 
+  const updateObject ={
+    ...stateObject
+  }
+
+  console.log("our state OBJECT-->",stateObject)
+
+  const { teachers } = useSelector((state) => state.jobs);
+
+ const [teachersArr,setTeacherArr]=useState([...teachers.map((item)=>(item.firstName + " " + item.lastName))])
  
+ const { allCategories,allTreatmentCategories } = useSelector((state) => state.group);
 
 
   return (
@@ -87,12 +96,12 @@ function EditComplaint() {
 
 
 
-    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>EDIT COMPLAINT</h1>
+    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>NEW COMPLAINT</h1>
 
     <Grid item xs={12} sx={{ display: 'flex' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Typography variant="h4" component="p">
-              EDIT DETAILS BELOW
+              EDIT COMPLAINT BELOW
               </Typography>
               <div style={{height:"2px", width:"80%",borderBottom:"1px solid black",position:"absolute",left:"20rem",top:"18rem"}}></div>
             </Box>
@@ -102,64 +111,8 @@ function EditComplaint() {
 
      <Grid container spacing={2}>
 
-    
-     <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             SUBJECT
-             </div>
+
       
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" Mathematique,Francais, etc."
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {section}
-           disabled={true}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-
-
-
-
-
-         <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             LEVEL
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" 6eme Annee, 10eme Annee, etc."
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {category}
-            disabled={true}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
 
 
 
@@ -168,7 +121,7 @@ function EditComplaint() {
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
-             TITLE
+               COMPLAINT NAME
              </div>
       
             </Typography>
@@ -178,38 +131,16 @@ function EditComplaint() {
           <Grid item xs={7}>
             <TextField
             fullWidth
-            placeholder=" e.g  Dissociation."
+            placeholder=" enter complaint."
             variant="outlined"
             multiline
             maxRows={2}
-            value= {title}
-            onChange = {(e)=>{setTitle(e.target.value)}}
-            />
-            
-            
-          </Grid>
-        </Grid>
-
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             DESCRIPTION
-             </div>
-      
-            </Typography>
+            name="complaint"
           
-          </Grid>
-
-          <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" enter description"
-            variant="outlined"
-            multiline
-            rows={8}
-            value= {body}
-            onChange = {(e)=>{setBody(e.target.value)}}
+            value= {stateObject.complaint}
+            onChange = {(e)=>{setStateObject({
+              ...stateObject,
+              [e.target.name]:e.target.value})}}
             
             />
             
@@ -219,90 +150,124 @@ function EditComplaint() {
 
 
 
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             LESSON NUMBER
-             </div>
-      
-            </Typography>
-          
-          </Grid>
 
-          <Grid item xs={7}>
-            <TextField
-            type="number"
-            fullWidth
-            placeholder="please input only a number e.g 1,2,17 etc "
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {lessonNumber}
-            onChange = {(e)=>{setLessonNumber(e.target.value)}}
-            
-            />
-            
-            
-          </Grid>
+        <Grid item xs={12} sx={{ display: 'flex',position:"relative",marginTop:"2rem",width:"22rem" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <Typography variant="h4" component="p">
+              EDIT TREATMENT
+              </Typography>
+             
+            </Box>
+            <br/> <br/> <br/>
         </Grid>
 
 
+       {allCategories.length > 0 && allCategories.map((item)=> (
+         
+<Grid container item xs={12} spacing={2}>
+<Grid item xs={3}>
+  <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+   <div >
+   {item.title.toUpperCase()}
+   </div>
 
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             DURATION
-             </div>
-      
-            </Typography>
-          
-          </Grid>
+  </Typography>
 
-          <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder="e.g 08:55"
-            variant="outlined"
-            multiline
-            
-            value= {duration}
-            onChange = {(e)=>{setDuration(e.target.value)}}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
+</Grid>
+
+<Grid item xs={7}>
+<Select
+style={{width:"100%"}}
+labelId="demo-simple-select-label"
+id="demo-simple-select"
+value={Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))]>-1 && Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))]}
+placeholder={Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))]>-1 && Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))]}
+name={item.title}       
+
+onChange = {(e)=>{setStateObject({
+  ...stateObject,
+  [e.target.name]:e.target.value.title})}}
+
+
+>
+{allTreatmentCategories && allTreatmentCategories.length >0 && allTreatmentCategories.filter((me)=>(me.treatmentId === item.uid)).length > 0 ? allTreatmentCategories.filter((me)=>(me.treatmentId === item.uid)).map((kiwi)=>(
+  <MenuItem value={kiwi}>{kiwi.title}</MenuItem>
+)):
+<MenuItem value={null}>{"No items listed!"}</MenuItem>
+}
+
+</Select>
+</Grid>
+
+</Grid>
+
+       ))
+       }
+
 
 
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
-             LESSON FILE URL
+             PRESCRIPTIONS
              </div>
       
             </Typography>
           
           </Grid>
 
-          <Grid item xs={7}>
+          <Grid item xs={2}>
             <TextField
             fullWidth
-            placeholder="e,g www.amazons3.com/video.mp4 "
+            placeholder=""
             variant="outlined"
             multiline
-            value= {lessonUrl}
-            onChange = {(e)=>{setLessonUrl(e.target.value)}}
+            maxRows={3}
+            value= {stateObject.prescription1}
+            onChange = {(e)=>{setStateObject(
+              {...stateObject,
+              prescription1:e.target.value
+              }
+              )}}
             
             />
+          </Grid>
+
+          <Grid item xs={2}>
+            <TextField
+            fullWidth
+            placeholder=""
+            variant="outlined"
+            multiline
+            maxRows={3}
+            value= {stateObject.prescription2}
+            onChange = {(e)=>{setStateObject(
+              {...stateObject,
+              prescription2:e.target.value
+              }
+              )}}
             
+            />
+          </Grid>
+
+          <Grid item xs={2}>
+            <TextField
+            fullWidth
+            placeholder=""
+            variant="outlined"
+            multiline
+            maxRows={3}
+            value= {stateObject.prescription3}
+            onChange = {(e)=>{setStateObject(
+              {...stateObject,
+              prescription3:e.target.value
+              }
+              )}}
             
+            />
           </Grid>
         </Grid>
-
       
 
 
@@ -321,16 +286,16 @@ function EditComplaint() {
     CANCEL
   </Button>
  
-  <Button  onClick={() => { updateThisLesson(lessonInfo.uid,updateObject)}} variant="contained" 
+  <Button  onClick={() => { updateThisComplaint(updateObject,navigate)}} variant="contained" 
   style={{ backgroundColor: "#000000"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >
-    {loading?"loading...":"SUBMIT"}
+   {loading?"loading..." :"SUBMIT"}
   </Button>
 </div>
 </Container>
     </>
-  );
+  ); 
 }
 
 export default EditComplaint;
