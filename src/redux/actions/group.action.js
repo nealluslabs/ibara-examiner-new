@@ -593,11 +593,16 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
       treatment:{
         ECG:addObject["ECG"],
         bloodInvestigation:addObject["Blood Investigation"],
-        referral:addObject.Referral,
+        referral:addObject.Referrals,
         radiology:addObject.Radiology,
         prescription1:addObject.prescription1,
         prescription2:addObject.prescription2,
-        prescription3:addObject.prescription3
+        prescription3:addObject.prescription3,
+        chosenBloodInvestigationArray:addObject.chosenBloodInvestigationArray,
+        chosenBloodInvestigationIdArray:addObject.chosenBloodInvestigationIdArray,
+        chosenRadiologyArray:addObject.chosenRadiologyArray,
+        chosenRadiologyIdArray:addObject.chosenRadiologyIdArray,
+
 
       },
         registeredOn:new Date()

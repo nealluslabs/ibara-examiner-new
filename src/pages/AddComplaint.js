@@ -1,4 +1,4 @@
-import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,Divider,Box} from '@mui/material';
+import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,Divider,Box,Chip} from '@mui/material';
 import { useRef, useState,useEffect} from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
@@ -29,6 +29,17 @@ function AddTeacher() {
 
   const [complaint,setComplaint] = useState('')
   const [bloodInvestigation,setBloodInvestigation] = useState('')
+  const [bloodInv,setBloodInv] =  useState([])
+  const [bloodInvId,setBloodInvId] =  useState([])
+  const [radiologyArr,setRadiologyArr] = useState([])
+  const [radiologyIdArr,setRadiologyIdArr] = useState([])
+  console.log("blood inv is",bloodInv)
+  console.log("blood inv ID array is",bloodInvId)
+
+
+  console.log("radiology arr is",radiologyArr)
+
+  console.log("radiology ID  arr is",radiologyIdArr)
   const [referral,setReferral] = useState('')
   const [prescription,setPrescription] = useState('')
   const [radiology,setRadiology] = useState('')
@@ -54,12 +65,12 @@ function AddTeacher() {
  const [teachersArr,setTeacherArr]=useState([...teachers.map((item)=>(item.firstName + " " + item.lastName))])
  
  const { allCategories,allTreatmentCategories } = useSelector((state) => state.group);
- console.log("all treatments  ARRE:",allCategories)
- console.log("all tests are ",allTreatmentCategories)
+ //console.log("all treatments  ARRE:",allCategories)
+ //console.log("all tests are ",allTreatmentCategories)
 
   const { user } = useSelector((state) => state.auth);
 
-  console.log("user details are:",user)
+  //console.log("user details are:",user)
 
   useEffect(()=>{
     dispatch(fetchAllCategories())
@@ -68,7 +79,11 @@ function AddTeacher() {
 
 
   const addObject ={
-   ...stateObject
+   ...stateObject,
+   chosenBloodInvestigationArray:bloodInv,
+   chosenBloodInvestigationIdArray:bloodInvId,
+   chosenRadiologyArray:radiologyArr,
+  chosenRadiologyIdArray:radiologyIdArr
   }
 
   const addThisComplaint = async(addObject,navigate) => {
@@ -86,6 +101,33 @@ function AddTeacher() {
     setTimeout(()=>{setLoading(false)},1800)
    /* }*/
   }
+
+  const handleClick = () => {
+    console.info('You clicked the Chip.');
+  };
+
+
+  const handleDelete = (tbr) => {
+    
+
+    let placeholder =   bloodInv.filter((item)=>(item !== tbr))
+   // let placeholder2 =   bloodInvIdArray.filter((item)=>(item !== tbrId))
+
+
+     setBloodInv([...placeholder])
+    // setBloodInv2IdArray([...placeholder2])
+ };
+
+ const handleDeleteRad = (tbr) => {
+    
+
+  let placeholder =   radiologyArr.filter((item)=>(item !== tbr))
+ // let placeholder2 =   bloodInvIdArray.filter((item)=>(item !== tbrId))
+
+
+   setRadiologyArr([...placeholder])
+  // setBloodInv2IdArray([...placeholder2])
+};
  
 
 
@@ -189,9 +231,37 @@ id="demo-simple-select"
 value={Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))] && Object.values(stateObject)[Object.keys(stateObject).indexOf((item.title))].title}
 name={item.title}       
 
-onChange = {(e)=>{setStateObject({
-  ...stateObject,
-  [e.target.name]:e.target.value.title})}}
+onChange = {
+  
+  (e)=>{setStateObject(
+{
+  ...stateObject, 
+  [e.target.name]:e.target.value.title
+}
+
+);
+if(item.title === "Blood Investigation"){
+
+ if(!bloodInvId.includes(e.target.value.uid)) {
+setBloodInv([...bloodInv,e.target.value.title])
+setBloodInvId([...bloodInvId,e.target.value.uid])
+ }
+
+}
+
+if(item.title === "Radiology"){
+
+  if(!radiologyArr.includes(e.target.value.uid)) {
+    setRadiologyIdArr([...radiologyIdArr,e.target.value.uid])
+  setRadiologyArr([...radiologyArr,e.target.value.title])
+   }
+
+
+}
+}
+
+
+}
 
 
 >
@@ -203,6 +273,66 @@ onChange = {(e)=>{setStateObject({
 
 </Select>
 </Grid>
+{item.title === "Blood Investigation" &&
+
+<Grid container item xs={12} spacing={2}>
+<Grid item xs={3}>
+  <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+   <div >
+ 
+   </div>
+
+  </Typography>
+
+</Grid>
+
+<Grid item xs={7}>
+{bloodInv &&
+     <div style={{padding: '10px', border: '1px solid #00000033' }}>
+              <> 
+                 &nbsp; 
+               {  bloodInv.map((chipItem,index)=>(
+              <Chip label={chipItem} onClick={()=>{}} onDelete={()=>{handleDelete(chipItem)}} />
+              ))
+                }
+
+              </>
+     </div>
+              }
+</Grid>
+</Grid>
+}
+
+
+{item.title === "Radiology" &&
+
+<Grid container item xs={12} spacing={2}>
+<Grid item xs={3}>
+  <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+   <div >
+ 
+   </div>
+
+  </Typography>
+
+</Grid>
+
+<Grid item xs={7}>
+{radiologyArr &&
+     <div style={{padding: '10px', border: '1px solid #00000033' }}>
+              <> 
+                 &nbsp; 
+               {  radiologyArr.map((chipItem,index)=>(
+              <Chip label={chipItem} onClick={handleClick} onDelete={()=>{handleDeleteRad(chipItem)}} />
+              ))
+                }
+
+              </>
+     </div>
+              }
+</Grid>
+</Grid>
+}
 
 </Grid>
 
