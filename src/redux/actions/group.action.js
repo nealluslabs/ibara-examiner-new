@@ -832,22 +832,28 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
 
 
  export const updateLesson = (uid,updateObject) => async (dispatch) => {
- 
-  db.collection("Complaint").doc(uid).update(
+  
+  db.collection("Complaints").doc(uid.trim()).update(
     {
      
      
       complaint:updateObject.complaint,
       treatment:{
-        ECG:Object["ECG"],
+        ECG:updateObject["ECG"],
         bloodInvestigation:updateObject["Blood Investigation"],
         referral:updateObject.Referrals,
         radiology:updateObject.Radiology,
+
         prescription1:updateObject.prescription1,
         prescription2:updateObject.prescription2,
-        prescription3:updateObject.prescription3
+        prescription3:updateObject.prescription3,
 
-      },
+        chosenBloodInvestigationArray:updateObject.chosenBloodInvestigationArray,
+        chosenBloodInvestigationIdArray:updateObject.chosenBloodInvestigationIdArray,
+        chosenRadiologyArray:updateObject.chosenRadiologyArray,
+        chosenRadiologyIdArray:updateObject.chosenRadiologyIdArray,
+
+      }
     
     }
   ).then((snapshot) => {
@@ -856,7 +862,7 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
      notifySuccessFxn("updated  Complaint successfully")
 
  }).catch((error) => {
-   console.log("Error updating complaint:", error);
+   console.log("Error updating  our complaint:", error);
    notifyErrorFxn("Problem Updating complaint, please try again")
 
 

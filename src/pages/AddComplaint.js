@@ -11,7 +11,7 @@ import users from 'src/_mock/user';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
-function AddTeacher() {
+function AddComplaint() {
   const navigate = useNavigate();
   const location = useLocation()
  // console.log("location is",location.state.levelName,location.state.uid)
@@ -107,26 +107,26 @@ function AddTeacher() {
   };
 
 
-  const handleDelete = (tbr) => {
+  const handleDelete = (tbr,tbrId) => {
     
 
     let placeholder =   bloodInv.filter((item)=>(item !== tbr))
-   // let placeholder2 =   bloodInvIdArray.filter((item)=>(item !== tbrId))
+   let placeholder2 =   bloodInvId.filter((item)=>(item !== tbrId))
 
 
      setBloodInv([...placeholder])
-    // setBloodInv2IdArray([...placeholder2])
+    setBloodInvId([...placeholder2])
  };
 
- const handleDeleteRad = (tbr) => {
+ const handleDeleteRad = (tbr,tbrId) => {
     
 
   let placeholder =   radiologyArr.filter((item)=>(item !== tbr))
- // let placeholder2 =   bloodInvIdArray.filter((item)=>(item !== tbrId))
+ let placeholder2 =   radiologyIdArr.filter((item)=>(item !== tbrId))
 
 
    setRadiologyArr([...placeholder])
-  // setBloodInv2IdArray([...placeholder2])
+  setRadiologyIdArr([...placeholder2])
 };
  
 
@@ -287,12 +287,12 @@ if(item.title === "Radiology"){
 </Grid>
 
 <Grid item xs={7}>
-{bloodInv &&
+{bloodInv && bloodInv.length>0 &&
      <div style={{padding: '10px', border: '1px solid #00000033' }}>
               <> 
                  &nbsp; 
                {  bloodInv.map((chipItem,index)=>(
-              <Chip label={chipItem} onClick={()=>{}} onDelete={()=>{handleDelete(chipItem)}} />
+              <Chip label={chipItem} onClick={()=>{}} onDelete={()=>{handleDelete(chipItem,bloodInvId[index])}} />
               ))
                 }
 
@@ -318,12 +318,12 @@ if(item.title === "Radiology"){
 </Grid>
 
 <Grid item xs={7}>
-{radiologyArr &&
+{radiologyArr && radiologyArr.length >0 &&
      <div style={{padding: '10px', border: '1px solid #00000033' }}>
               <> 
                  &nbsp; 
                {  radiologyArr.map((chipItem,index)=>(
-              <Chip label={chipItem} onClick={handleClick} onDelete={()=>{handleDeleteRad(chipItem)}} />
+              <Chip label={chipItem} onClick={handleClick} onDelete={()=>{handleDeleteRad(chipItem,radiologyIdArr[index])}} />
               ))
                 }
 
@@ -433,4 +433,4 @@ if(item.title === "Radiology"){
   );
 }
 
-export default AddTeacher;
+export default AddComplaint;

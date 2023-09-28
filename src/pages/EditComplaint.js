@@ -1,4 +1,4 @@
-import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,Divider,Box} from '@mui/material';
+import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,Divider,Box,Chip} from '@mui/material';
 import { useRef, useState,useEffect} from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
@@ -25,10 +25,15 @@ function EditComplaint() {
 
   const [loading,setLoading] =useState(false)
 
+
   const {complaintInfo} = useSelector((state) => state.group)
   const { user } = useSelector((state) => state.auth);
- 
-  
+
+   const [bloodInv,setBloodInv] =  useState(complaintInfo && complaintInfo.treatment.chosenBloodInvestigationArray ?complaintInfo.treatment.chosenBloodInvestigationArray:[])
+  const [bloodInvId,setBloodInvId] =  useState(complaintInfo && complaintInfo.treatment.chosenBloodInvestigationIdArray ?complaintInfo.treatment.chosenBloodInvestigationIdArray:[])
+  const [radiologyArr,setRadiologyArr] = useState(complaintInfo && complaintInfo.treatment.chosenRadiologyArray ?complaintInfo.treatment.chosenRadiologyArray:[])
+  const [radiologyIdArr,setRadiologyIdArr] = useState(complaintInfo && complaintInfo.treatment.chosenRadiologyIdArray ?complaintInfo.treatment.chosenRadiologyIdArray:[])
+
 
  
   
@@ -63,18 +68,52 @@ function EditComplaint() {
      prescription2:complaintInfo && complaintInfo.treatment.prescription2 ?complaintInfo.treatment.prescription2:" ",
      prescription3:complaintInfo && complaintInfo.treatment.prescription3 ?complaintInfo.treatment.prescription3:" ",
      ECG:complaintInfo && complaintInfo.treatment.ecg ?complaintInfo.treatment.ecg:" ",
-        }
+    
+    }
   )
 
 
-  console.log("our experiment",Object.values(stateObject)[Object.keys(stateObject).indexOf(('Radiology'))])
-   console.log("our experiment values",Object.values(stateObject)[1])
+
 
   const updateObject ={
-    ...stateObject
+    ...stateObject,
+    chosenBloodInvestigationArray:bloodInv,
+   chosenBloodInvestigationIdArray:bloodInvId,
+   chosenRadiologyArray:radiologyArr,
+  chosenRadiologyIdArray:radiologyIdArr
   }
 
-  console.log("our state OBJECT-->",stateObject)
+  const handleClick = () => {
+    console.info('You clicked the Chip.');
+  };
+
+
+  const handleDelete = (tbr,tbrId) => {
+    
+
+    let placeholder =   bloodInv.filter((item)=>(item !== tbr))
+    let placeholder2 =   bloodInvId.filter((item)=>(item !== tbrId))
+
+
+     setBloodInv([...placeholder])
+     setBloodInvId([...placeholder2])
+ };
+
+ const handleDeleteRad = (tbr,tbrId) => {
+    
+
+  let placeholder =   radiologyArr.filter((item)=>(item !== tbr))
+  let placeholder2 =   radiologyIdArr.filter((item)=>(item !== tbrId))
+
+
+   setRadiologyArr([...placeholder])
+   setRadiologyIdArr([...placeholder2])
+};
+
+  console.log("bloodInv",bloodInv)
+  console.log("bloodInvId",bloodInvId)
+  console.log("radiologyIdArray",radiologyIdArr)
+  console.log("radiology-->Array",radiologyArr)
 
   const { teachers } = useSelector((state) => state.jobs);
 
@@ -186,7 +225,30 @@ name={item.title}
 
 onChange = {(e)=>{setStateObject({
   ...stateObject,
-  [e.target.name]:e.target.value.title})}}
+  [e.target.name]:e.target.value.title})
+
+  if(item.title === "Blood Investigation"){
+
+    if(!bloodInvId.includes(e.target.value.uid)) {
+   setBloodInv([...bloodInv,e.target.value.title])
+   setBloodInvId([...bloodInvId,e.target.value.uid])
+    }
+   
+   }
+
+
+   if(item.title === "Radiology"){
+
+    if(!radiologyIdArr.includes(e.target.value.uid)) {
+      setRadiologyIdArr([...radiologyIdArr,e.target.value.uid])
+    setRadiologyArr([...radiologyArr,e.target.value.title])
+     }
+  
+  
+  }
+
+
+}}
 
 
 >
@@ -198,6 +260,71 @@ onChange = {(e)=>{setStateObject({
 
 </Select>
 </Grid>
+
+{item.title === "Blood Investigation" &&
+
+<Grid container item xs={12} spacing={2}>
+<Grid item xs={3}>
+  <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+   <div >
+ 
+   </div>
+
+  </Typography>
+
+</Grid>
+
+<Grid item xs={7}>
+{bloodInv && bloodInv.length>0 &&
+     <div style={{padding: '10px', border: '1px solid #00000033' }}>
+              <> 
+                 &nbsp; 
+               {  bloodInv.map((chipItem,index)=>(
+              <Chip label={chipItem} onClick={()=>{}} onDelete={()=>{handleDelete(chipItem, bloodInvId[index])}} />
+              ))
+                }
+
+              </>
+     </div>
+              }
+</Grid>
+</Grid>
+}
+
+
+{item.title === "Radiology" &&
+
+<Grid container item xs={12} spacing={2}>
+<Grid item xs={3}>
+  <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+   <div >
+ 
+   </div>
+
+  </Typography>
+
+</Grid>
+
+<Grid item xs={7}>
+{radiologyArr && radiologyArr.length >0 &&
+     <div style={{padding: '10px', border: '1px solid #00000033' }}>
+              <> 
+                 &nbsp; 
+               {  radiologyArr.map((chipItem,index)=>(
+              <Chip label={chipItem} onClick={handleClick} onDelete={()=>{handleDeleteRad(chipItem,radiologyIdArr[index])}} />
+              ))
+                }
+
+              </>
+     </div>
+              }
+</Grid>
+</Grid>
+}
+
+
+
+
 
 </Grid>
 
@@ -286,7 +413,7 @@ onChange = {(e)=>{setStateObject({
     CANCEL
   </Button>
  
-  <Button  onClick={() => { updateThisComplaint(updateObject,navigate)}} variant="contained" 
+  <Button  onClick={() => { updateThisComplaint(complaintInfo.uid,updateObject)}} variant="contained" 
   style={{ backgroundColor: "#000000"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >
