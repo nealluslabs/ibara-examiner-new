@@ -235,6 +235,7 @@ function EditTeacher() {
        
             <MenuItem value={"Male"}>{"Male"}</MenuItem>
             <MenuItem value={"Female"}>{"Female"}</MenuItem>
+            <MenuItem value={"Kid"}>{"Kid"}</MenuItem>
        
        
         </Select>
