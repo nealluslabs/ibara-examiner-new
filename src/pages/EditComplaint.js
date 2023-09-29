@@ -3,7 +3,7 @@ import { useRef, useState,useEffect} from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
 import { addLesson,updateLesson} from 'src/redux/actions/group.action';
-
+import {  fetchAllTreatmentCategories, fetchAllCategories} from 'src/redux/actions/group.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { notifyErrorFxn } from 'src/utils/toast-fxn';
 import users from 'src/_mock/user';
@@ -44,7 +44,13 @@ function EditComplaint() {
    },[])
 
 
+   useEffect(()=>{
+    dispatch(fetchAllCategories())
+    dispatch(fetchAllTreatmentCategories())
+  },[])
 
+
+  const { allCategories,allTreatmentCategories } = useSelector((state) => state.group);
 
 
   const updateThisComplaint= (uid,updateObject) => {
@@ -119,7 +125,7 @@ function EditComplaint() {
 
  const [teachersArr,setTeacherArr]=useState([...teachers.map((item)=>(item.firstName + " " + item.lastName))])
  
- const { allCategories,allTreatmentCategories } = useSelector((state) => state.group);
+
 
 
   return (

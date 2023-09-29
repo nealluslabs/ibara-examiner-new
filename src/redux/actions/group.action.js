@@ -534,6 +534,7 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
       icon:addObject.icon,
       history:addObject.history,
       complaint:addObject.complaint,
+      complaintId:addObject.complaintId,
       screenTime:addObject.screenTime,
         registeredOn:new Date()
 
@@ -547,7 +548,7 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
       console.log("the new  Patient's id is",doc.id)
       dispatch(getTeachers())
        notifySuccessFxn(`new Patient ${addObject.firstName + " " + addObject.lastName} added!`)
-       setTimeout(()=>{navigate('/dashboard/teacher-list')},1000)
+       setTimeout(()=>{navigate('/dashboard/patient-list')},1000)
    }).catch((error) => {
      console.log("Error adding Patient:", error);
      notifyErrorFxn(error)
@@ -705,7 +706,8 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
       lastName:updateObject.lastName,
       icon:updateObject.icon,
       history:updateObject.history,
-      complaintId:updateObject.complaint,
+      complaintId:updateObject.complaintId,
+      complaint:updateObject.complaint,
       screenTime:updateObject.screenTime,
     }
   ).then((snapshot) => {

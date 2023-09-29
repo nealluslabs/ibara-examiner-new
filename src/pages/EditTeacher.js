@@ -35,14 +35,14 @@ function EditTeacher() {
   const [lastName,setLastName] =useState(teacherInfo.lastName)
   const [icon,setIcon]=useState(teacherInfo.icon && teacherInfo.icon)
   const [complaint,setComplaint] =useState(teacherInfo.complaint)
-
+  const [complaintId,setComplaintId] =useState(teacherInfo.complaintId ? teacherInfo.complaintId:'')
 
   
 
 
   useEffect(()=>{
 
-    console.log("INFO FOR THE SELECTED TEACHER IS",teacherInfo)
+    console.log("OUR UPDATE OBJECT IS--->",updateObject)
  
    },[])
 
@@ -51,8 +51,9 @@ function EditTeacher() {
     lastName,
     icon,
     history,
-    screenTime:screenTime,
-    complaint
+    screenTime,
+    complaint,
+    complaintId
   }
 
   const updateThisSubject = async(identity,updateObject,navigate) => {
@@ -289,14 +290,15 @@ function EditTeacher() {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={complaint}
-          label="icon"
+          label="complaint"
           onChange={(event) => {
-            setComplaint(event.target.value);
+            setComplaint(event.target.value.complaint);
+            setComplaintId(event.target.value.uid);
           }}
         >
        {complaintArr.map((item)=>(
 
-            <MenuItem value={item.uid}>{item.complaint}</MenuItem>
+            <MenuItem value={item}>{item.complaint}</MenuItem>
             
        )
        )}

@@ -41,13 +41,17 @@ function AddTeacher() {
   const [lastName,setLastName] =useState()
   const [icon,setIcon]=useState()
   const [complaint,setComplaint] =useState()
+  const [complaintId,setComplaintId] =useState()
+ 
 
   const { teachers } = useSelector((state) => state.jobs);
 
  const [teachersArr,setTeacherArr]=useState([...teachers.map((item)=>(item.firstName + " " + item.lastName))])
 
   const { user } = useSelector((state) => state.auth);
-
+  const { complaints } = useSelector((state) => state.jobs);
+  const [complaintArr, setComplaintArr] = useState(complaints?complaints:[]/*teachers*/);
+  
   console.log("user details are:",user)
 
 
@@ -57,7 +61,8 @@ function AddTeacher() {
     history,
     screenTime,
     icon,
-    complaint
+    complaint,
+    complaintId
   }
 
   const addThisTeacher = async(addObject,navigate) => {
@@ -276,14 +281,18 @@ function AddTeacher() {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={complaint}
-          label="Referral"
+          label="complaint"
           onChange={(event) => {
-            setComplaint(event.target.value);
+            setComplaint(event.target.value.complaint);
+            setComplaintId(event.target.value.uid);
           }}
         >
-        {teachersArr.length >0  && teachersArr.map((item)=>(
-            <MenuItem value={item}>{item}</MenuItem>
-        ))}
+       {complaintArr.map((item)=>(
+
+<MenuItem value={item}>{item.complaint}</MenuItem>
+
+)
+)}
        
         </Select>
           </Grid>
