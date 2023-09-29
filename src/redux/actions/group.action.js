@@ -648,7 +648,30 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
  export const addSubject = (addObject) => async (dispatch) => {
 
 
-  db.collection("TreatmentTests")
+  const imageName = uuidv4() + '.' + addObject.answerImage?.name?.split('.')?.pop();
+  console.log('File Name: ', imageName);
+
+  const uploadTask = storage.ref(`treatment_images/${imageName}`).put(addObject.answerImage);
+  uploadTask.on(
+    "state_changed",
+    snapshot => {
+      const progress = Math.round(
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      );
+      // setProgress(progress);
+    },
+    error => {
+      console.log(error);
+    },
+    () => {
+      storage
+        .ref("treatment_images")
+        .child(imageName)
+        .getDownloadURL()
+        .then(url => {
+
+
+          db.collection("TreatmentTests")
   .where("title", "==", addObject.title)
   .where("treatmentCategoryId", "==", addObject.treatmentCategoryId)
   .get()
@@ -668,7 +691,8 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
         treatmentId:addObject.treatmentId,
         treatmentCategoryId:addObject.treatmentCategoryId,
         specific:addObject.specific?addObject.specific:"lorem ipsum",
-        responseTime:addObject.response
+        responseTime:addObject.response,
+        answerImage:url
       }
     ).then((doc) => {
        //const publicGroups = snapshot.docs.map((doc) => ({ ...doc.data() }));
@@ -693,6 +717,15 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
 
 
 });
+        });
+    }
+  );
+
+
+
+
+
+
 
  };
  
@@ -807,22 +840,22 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
 
  };
 
- export const updateChapter = (uid,updateObject) => async (dispatch) => {
-  console.log("I have reached the chapter land")
-  db.collection("chapters").doc(uid).update(
+ export const updateChapter = (uid,updateObject,url) => async (dispatch) => {
+  
+  db.collection("TreatmentTests").doc(uid).update(
     {
       
-      category:updateObject.category,
+      specific:updateObject.specific,
       title:updateObject.title,
-      subject:updateObject.subject,
-      chapterNumber:updateObject.chapterNumber,
-      chapterPdfUrl:updateObject.chapterPdfUrl,
+      body:updateObject.body,
+      responseTime:updateObject.responseTime,
+      answerImage:url
     
     }
   ).then((snapshot) => {
      //const publicGroups = snapshot.docs.map((doc) => ({ ...doc.data() }));
    
-     notifySuccessFxn("updated chapter successfully")
+     notifySuccessFxn("updated treatment successfully")
 
  }).catch((error) => {
    console.log("Error updating document:", error);
@@ -831,6 +864,39 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
 
  });
  };
+
+
+ export const updateChapterWithImage = (uid,updateObject,file) => async (dispatch) => {
+
+  const imageName = uuidv4() + '.' + file?.name?.split('.')?.pop();
+  console.log('File Name: ', imageName);
+
+  const uploadTask = storage.ref(`treatment_images/${imageName}`).put(file);
+  uploadTask.on(
+    "state_changed",
+    snapshot => {
+      const progress = Math.round(
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      );
+      // setProgress(progress);
+    },
+    error => {
+      console.log(error);
+    },
+    () => {
+      storage
+        .ref("treatment_images")
+        .child(imageName)
+        .getDownloadURL()
+        .then(url => {
+          console.log('Image URL isss: ', url);
+          dispatch(updateChapter(uid,updateObject, url));
+        });
+    }
+  );
+
+
+ }
 
 
  export const updateLesson = (uid,updateObject) => async (dispatch) => {

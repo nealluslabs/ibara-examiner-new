@@ -3,10 +3,11 @@ import { useRef, useState,useEffect} from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
 import { addSubject, fetchAllTreatmentCategories} from 'src/redux/actions/group.action';
-
+import {CardMedia,CssBaseline,FormControlLabel, Checkbox, makeStyles} from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { notifyErrorFxn } from 'src/utils/toast-fxn';
 import users from 'src/_mock/user';
+import DEFAULTIMG from 'src/assets/images/cooler-img.png'
 
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
@@ -35,11 +36,24 @@ function AddSubject() {
   const [specific,setSpecific]  = useState('')
   const [subjectImageUrl,setSubjectImageUrl] = useState('')
 
+  const [selectedFile, setSelectedFile] = useState({selectedFile: [], selectedFileName: []});
+const [file,setFile] = useState('')
+
   const { user } = useSelector((state) => state.auth);
 
   console.log("user details are:",user)
+  console.log("selected file:",selectedFile)
+  
 
+  const handleselectedFile = event => {
+    setSelectedFile({
+        selectedFile: event.target.files[0],
+        selectedFileName: event.target.files[0].name
+    });
 
+    setFile(URL.createObjectURL(event.target.files[0]));
+    
+};
   
  
 
@@ -51,11 +65,14 @@ function AddSubject() {
     treatment:location.state.treatment,
     treatmentCategoryId,
     specific,
+    answerImage:selectedFile && selectedFile.selectedFile ?selectedFile.selectedFile :''
   }
+
+  console.log("add object details are:",addObject)
 
   const addThisSubject = async(addObject) => {
     
-    if(!title||!location.state.treatment||!location.state.uid){
+    if(!response||!specific||!title||!location.state.treatment||!location.state.uid||!selectedFile.selectedFile){
       notifyErrorFxn("Please make sure to fill in all fields.")
     }
     else{
@@ -271,39 +288,42 @@ function AddSubject() {
       </Grid>
        }
    
-       {/*<Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             INSTRUCTOR
-             </div>
       
-            </Typography>
-          
-          </Grid>
+   <Grid container item xs={12} spacing={2}>
 
-          <Grid item xs={7}>
-          
-         <Select
-         style={{width:"100%"}}
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={instructor}
-          label="Instructor"
-          onChange={(event) => {
-            setInstructor(event.target.value);
-          }}
-        >
-        {teachersArr.length >0  && teachersArr.map((item)=>(
-            <MenuItem value={item}>{item}</MenuItem>
-        ))}
-       
-        </Select>
-            
-            
-          </Grid>
-        </Grid>*/}
-       
+<Grid item xs={3}>
+    <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+     <div >
+     UPDATE IMAGE
+     </div>
+
+    </Typography>
+  
+  </Grid>
+
+
+
+<Grid item xs={7}  style={{border: '0px solid red'}}>
+<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }}>
+  <CardMedia
+    style={{ border: '0.2px solid black', backgroundColor: '#fff', width: '240px' }}
+    component="img"
+    height="240"
+    width="540"
+    image={file?file : DEFAULTIMG}
+    alt="IMG"
+  />
+  <Button component="label" variant="contained" style={{ minHeight: '45px', minWidth: '145px', backgroundColor: '#000000', marginTop: '15px' }}>
+    <b>UPLOAD</b>
+    <input
+      type="file"
+      style={{ display: 'none' }}
+      onChange={handleselectedFile}
+    />
+  </Button>
+</div>
+</Grid>
+</Grid>
   
       
 
