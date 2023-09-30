@@ -54,6 +54,7 @@ function AddComplaint() {
      prescription1:"",
      prescription2:"",
      prescription3:"",
+     prescription4:"",
      ecg:''
         }
   )
@@ -341,7 +342,7 @@ if(item.title === "Radiology"){
 
 
 
-        <Grid container item xs={12} spacing={2}>
+        <Grid container item xs={12} spacing={1}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
@@ -352,7 +353,7 @@ if(item.title === "Radiology"){
           
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs={6}>
             <TextField
             fullWidth
             placeholder=""
@@ -369,7 +370,17 @@ if(item.title === "Radiology"){
             />
           </Grid>
 
-          <Grid item xs={2}>
+        
+        </Grid>
+
+
+        <Grid container item xs={12} spacing={1}>
+        <Grid item xs={3}>
+           
+          
+          </Grid>
+
+        <Grid item xs={6}>
             <TextField
             fullWidth
             placeholder=""
@@ -385,8 +396,18 @@ if(item.title === "Radiology"){
             
             />
           </Grid>
+       
+        </Grid>
 
-          <Grid item xs={2}>
+
+  
+        <Grid container item xs={12} spacing={1}>
+        <Grid item xs={3}>
+          
+          
+          </Grid>
+
+        <Grid item xs={6}>
             <TextField
             fullWidth
             placeholder=""
@@ -402,8 +423,33 @@ if(item.title === "Radiology"){
             
             />
           </Grid>
+       
         </Grid>
-      
+
+        <Grid container item xs={12} spacing={1}>
+        <Grid item xs={3}>
+           
+          
+          </Grid>
+
+        <Grid item xs={6}>
+            <TextField
+            fullWidth
+            placeholder=""
+            variant="outlined"
+            multiline
+            maxRows={3}
+            value= {stateObject.prescription4}
+            onChange = {(e)=>{setStateObject(
+              {...stateObject,
+              prescription4:e.target.value
+              }
+              )}}
+            
+            />
+          </Grid>
+       
+        </Grid>
 
 
 

@@ -596,9 +596,8 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
         bloodInvestigation:addObject["Blood Investigation"],
         referral:addObject.Referrals,
         radiology:addObject.Radiology,
-        prescription1:addObject.prescription1,
-        prescription2:addObject.prescription2,
-        prescription3:addObject.prescription3,
+        correctPrescriptionArray:[addObject.prescription1,addObject.prescription2,addObject.prescription3,addObject.prescription4],
+      
         chosenBloodInvestigationArray:addObject.chosenBloodInvestigationArray,
         chosenBloodInvestigationIdArray:addObject.chosenBloodInvestigationIdArray,
         chosenRadiologyArray:addObject.chosenRadiologyArray,
@@ -911,11 +910,9 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
         bloodInvestigation:updateObject["Blood Investigation"],
         referral:updateObject.Referrals,
         radiology:updateObject.Radiology,
-
-        prescription1:updateObject.prescription1,
-        prescription2:updateObject.prescription2,
-        prescription3:updateObject.prescription3,
-
+        
+      correctPrescriptionArray:[updateObject.prescription1,updateObject.prescription2,updateObject.prescription3,updateObject.prescription4],
+        
         chosenBloodInvestigationArray:updateObject.chosenBloodInvestigationArray,
         chosenBloodInvestigationIdArray:updateObject.chosenBloodInvestigationIdArray,
         chosenRadiologyArray:updateObject.chosenRadiologyArray,

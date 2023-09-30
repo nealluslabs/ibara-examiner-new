@@ -70,9 +70,10 @@ function EditComplaint() {
      'Referrals':complaintInfo && complaintInfo.treatment.referral ?complaintInfo.treatment.referral:" ",
     'Radiology':complaintInfo && complaintInfo.treatment.radiology ?complaintInfo.treatment.radiology:" ",
     'Prescription':complaintInfo && complaintInfo.treatment.prescription ?complaintInfo.treatment.prescription:" ",
-     prescription1:complaintInfo && complaintInfo.treatment.prescription1 ?complaintInfo.treatment.prescription1:" ",
-     prescription2:complaintInfo && complaintInfo.treatment.prescription2 ?complaintInfo.treatment.prescription2:" ",
-     prescription3:complaintInfo && complaintInfo.treatment.prescription3 ?complaintInfo.treatment.prescription3:" ",
+     prescription1:complaintInfo && complaintInfo.treatment.correctPrescriptionArray[0] ?complaintInfo.treatment.correctPrescriptionArray[0]:" ",
+     prescription2:complaintInfo && complaintInfo.treatment.correctPrescriptionArray[1] ?complaintInfo.treatment.correctPrescriptionArray[1]:" ",
+     prescription3:complaintInfo && complaintInfo.treatment.correctPrescriptionArray[2] ?complaintInfo.treatment.correctPrescriptionArray[2]:" ",
+     prescription4:complaintInfo && complaintInfo.treatment.correctPrescriptionArray[3] ?complaintInfo.treatment.correctPrescriptionArray[3]:" ",
      ECG:complaintInfo && complaintInfo.treatment.ecg ?complaintInfo.treatment.ecg:" ",
     
     }
@@ -141,7 +142,7 @@ function EditComplaint() {
 
 
 
-    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>NEW COMPLAINT</h1>
+    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>{stateObject && stateObject.complaint.toUpperCase()}</h1>
 
     <Grid item xs={12} sx={{ display: 'flex' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -339,7 +340,7 @@ onChange = {(e)=>{setStateObject({
 
 
 
-        <Grid container item xs={12} spacing={2}>
+<Grid container item xs={12} spacing={1}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
@@ -350,7 +351,7 @@ onChange = {(e)=>{setStateObject({
           
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs={6}>
             <TextField
             fullWidth
             placeholder=""
@@ -367,7 +368,17 @@ onChange = {(e)=>{setStateObject({
             />
           </Grid>
 
-          <Grid item xs={2}>
+        
+        </Grid>
+
+
+        <Grid container item xs={12} spacing={1}>
+        <Grid item xs={3}>
+           
+          
+          </Grid>
+
+        <Grid item xs={6}>
             <TextField
             fullWidth
             placeholder=""
@@ -383,8 +394,18 @@ onChange = {(e)=>{setStateObject({
             
             />
           </Grid>
+       
+        </Grid>
 
-          <Grid item xs={2}>
+
+  
+        <Grid container item xs={12} spacing={1}>
+        <Grid item xs={3}>
+          
+          
+          </Grid>
+
+        <Grid item xs={6}>
             <TextField
             fullWidth
             placeholder=""
@@ -400,6 +421,32 @@ onChange = {(e)=>{setStateObject({
             
             />
           </Grid>
+       
+        </Grid>
+
+        <Grid container item xs={12} spacing={1}>
+        <Grid item xs={3}>
+           
+          
+          </Grid>
+
+        <Grid item xs={6}>
+            <TextField
+            fullWidth
+            placeholder=""
+            variant="outlined"
+            multiline
+            maxRows={3}
+            value= {stateObject.prescription4}
+            onChange = {(e)=>{setStateObject(
+              {...stateObject,
+              prescription4:e.target.value
+              }
+              )}}
+            
+            />
+          </Grid>
+       
         </Grid>
       
 
