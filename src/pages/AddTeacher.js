@@ -40,6 +40,7 @@ function AddTeacher() {
   const [firstName,setFirstName] =useState()
   const [lastName,setLastName] =useState()
   const [icon,setIcon]=useState()
+  const [age,setAge]=useState()
   const [complaint,setComplaint] =useState()
   const [complaintId,setComplaintId] =useState()
  
@@ -61,13 +62,14 @@ function AddTeacher() {
     history,
     screenTime,
     icon,
+    age,
     complaint,
     complaintId
   }
 
   const addThisTeacher = async(addObject,navigate) => {
     
-    if(!firstName||!lastName||!history || !screenTime ||!icon||!complaint ){
+    if(!firstName||!lastName||!history || !screenTime ||!icon||!complaint||!age ){
       notifyErrorFxn("Please make sure to fill in all fields.")
     }
     else{
@@ -133,6 +135,34 @@ function AddTeacher() {
             maxRows={2}
             value= {firstName}
             onChange = {(e)=>{setFirstName(e.target.value)}}
+            
+            />
+            
+            
+          </Grid>
+        </Grid>
+
+
+        <Grid container item xs={12} spacing={2}>
+          <Grid item xs={3}>
+            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+             <div >
+             AGE
+             </div>
+      
+            </Typography>
+          
+          </Grid>
+
+          <Grid item xs={7}>
+            <TextField
+            fullWidth
+            placeholder=" Add last name"
+            variant="outlined"
+            multiline
+            maxRows={2}
+            value= {age}
+            onChange = {(e)=>{setAge(e.target.value)}}
             
             />
             

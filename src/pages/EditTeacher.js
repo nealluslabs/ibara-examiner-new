@@ -34,6 +34,7 @@ function EditTeacher() {
   const [firstName,setFirstName] =useState(teacherInfo.firstName)
   const [lastName,setLastName] =useState(teacherInfo.lastName)
   const [icon,setIcon]=useState(teacherInfo.icon && teacherInfo.icon)
+  const [age,setAge]=useState(teacherInfo.age && teacherInfo.age)
   const [complaint,setComplaint] =useState(teacherInfo.complaint)
   const [complaintId,setComplaintId] =useState(teacherInfo.complaintId ? teacherInfo.complaintId:'')
 
@@ -50,6 +51,7 @@ function EditTeacher() {
     firstName,
     lastName,
     icon,
+    age,
     history,
     screenTime,
     complaint,
@@ -57,7 +59,7 @@ function EditTeacher() {
   }
 
   const updateThisSubject = async(identity,updateObject,navigate) => {
-   if(!screenTime||!firstName||!lastName||!icon||!complaint||!history){
+   if(!screenTime||!firstName||!lastName||!icon||!complaint||!history||!age){
     notifyErrorFxn("please make sure all fields are filled in")
    }else{
     setLoading(true)
@@ -204,6 +206,33 @@ function EditTeacher() {
             maxRows={2}
             value= {lastName}
             onChange = {(e)=>{setLastName(e.target.value)}}
+            
+            />
+            
+            
+          </Grid>
+        </Grid>
+
+        <Grid container item xs={12} spacing={2}>
+          <Grid item xs={3}>
+            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+             <div >
+              AGE
+             </div>
+      
+            </Typography>
+          
+          </Grid>
+
+          <Grid item xs={7}>
+            <TextField
+            fullWidth
+            placeholder=" enter last name."
+            variant="outlined"
+            multiline
+            maxRows={2}
+            value= {age}
+            onChange = {(e)=>{setAge(e.target.value)}}
             
             />
             
