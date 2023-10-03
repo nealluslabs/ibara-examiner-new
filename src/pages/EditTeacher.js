@@ -39,7 +39,7 @@ function EditTeacher() {
   const [complaintId,setComplaintId] =useState(teacherInfo.complaintId ? teacherInfo.complaintId:'')
 
   
-
+  console.log("TYPE OF SCREEN TIME-->",typeof(screenTime))
 
   useEffect(()=>{
 
@@ -51,7 +51,7 @@ function EditTeacher() {
     firstName,
     lastName,
     icon,
-    age,
+    age:Number(age)&&Number(age),
     history,
     screenTime,
     complaint,
@@ -66,18 +66,14 @@ function EditTeacher() {
     notifyErrorFxn("please make sure all fields are filled in")
    }else{
 
-   if(typeof(screenTime) !== "number"){
-        
-    notifyErrorFxn("Please make sure screen time is a number!.")
-  }
-   else {
+
     setLoading(true)
     dispatch(updateTeacher(identity,updateObject,navigate))
    
     // console.log("identity is",identity)
     // console.log("update this subject is updating.........")
     setTimeout(()=>{setLoading(false)},2100)
-    }
+   
    } 
   }
 
@@ -149,14 +145,18 @@ function EditTeacher() {
 
           <Grid item xs={7}>
             <TextField
+            type="number"
             fullWidth
             placeholder=" add screen time"
             variant="outlined"
+            InputProps={{ inputProps: {type:"number" } }}
             multiline
             maxRows={2}
             value= {screenTime}
-            onChange = {(e)=>{setScreenTime(e.target.value)}}
-            
+            onChange = {(e)=>{ 
+              if(Number(e.target.value)|| e.target.value=== ''){
+              setScreenTime(e.target.value)}}
+              }
             />
             
             
@@ -242,7 +242,11 @@ function EditTeacher() {
             multiline
             maxRows={2}
             value= {age}
-            onChange = {(e)=>{setAge(e.target.value)}}
+            onChange = {(e)=>{
+              if(Number(e.target.value)|| e.target.value=== ''){
+              setAge(e.target.value)}
+              }
+            }
             
             />
             

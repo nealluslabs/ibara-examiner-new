@@ -35,12 +35,12 @@ function AddTeacher() {
   const [body,setBody] = useState('')
   const [imageUrl,setImageUrl] =useState('')
 
-  const [screenTime,setScreenTime] = useState()
+  const [screenTime,setScreenTime] = useState('')
   const [history,setHistory] = useState()
   const [firstName,setFirstName] =useState()
   const [lastName,setLastName] =useState()
   const [icon,setIcon]=useState()
-  const [age,setAge]=useState()
+  const [age,setAge]=useState('')
   const [complaint,setComplaint] =useState()
   const [complaintId,setComplaintId] =useState()
  
@@ -62,7 +62,7 @@ function AddTeacher() {
     history,
     screenTime,
     icon,
-    age,
+    age:Number(age) && Number(age),
     complaint,
     complaintId
   }
@@ -74,18 +74,13 @@ function AddTeacher() {
     }
     else{
 
-
-    if(typeof(screenTime) !== "number"){
-        
-      notifyErrorFxn("Please make sure screen time is a number!.")
-    }else{
     setLoading(true)
     dispatch(addTeacher(addObject,navigate))
    
     // console.log("identity is",identity)
     // console.log("update this subject is updating.........")
     setTimeout(()=>{setLoading(false)},1800)
-    }
+    
   } 
   }
  
@@ -168,7 +163,11 @@ function AddTeacher() {
             multiline
             maxRows={2}
             value= {age}
-            onChange = {(e)=>{setAge(e.target.value)}}
+            onChange = {(e)=>{
+              if(Number(e.target.value) ||e.target.value=== ''){
+              setAge(e.target.value)}
+              }
+            }
             
             />
             
@@ -225,7 +224,11 @@ function AddTeacher() {
             type="number"
             maxRows={2}
             value= {screenTime}
-            onChange = {(e)=>{setScreenTime(e.target.value)}}
+            onChange = {(e)=>{
+              if(Number(e.target.value)|| e.target.value=== ''){
+              setScreenTime(e.target.value)
+              }
+            }}
             
             />
             
