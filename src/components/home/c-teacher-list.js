@@ -254,8 +254,8 @@ export default function TeacherList({teachers}) {
           <TableHead>
             <TableRow>
               <StyledTableCell>Name</StyledTableCell>
-              <StyledTableCell align="right">Complaint</StyledTableCell>
-              <StyledTableCell align="right">Screen Time</StyledTableCell>
+              <StyledTableCell align="left">Complaint</StyledTableCell>
+              <StyledTableCell align="left">Screen Time</StyledTableCell>
               
               {/*<StyledTableCell align="right">Industry</StyledTableCell>
               <StyledTableCell align="center">State</StyledTableCell>
@@ -276,15 +276,16 @@ export default function TeacherList({teachers}) {
                 <TableCell component="th" scope="row">
                   {row.firstName + " " + row.lastName}
                 </TableCell>
-                <TableCell style={{ width: 140 }} align="right">
+                <TableCell style={{ width: 140 }} align="left">
                   {row.complaint}
                 </TableCell>
                 {/*<TableCell style={{ width: 140 }} align="right">
                 {row.accountCreated &&typeof(row.accountCreated) !== "string"  ?(new Date(row.accountCreated.seconds*1000)).toDateString():row.accountCreated}
                 </TableCell>*/}
                 
-                <TableCell style={{ width: 140 }} align="right">
-                {row.registeredOn &&typeof(row.registeredOn) !== "string"  ?(new Date(row.registeredOn.seconds*1000)).toDateString():row.accountCreated}
+                <TableCell style={{ width: 140 }} align="left">
+                {/*row.registeredOn &&typeof(row.registeredOn) !== "string"  ?(new Date(row.registeredOn.seconds*1000)).toDateString():row.accountCreated*/}
+                {row.screenTime && row.screenTime}
                 </TableCell>
 
                
