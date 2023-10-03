@@ -254,9 +254,9 @@ export default function ComplaintList({complaints}) {
           <TableHead>
             <TableRow>
               <StyledTableCell>Complaint</StyledTableCell>
-              <StyledTableCell align="right">Blood Investigation</StyledTableCell>
-              <StyledTableCell align="right">Referrals</StyledTableCell>
-              <StyledTableCell align="right">Registered On</StyledTableCell>
+              <StyledTableCell align="left">Blood Investigation</StyledTableCell>
+              <StyledTableCell align="left">Referrals</StyledTableCell>
+              <StyledTableCell align="left">Registered On</StyledTableCell>
               
               {/*<StyledTableCell align="right">Industry</StyledTableCell>
               <StyledTableCell align="center">State</StyledTableCell>*/}
@@ -277,17 +277,17 @@ export default function ComplaintList({complaints}) {
                 <TableCell component="th" scope="row">
                   {row.complaint}
                 </TableCell>
-                <TableCell style={{ width: 140 }} align="right">
+                <TableCell style={{ width: 140 }} align="left">
                   {row.treatment.bloodInvestigation}
                 </TableCell>
-                <TableCell style={{ width: 140 }} align="right">
+                <TableCell style={{ width: 140 }} align="left">
                   {row.treatment.referral}
                 </TableCell>
                 {/*<TableCell style={{ width: 140 }} align="right">
                 {row.accountCreated &&typeof(row.accountCreated) !== "string"  ?(new Date(row.accountCreated.seconds*1000)).toDateString():row.accountCreated}
                 </TableCell>*/}
                 
-                <TableCell style={{ width: 140 }} align="right">
+                <TableCell style={{ width: 140 }} align="left">
                 {row.registeredOn &&typeof(row.registeredOn) !== "string"  ?(new Date(row.registeredOn.seconds*1000)).toDateString():row.accountCreated}
                 </TableCell>
 

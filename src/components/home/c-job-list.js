@@ -240,8 +240,8 @@ export default function CJobList({jobs}) {
           <TableHead>
             <TableRow>
               <StyledTableCell>Name</StyledTableCell>
-              <StyledTableCell align="right">Email</StyledTableCell>
-              <StyledTableCell align="right">Registered</StyledTableCell>
+              <StyledTableCell align="left">Email</StyledTableCell>
+              <StyledTableCell align="left">Registered</StyledTableCell>
               
               {/*<StyledTableCell align="right">Industry</StyledTableCell>
               <StyledTableCell align="center">State</StyledTableCell>
@@ -262,14 +262,14 @@ export default function CJobList({jobs}) {
                 <TableCell component="th" scope="row">
                   {row.firstName + " " + row.lastName}
                 </TableCell>
-                <TableCell style={{ width: 140 }} align="right">
+                <TableCell style={{ width: 140 }} align="left">
                   {row.email}
                 </TableCell>
                 {/*<TableCell style={{ width: 140 }} align="right">
                 {row.accountCreated &&typeof(row.accountCreated) !== "string"  ?(new Date(row.accountCreated.seconds*1000)).toDateString():row.accountCreated}
                 </TableCell>*/}
                 
-                <TableCell style={{ width: 140 }} align="right">
+                <TableCell style={{ width: 140 }} align="left">
                 {row.registeredOn &&typeof(row.registeredOn) !== "string"  ?(new Date(row.registeredOn.seconds*1000)).toDateString():row.accountCreated}
                 </TableCell>
 

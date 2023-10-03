@@ -73,7 +73,12 @@ function AddTeacher() {
       notifyErrorFxn("Please make sure to fill in all fields.")
     }
     else{
-    
+
+
+    if(typeof(screenTime) !== "number"){
+        
+      notifyErrorFxn("Please make sure screen time is a number!.")
+    }else{
     setLoading(true)
     dispatch(addTeacher(addObject,navigate))
    
@@ -81,6 +86,7 @@ function AddTeacher() {
     // console.log("update this subject is updating.........")
     setTimeout(()=>{setLoading(false)},1800)
     }
+  } 
   }
  
 
@@ -216,6 +222,7 @@ function AddTeacher() {
             placeholder=" add screen time"
             variant="outlined"
             multiline
+            type="number"
             maxRows={2}
             value= {screenTime}
             onChange = {(e)=>{setScreenTime(e.target.value)}}

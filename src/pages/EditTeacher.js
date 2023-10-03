@@ -59,15 +59,25 @@ function EditTeacher() {
   }
 
   const updateThisSubject = async(identity,updateObject,navigate) => {
+
+     console.log("TYPE OF SCREEN TIME--->",typeof(screenTime))
+
    if(!screenTime||!firstName||!lastName||!icon||!complaint||!history||!age){
     notifyErrorFxn("please make sure all fields are filled in")
    }else{
+
+   if(typeof(screenTime) !== "number"){
+        
+    notifyErrorFxn("Please make sure screen time is a number!.")
+  }
+   else {
     setLoading(true)
     dispatch(updateTeacher(identity,updateObject,navigate))
    
     // console.log("identity is",identity)
     // console.log("update this subject is updating.........")
     setTimeout(()=>{setLoading(false)},2100)
+    }
    } 
   }
 
