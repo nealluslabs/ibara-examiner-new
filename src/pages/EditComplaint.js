@@ -70,10 +70,10 @@ function EditComplaint() {
      'Referrals':complaintInfo && complaintInfo.treatment.referral ?complaintInfo.treatment.referral:" ",
     'Radiology':complaintInfo && complaintInfo.treatment.radiology ?complaintInfo.treatment.radiology:" ",
     'Prescription':complaintInfo && complaintInfo.treatment.prescription ?complaintInfo.treatment.prescription:" ",
-     prescription1:complaintInfo && complaintInfo.treatment.correctPrescriptionArray[0] ?complaintInfo.treatment.correctPrescriptionArray[0]:" ",
-     prescription2:complaintInfo && complaintInfo.treatment.correctPrescriptionArray[1] ?complaintInfo.treatment.correctPrescriptionArray[1]:" ",
-     prescription3:complaintInfo && complaintInfo.treatment.correctPrescriptionArray[2] ?complaintInfo.treatment.correctPrescriptionArray[2]:" ",
-     prescription4:complaintInfo && complaintInfo.treatment.correctPrescriptionArray[3] ?complaintInfo.treatment.correctPrescriptionArray[3]:" ",
+     prescription1:complaintInfo && complaintInfo.treatment.correctPrescriptionArray &&  complaintInfo.treatment.correctPrescriptionArray[0] && complaintInfo.treatment.correctPrescriptionArray[0] ?complaintInfo.treatment.correctPrescriptionArray[0]:" ",
+     prescription2:complaintInfo && complaintInfo.treatment.correctPrescriptionArray && complaintInfo.treatment.correctPrescriptionArray[1] &&   complaintInfo.treatment.correctPrescriptionArray[1] ?complaintInfo.treatment.correctPrescriptionArray[1]:" ",
+     prescription3:complaintInfo && complaintInfo.treatment.correctPrescriptionArray && complaintInfo.treatment.correctPrescriptionArray[2] &&  complaintInfo.treatment.correctPrescriptionArray[2] ?complaintInfo.treatment.correctPrescriptionArray[2]:" ",
+     prescription4:complaintInfo && complaintInfo.treatment.correctPrescriptionArray && complaintInfo.treatment.correctPrescriptionArray[3] &&  complaintInfo.treatment.correctPrescriptionArray[3] ?complaintInfo.treatment.correctPrescriptionArray[3]:" ",
      ECG:complaintInfo && complaintInfo.treatment.ecg ?complaintInfo.treatment.ecg:" ",
     
     }
