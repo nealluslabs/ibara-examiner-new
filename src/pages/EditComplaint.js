@@ -34,6 +34,8 @@ function EditComplaint() {
   const [radiologyArr,setRadiologyArr] = useState(complaintInfo && complaintInfo.treatment.chosenRadiologyArray ?complaintInfo.treatment.chosenRadiologyArray:[])
   const [radiologyIdArr,setRadiologyIdArr] = useState(complaintInfo && complaintInfo.treatment.chosenRadiologyIdArray ?complaintInfo.treatment.chosenRadiologyIdArray:[])
 
+  const [referralsArr,setReferralsArr] = useState(complaintInfo && complaintInfo.treatment.chosenReferralsArray ?complaintInfo.treatment.chosenReferralsArray:[])
+  const [referralsIdArr,setReferralsIdArr] = useState(complaintInfo && complaintInfo.treatment.chosenReferralsIdArray ?complaintInfo.treatment.chosenReferralsIdArray:[])
 
  
   
@@ -87,7 +89,10 @@ function EditComplaint() {
     chosenBloodInvestigationArray:bloodInv,
    chosenBloodInvestigationIdArray:bloodInvId,
    chosenRadiologyArray:radiologyArr,
-  chosenRadiologyIdArray:radiologyIdArr
+  chosenRadiologyIdArray:radiologyIdArr,
+  chosenReferralsArray:radiologyArr,
+  chosenReferralsIdArray:radiologyIdArr,
+
   }
 
   const handleClick = () => {
@@ -117,10 +122,25 @@ function EditComplaint() {
    setRadiologyIdArr([...placeholder2])
 };
 
-  console.log("bloodInv",bloodInv)
+
+
+const handleDeleteRef = (tbr,tbrId) => {
+    
+
+  let placeholder =   referralsArr.filter((item)=>(item !== tbr))
+  let placeholder2 =   referralsIdArr.filter((item)=>(item !== tbrId))
+
+
+   setReferralsArr([...placeholder])
+   setReferralsIdArr([...placeholder2])
+};
+/*console.log("bloodInv",bloodInv)
   console.log("bloodInvId",bloodInvId)
   console.log("radiologyIdArray",radiologyIdArr)
-  console.log("radiology-->Array",radiologyArr)
+  console.log("radiology-->Array",radiologyArr)*/
+
+  console.log("referralsIdArray",referralsIdArr)
+  console.log("referrals--->Array",referralsArr)
 
   const { teachers } = useSelector((state) => state.jobs);
 
@@ -254,6 +274,16 @@ onChange = {(e)=>{setStateObject({
   
   }
 
+  if(item.title === "Referrals"){
+
+    if(!referralsIdArr.includes(e.target.value.uid)) {
+      setReferralsIdArr([...referralsIdArr,e.target.value.uid])
+    setReferralsArr([...referralsArr,e.target.value.title])
+     }
+  
+  
+  }
+
 
 }}
 
@@ -329,7 +359,35 @@ onChange = {(e)=>{setStateObject({
 </Grid>
 }
 
+{item.title === "Referrals" &&
 
+<Grid container item xs={12} spacing={2}>
+<Grid item xs={3}>
+  <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+   <div >
+ 
+   </div>
+
+  </Typography>
+
+</Grid>
+
+<Grid item xs={7}>
+{referralsArr && referralsArr.length >0 &&
+     <div style={{padding: '10px', border: '1px solid #00000033' }}>
+              <> 
+                 &nbsp; 
+               {  referralsArr.map((chipItem,index)=>(
+              <Chip label={chipItem} onClick={handleClick} onDelete={()=>{handleDeleteRef(chipItem,referralsIdArr[index])}} />
+              ))
+                }
+
+              </>
+     </div>
+              }
+</Grid>
+</Grid>
+}
 
 
 

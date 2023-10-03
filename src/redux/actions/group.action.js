@@ -919,6 +919,9 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
         chosenBloodInvestigationIdArray:updateObject.chosenBloodInvestigationIdArray,
         chosenRadiologyArray:updateObject.chosenRadiologyArray,
         chosenRadiologyIdArray:updateObject.chosenRadiologyIdArray,
+        chosenReferralsArray:updateObject.chosenReferralsArray,
+        chosenReferralsIdArray:updateObject.chosenReferralsIdArray,
+
 
       }
     
