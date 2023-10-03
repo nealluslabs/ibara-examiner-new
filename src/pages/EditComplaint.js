@@ -90,13 +90,13 @@ function EditComplaint() {
    chosenBloodInvestigationIdArray:bloodInvId,
    chosenRadiologyArray:radiologyArr,
   chosenRadiologyIdArray:radiologyIdArr,
-  chosenReferralsArray:radiologyArr,
-  chosenReferralsIdArray:radiologyIdArr,
+  chosenReferralsArray:referralsArr,
+  chosenReferralsIdArray:referralsIdArr,
 
   }
 
   const handleClick = () => {
-    console.info('You clicked the Chip.');
+    console.info('You clicked the Chip 0.');
   };
 
 

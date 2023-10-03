@@ -604,6 +604,9 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
         chosenRadiologyArray:addObject.chosenRadiologyArray,
         chosenRadiologyIdArray:addObject.chosenRadiologyIdArray,
 
+        chosenReferralsArray:addObject.chosenReferralsArray,
+        chosenReferralsIdArray:addObject.chosenReferralsIdArray,
+
 
       },
         registeredOn:new Date()
@@ -921,8 +924,6 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
         chosenRadiologyIdArray:updateObject.chosenRadiologyIdArray,
         chosenReferralsArray:updateObject.chosenReferralsArray,
         chosenReferralsIdArray:updateObject.chosenReferralsIdArray,
-
-
       }
     
     }
