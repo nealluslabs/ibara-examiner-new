@@ -19,13 +19,14 @@ text-decoration: none;
 * {
    
     font-family: 'Josefin Sans', sans-serif !important;
+    color:#FFFFFF;
   
     }
 
     body {
         /*background-color: black !important;*/
        /* background: linear-gradient(rgb(255, 255, 255,0), black);*/
-       background-color: white !important;
+       background-color: #3EA4EE !important;
         
     }
 

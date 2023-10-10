@@ -22,7 +22,7 @@ module.exports = {
       white: '#fff',
       grey: {
         50: '#FAFAFA',
-        100: '#F5F5F5',
+        100: '#EFEFEF',
         200: '#EEEEEE',
         300: '#E0E0E0',
         400: '#BDBDBD',
@@ -39,7 +39,7 @@ module.exports = {
       },
       gray: {
         50: '#FAFAFA',
-        100: '#F5F5F5',
+        100: '#EFEFEF',
         200: '#EEEEEE',
         300: '#E0E0E0',
         400: '#BDBDBD',

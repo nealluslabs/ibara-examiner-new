@@ -56,6 +56,15 @@ import ComplaintsListPage from './pages/ComplaintsListPage';
 
 import EditComplaint from './pages/EditComplaint';
 import EditQuiz from './pages/EditQuiz';
+import AddPatientBioData from './pages/AddPatientBioData';
+import AddPatientArrival from './pages/AddPatientArrival';
+import AddPatientScreenTime from './pages/AddPatientScreenTime';
+import AddPatientBloodInv from './pages/AddPatientBloodInv';
+import AddPatientRadiology from './pages/AddPatientRadiology';
+import AddPatientHistory from './pages/AddPatientHistory';
+import AddPatientReferral from './pages/AddPatientReferral';
+import AddPatientPrescription from './pages/AddPatientPrescription';
+import AddPatientECG from './pages/AddPatientECG';
 
 export default function Router() {
   const routes = useRoutes([
@@ -96,7 +105,19 @@ export default function Router() {
         { path: 'add-quiz', element: <AddQuiz /> },
         { path: 'edit-quiz', element: <EditQuiz /> },
         { path: 'edit-chapter', element: <EditChapter /> },
-        { path: 'add-patient', element: <AddTeacher /> },
+        { path: 'add-patient-bio', element: <AddPatientBioData/> },
+        { path: 'add-patient-history', element: <AddPatientHistory/> },
+        { path: 'add-patient-arrival', element: <AddPatientArrival/> },
+        { path: 'add-patient-screen', element: <AddPatientScreenTime/> },
+        { path: 'add-patient-bloodinv', element: <AddPatientBloodInv/> },
+        { path: 'add-patient-radiology', element: <AddPatientRadiology/> },
+        { path: 'add-patient-ecg', element: <AddPatientECG/> },
+        { path: 'add-patient-prescription', element: <AddPatientPrescription/> },
+        { path: 'add-patient-referral', element: <AddPatientReferral/> },
+
+
+
+
         { path: 'edit-patient', element: <EditTeacher /> },
         { path: 'patient-expanded', element: <PatientExpanded/> },
         // { path: 'my-cooler', element: <MyCoolersPage /> },

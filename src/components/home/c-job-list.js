@@ -217,10 +217,13 @@ export default function CJobList({jobs}) {
       </div>*/}
       
       <br/>
-      <p style={{fontSize: '26px', marginLeft: '5px',marginBottom:"1rem", color: 'black',display:"flex",justifyContent:"space-between"}}><b>ALL CANDIDATES</b>   <Button
+     
+      <p style={{fontSize: '26px', marginLeft: '5px',marginBottom:"1rem", color: 'black',display:"flex",justifyContent:"space-between"}}><b>ALL CANDIDATES</b>  
+       {/*
+       <Button
                    
                    type="button"
-                    // fullWidth
+                  
                     variant="contained"
                     style={{
                       backgroundColor: '#000000' ,
@@ -233,7 +236,11 @@ export default function CJobList({jobs}) {
                    
                   >
                     FILTER
-                  </Button></p><br/>
+                  </Button>
+                  */}
+            </p>
+           
+                  <br/>
       <hr />
       <TableContainer component={Paper}>
         <Table sx={{ maxWidth: 1500,tableLayout:"fixed" }} aria-label="custom pagination table">

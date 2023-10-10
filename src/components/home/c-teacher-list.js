@@ -244,7 +244,7 @@ export default function TeacherList({teachers}) {
                       fontSize: "15px",
                     }}
                     sx={{ mt: 7, mb: 2 }}
-                    onClick={() => {navigate('/dashboard/add-patient')}}
+                    onClick={() => {navigate('/dashboard/add-patient-bio')}}
                   >
                     ADD PATIENT
                   </Button></p><br/>

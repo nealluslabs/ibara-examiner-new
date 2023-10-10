@@ -3,6 +3,7 @@ import { clearUser, loginFailed, loginSuccess, logoutFxn, signupPending, signupF
 import { v4 as uuidv4 } from 'uuid';
 import { notifyErrorFxn, notifySuccessFxn } from 'src/utils/toast-fxn';
 import { clearGroup } from '../reducers/group.slice';
+import { fetchAllCategories, fetchAllTreatmentCategories } from './group.action';
 
 
   export const signin = (user, navigate,) => async (dispatch) => {
@@ -14,6 +15,8 @@ import { clearGroup } from '../reducers/group.slice';
       var user = userCredential.user;
       console.log('Signed In user is: ', user.email);
        dispatch(fetchUserData(user.uid, "sigin", navigate));
+       dispatch(fetchAllCategories())
+      dispatch(fetchAllTreatmentCategories())
     })
     .catch((error) => {
       console.log( ' PROBLEM REPORT ', error.message);
@@ -40,6 +43,8 @@ export const signInWithGoogle = (user, navigate,) => async (dispatch) => {
     console.log('Signed In user is: ', user.email);
     console.log('ALL THE DETAILS THAT COME BACK FROM THE GOOGLE SIGN IN ARE:',userCredential)
      dispatch(fetchUserData(user.uid, "sigin", navigate));
+     dispatch(fetchAllCategories())
+     dispatch(fetchAllTreatmentCategories())
 
   }).catch((error) => {
     console.log( ' PROBLEM REPORT ', error.message);
@@ -77,6 +82,8 @@ export const signup = (user,navigate) => async (dispatch) => {
     
 
     dispatch(fetchUserData(res.user.uid, "sigin"));
+    dispatch(fetchAllCategories())
+    dispatch(fetchAllTreatmentCategories())
   }).then(() => {
    
     navigate("/dashboard/home");
@@ -249,7 +256,7 @@ export const logout = (navigate) => async (dispatch) => {
     dispatch(logoutFxn());
     dispatch(clearUser());
     dispatch(clearGroup());
-    navigate('/loginTest', { replace: true });
+    navigate('/', { replace: true });
     console.log('logout successful!');
   }).catch((error) => {
     // An error happened.

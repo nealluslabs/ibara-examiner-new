@@ -42,7 +42,7 @@ export default function CategoriesVideoPage() {
 
 
 useEffect(()=>{
-  dispatch(fetchAllCategories())
+ // dispatch(fetchAllCategories())
  
 
   setData(allCategories)

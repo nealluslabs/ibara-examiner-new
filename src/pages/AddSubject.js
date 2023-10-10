@@ -89,8 +89,8 @@ const [file,setFile] = useState('')
 
   useEffect(()=>{
 
-    dispatch(getTeachers())
-    dispatch(fetchAllTreatmentCategories())
+    //dispatch(getTeachers())
+    //dispatch(fetchAllTreatmentCategories())
   },[])
 
   return (
