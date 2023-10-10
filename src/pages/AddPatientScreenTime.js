@@ -104,7 +104,7 @@ function AddPatientScreenTime() {
     <Grid item xs={12} sx={{ display: 'flex' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Typography variant="h4" component="p">
-              Enter Duration of Stay(Minutes):
+              Enter Duration of Stay (Minutes):
               </Typography>
               <div style={{height:"2px", width:"80%",borderBottom:"1px solid black",position:"absolute",left:"20rem",top:"18rem"}}></div>
             </Box>
@@ -112,250 +112,35 @@ function AddPatientScreenTime() {
         </Grid>
    
 
-     <Grid container spacing={2} style={{margin:"0 auto",backgroundColor:"#EFEFEF",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
+     <Grid container spacing={2} style={{display:"flex",justifyContent:"center",alignItems:"center",height:"450px",margin:"0 auto",backgroundColor:"#EFEFEF",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
 
-
-
-     <Grid container item xs={12} spacing={1}>
+     <Grid container item xs={12} spacing={1} >
           <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-             <div style={{color:"black"}}>
+           {/* <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
+            <div style={{color:"black"}}>
              FIRST NAME:
              </div>
       
-            </Typography>
+            </Typography>*/}
           
           </Grid>
 
           <Grid item xs={7}>
             <TextField
-             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
             fullWidth
-            placeholder=" Add first name."
+            
+            placeholder=" Add time in minutes."
             variant="outlined"
             multiline
             maxRows={2}
             value= {firstName}
             onChange = {(e)=>{setFirstName(e.target.value)}}
-            
+            style={{position:"relative",left:"-10%",backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
             />
             
             
           </Grid>
         </Grid>
-
-
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-            <div style={{color:"black"}}>
-             LAST NAME:
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={7}>
-            <TextField
-             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
-            fullWidth
-            placeholder=" Add last name"
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {lastName}
-            onChange = {(e)=>{setLastName(e.target.value)}}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-
-
-
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-            <div style={{color:"black"}}>
-             AGE:
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={7}>
-            <TextField
-             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
-            fullWidth
-            placeholder=" Add age"
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {age}
-            onChange = {(e)=>{
-              if(Number(e.target.value) ||e.target.value=== ''){
-              setAge(e.target.value)}
-              }
-            }
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-
-
-
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-            <div style={{color:"black"}}>
-              ICON:
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={7}>
-          <Select
-          style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
-        
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={icon}
-          label="icon"
-          onChange={(event) => {
-            setIcon(event.target.value);
-          }}
-        >
-       
-            <MenuItem value={"Male"}>{"Male"}</MenuItem>
-            <MenuItem value={"Female"}>{"Female"}</MenuItem>
-            <MenuItem value={"Kid"}>{"Kid"}</MenuItem>
-       
-       
-        </Select>
-            
-            
-          </Grid>
-        </Grid>
-
-
-
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-            <div style={{color:"black"}}>
-             COMPLAINT(S):
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={7}>
-          <Select
-         
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={complaint}
-          label="complaint"
-          style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
-          onChange={(event) => {
-            setComplaint(event.target.value.complaint);
-            setComplaintId(event.target.value.uid);
-          }}
-        >
-       {complaintArr.map((item)=>(
-
-<MenuItem value={item}>{item.complaint}</MenuItem>
-
-)
-)}
-       
-        </Select>
-          </Grid>
-        </Grid>
-
-       
-     {/*
-         <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             SCREEN TIME
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={6}>
-            <TextField
-            fullWidth
-            placeholder=" add screen time"
-            variant="outlined"
-            multiline
-            type="number"
-            maxRows={2}
-            value= {screenTime}
-            onChange = {(e)=>{
-              if(Number(e.target.value)|| e.target.value=== ''){
-              setScreenTime(e.target.value)
-              }
-            }}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-
-
-
-       
-      
-
-
-
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             HISTORY
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={6}>
-            <TextField
-            fullWidth
-            placeholder=" Medical history"
-            variant="outlined"
-            multiline
-            rows={8}
-            value= {history}
-            onChange = {(e)=>{setHistory(e.target.value)}}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-       */}
-
-   
-        
-      
-
-
-
 
 
       

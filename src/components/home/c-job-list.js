@@ -243,7 +243,7 @@ export default function CJobList({jobs}) {
                   <br/>
       <hr />
       <TableContainer component={Paper}>
-        <Table sx={{ maxWidth: 1500,tableLayout:"fixed" }} aria-label="custom pagination table">
+        <Table sx={{ maxWidth: 1500,tableLayout:"fixed",backgroundColor:"#3EA4EE" }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
               <StyledTableCell>Name</StyledTableCell>

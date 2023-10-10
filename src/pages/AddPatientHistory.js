@@ -112,120 +112,44 @@ function AddPatientHistory() {
         </Grid>
    
 
-     <Grid container spacing={2} style={{margin:"0 auto",backgroundColor:"#EFEFEF",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
+        <Grid container spacing={2} style={{display:"flex",justifyContent:"flex-start",alignItems:"flex-start",height:"450px",margin:"0 auto",backgroundColor:"#EFEFEF",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
 
+<Grid container item xs={12} spacing={1}  style={{height:"100%",width:"100%",display:"flex",justifyContent:"center",alignItems:"center"}} >
+    {/*  <Grid item xs={3}>
+      <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
+       <div style={{color:"black"}}>
+        FIRST NAME:
+        </div>
+ 
+       </Typography>
+     
+  </Grid>*/}
 
-
-     <Grid container item xs={12} spacing={1}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-            <div style={{color:"black"}}>
-             HISTORY:
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={7}>
-            <TextField
-            style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
-            fullWidth
-            placeholder=" Add first name."
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {firstName}
-            onChange = {(e)=>{setFirstName(e.target.value)}}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-
-
-      
-
+     <Grid item xs={7} >
+       <TextField
+       fullWidth
        
-     {/*
-         <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             SCREEN TIME
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={6}>
-            <TextField
-            fullWidth
-            placeholder=" add screen time"
-            variant="outlined"
-            multiline
-            type="number"
-            maxRows={2}
-            value= {screenTime}
-            onChange = {(e)=>{
-              if(Number(e.target.value)|| e.target.value=== ''){
-              setScreenTime(e.target.value)
-              }
-            }}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-
-
-
+       placeholder=" Add patient history."
+       variant="outlined"
+       multiline
+       rows={14}
+       /*maxRows={2}*/
+       value= {firstName}
+       onChange = {(e)=>{setFirstName(e.target.value)}}
+       style={{position:"relative",left:"-10%",backgroundColor:"#FFFFFF",borderRadius:"3rem",height:"100%",width:"120%"}}
+      // InputProps={style={borderRadius:"3rem"}}
+      InputProps={{
+        borderRadius:"3rem"
+    }}
+       />
        
-      
+       
+     </Grid>
+   </Grid>
 
 
-
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             HISTORY
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={6}>
-            <TextField
-            fullWidth
-            placeholder=" Medical history"
-            variant="outlined"
-            multiline
-            rows={8}
-            value= {history}
-            onChange = {(e)=>{setHistory(e.target.value)}}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-       */}
-
-   
-        
-      
-
-
-
-
-
-      
-      </Grid>
+ 
+ </Grid>
       <br/><br/><br/><br/>
   <div style={{ display: 'flex',margin:"0 auto", justifyContent: 'space-between',width:"60%",gap:"1rem" }}>
  

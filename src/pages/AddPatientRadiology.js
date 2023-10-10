@@ -104,7 +104,7 @@ function AddPatientRadiology() {
     <Grid item xs={12} sx={{ display: 'flex' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Typography variant="h4" component="p">
-              Enter Patient Bio Data:
+              Enter Radiology:
               </Typography>
               <div style={{height:"2px", width:"80%",borderBottom:"1px solid black",position:"absolute",left:"20rem",top:"18rem"}}></div>
             </Box>
@@ -112,14 +112,14 @@ function AddPatientRadiology() {
         </Grid>
    
 
-     <Grid container spacing={2} style={{margin:"0 auto",backgroundColor:"#EFEFEF",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
+     <Grid container spacing={2} style={{height:"450px",margin:"0 auto",backgroundColor:"#EFEFEF",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
 
 
 
      <Grid container item xs={12} spacing={1}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-             <div >
+             <div  style={{color:"black"}}>
              FIRST NAME:
              </div>
       
@@ -148,7 +148,7 @@ function AddPatientRadiology() {
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-             <div >
+             <div  style={{color:"black"}}>
              LAST NAME:
              </div>
       
@@ -178,7 +178,7 @@ function AddPatientRadiology() {
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-             <div >
+             <div  style={{color:"black"}}>
              AGE:
              </div>
       
@@ -212,7 +212,7 @@ function AddPatientRadiology() {
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-             <div >
+             <div style={{color:"black"}}>
               ICON:
              </div>
       
@@ -249,7 +249,7 @@ function AddPatientRadiology() {
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-             <div >
+             <div  style={{color:"black"}}>
              COMPLAINT(S):
              </div>
       

@@ -112,14 +112,14 @@ function AddPatientBioData() {
         </Grid>
    
 
-     <Grid container spacing={2} style={{margin:"0 auto",backgroundColor:"#EFEFEF",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
+     <Grid container spacing={2} style={{height:"450px",margin:"0 auto",backgroundColor:"#EFEFEF",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
 
 
 
      <Grid container item xs={12} spacing={1}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-             <div >
+            <div style={{color:"black"}}>
              FIRST NAME:
              </div>
       
@@ -148,7 +148,7 @@ function AddPatientBioData() {
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-             <div >
+            <div style={{color:"black"}}>
              LAST NAME:
              </div>
       
@@ -178,7 +178,7 @@ function AddPatientBioData() {
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-             <div >
+            <div style={{color:"black"}}>
              AGE:
              </div>
       
@@ -213,7 +213,7 @@ function AddPatientBioData() {
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-             <div >
+            <div style={{color:"black"}}>
               ICON:
              </div>
       
@@ -234,9 +234,9 @@ function AddPatientBioData() {
           }}
         >
        
-            <MenuItem value={"Male"}>{"Male"}</MenuItem>
-            <MenuItem value={"Female"}>{"Female"}</MenuItem>
-            <MenuItem value={"Kid"}>{"Kid"}</MenuItem>
+            <MenuItem style={{color:"black"}}  value={"Male"}>{"Male"}</MenuItem>
+            <MenuItem  style={{color:"black"}}value={"Female"}>{"Female"}</MenuItem>
+            <MenuItem style={{color:"black"}} value={"Kid"}>{"Kid"}</MenuItem>
        
        
         </Select>
@@ -250,7 +250,7 @@ function AddPatientBioData() {
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-             <div >
+            <div style={{color:"black"}}>
              COMPLAINT(S):
              </div>
       
@@ -272,7 +272,7 @@ function AddPatientBioData() {
         >
        {complaintArr.map((item)=>(
 
-<MenuItem value={item}>{item.complaint}</MenuItem>
+<MenuItem style={{color:"black"}} value={item}>{item.complaint}</MenuItem>
 
 )
 )}
