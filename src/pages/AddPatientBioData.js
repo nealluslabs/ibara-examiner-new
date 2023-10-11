@@ -112,14 +112,14 @@ function AddPatientBioData() {
         </Grid>
    
 
-     <Grid container spacing={2} style={{height:"450px",margin:"0 auto",backgroundColor:"#EFEFEF",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
+     <Grid container spacing={2} style={{height:"450px",margin:"0 auto",backgroundColor:"#081B85",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
 
 
 
      <Grid container item xs={12} spacing={1}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-            <div style={{color:"black"}}>
+            <div >
              FIRST NAME:
              </div>
       
@@ -148,7 +148,7 @@ function AddPatientBioData() {
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-            <div style={{color:"black"}}>
+            <div >
              LAST NAME:
              </div>
       
@@ -178,7 +178,7 @@ function AddPatientBioData() {
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-            <div style={{color:"black"}}>
+            <div >
              AGE:
              </div>
       
@@ -213,7 +213,7 @@ function AddPatientBioData() {
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-            <div style={{color:"black"}}>
+            <div>
               ICON:
              </div>
       
@@ -250,7 +250,7 @@ function AddPatientBioData() {
         <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-            <div style={{color:"black"}}>
+            <div >
              COMPLAINT(S):
              </div>
       

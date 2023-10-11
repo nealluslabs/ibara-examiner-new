@@ -250,7 +250,7 @@ export default function TeacherList({teachers}) {
                   </Button></p><br/>
       <hr />
       <TableContainer component={Paper}>
-        <Table sx={{ maxWidth: 1500,tableLayout:"fixed",backgroundColor:"#3EA4EE" }} aria-label="custom pagination table">
+        <Table sx={{ maxWidth: 1500,tableLayout:"fixed",backgroundImage:"linear-gradient(#5c7ef4, #5c7ef4)" }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
               <StyledTableCell>Name</StyledTableCell>
@@ -273,17 +273,17 @@ export default function TeacherList({teachers}) {
               : teacherList
             ).map((row) => (
               <TableRow key={row.id}>
-                <TableCell component="th" scope="row">
+                <TableCell style={{ width: 140,color:"white" }} component="th" scope="row">
                   {row.firstName + " " + row.lastName}
                 </TableCell>
-                <TableCell style={{ width: 140 }} align="left">
+                <TableCell style={{ width: 140,color:"white" }} align="left">
                   {row.complaint}
                 </TableCell>
                 {/*<TableCell style={{ width: 140 }} align="right">
                 {row.accountCreated &&typeof(row.accountCreated) !== "string"  ?(new Date(row.accountCreated.seconds*1000)).toDateString():row.accountCreated}
                 </TableCell>*/}
                 
-                <TableCell style={{ width: 140 }} align="left">
+                <TableCell style={{ width: 140,color:"white" }} align="left">
                 {/*row.registeredOn &&typeof(row.registeredOn) !== "string"  ?(new Date(row.registeredOn.seconds*1000)).toDateString():row.accountCreated*/}
                 {row.screenTime && row.screenTime}
                 </TableCell>

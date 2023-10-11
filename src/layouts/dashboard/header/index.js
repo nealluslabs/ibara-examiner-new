@@ -26,7 +26,7 @@ import { Link } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
-const NAV_WIDTH = 240;
+const NAV_WIDTH = 0;
 
 const HEADER_MOBILE = 64;
 

@@ -112,7 +112,7 @@ function AddPatientHistory() {
         </Grid>
    
 
-        <Grid container spacing={2} style={{display:"flex",justifyContent:"flex-start",alignItems:"flex-start",height:"450px",margin:"0 auto",backgroundColor:"#EFEFEF",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
+        <Grid container spacing={2} style={{display:"flex",justifyContent:"flex-start",alignItems:"flex-start",height:"450px",margin:"0 auto",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
 
 <Grid container item xs={12} spacing={1}  style={{height:"100%",width:"100%",display:"flex",justifyContent:"center",alignItems:"center"}} >
     {/*  <Grid item xs={3}>

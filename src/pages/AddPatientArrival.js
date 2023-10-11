@@ -112,7 +112,7 @@ function AddPatientArrival() {
         </Grid>
    
 
-     <Grid container spacing={2} style={{display:"flex",justifyContent:"center",alignItems:"center",height:"450px",margin:"0 auto",backgroundColor:"#EFEFEF",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
+     <Grid container spacing={2} style={{display:"flex",justifyContent:"center",alignItems:"center",height:"450px",margin:"0 auto",backgroundColor:"#081B85",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
 
 
 

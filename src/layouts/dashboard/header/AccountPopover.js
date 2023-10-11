@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'src/redux/actions/auth.action';
 import { useNavigate } from 'react-router-dom';
 import randomGuy from 'src/assets/images/random-guy.jpg'
+import companyDefault from 'src/assets/images/companydefault.png'
 
 // ----------------------------------------------------------------------
 
@@ -51,7 +52,7 @@ export default function AccountPopover() {
           }),
         }}
       >
-        <Avatar src={user?user.imageUrl:randomGuy} alt="photoURL" />
+        <Avatar src={companyDefault} alt="photoURL" />
       </IconButton>
       <ArrowDropDownIcon sx={{color: 'black'}} onClick={handleOpen}/>
       <Popover
@@ -81,14 +82,14 @@ export default function AccountPopover() {
           alignItems="flex-start"
         >
           <Grid sx={{mt: 1, ml: 1}}>
-          <Avatar src={user?user.imageUrl:randomGuy} alt="photoURL" />
+          <Avatar src={companyDefault/*user?user.imageUrl:randomGuy*/} alt="photoURL" />
           </Grid>
           <Box sx={{ my: 1.5, px: 1 }}>
-          <Typography variant="subtitle2" noWrap>
+          <Typography variant="subtitle2" style={{color:"black"}} noWrap>
             {user?user.firstName + " " + user.lastName:"Globus Contractors"}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {user?user.email:'ut1@bc.com'}
+            {user?user.email:'ut1@ibara.com'}
           </Typography>
         </Box>
         </Grid>
