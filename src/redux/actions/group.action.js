@@ -651,7 +651,58 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
  export const addSubject = (addObject) => async (dispatch) => {
 
 
-  const imageName = uuidv4() + '.' + addObject.answerImage?.name?.split('.')?.pop();
+  db.collection("TreatmentTests")
+  .where("title", "==", addObject.title)
+  .where("treatmentCategoryId", "==", addObject.treatmentCategoryId)
+  .get()
+  .then((snapshot) => {
+    const existingSubject = snapshot.docs.map((doc) => ({ ...doc.data() }));
+  if (existingSubject.length) {
+   
+    notifyErrorFxn(`This test already exists,consider changing the subject name`)
+
+  } else {
+     
+    
+    db.collection("TreatmentTests").add(
+      {
+        body:addObject.body?addObject.body:"lorem ipsum",
+        title:addObject.title,
+        treatmentId:addObject.treatmentId,
+        treatmentCategoryId:addObject.treatmentCategoryId,
+        specific:addObject.specific?addObject.specific:"lorem ipsum",
+        responseTime:addObject.response,
+        answerImage:addObject.answerImage,
+      }
+    ).then((doc) => {
+      
+       db.collection("TreatmentTests").doc(doc.id).update({
+      uid:doc.id
+       })
+  
+      console.log("the documents id is",doc.id)
+       notifySuccessFxn(` ${addObject.title} added!`)
+  
+   }).catch((error) => {
+     console.log(`Error adding ${addObject.title} :`, error);
+     notifyErrorFxn(error)
+  
+  
+   });
+
+  }
+}).catch((error) => {
+  console.log("Error adding treatment test OUTSIDE ERROR:", error);
+  notifyErrorFxn(error)
+
+
+});
+
+
+
+
+
+ /* const imageName = uuidv4() + '.' + addObject.answerImage?.name?.split('.')?.pop();
   console.log('File Name: ', imageName);
 
   const uploadTask = storage.ref(`treatment_images/${imageName}`).put(addObject.answerImage);
@@ -661,7 +712,7 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
       const progress = Math.round(
         (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       );
-      // setProgress(progress);
+     
     },
     error => {
       console.log(error);
@@ -698,7 +749,7 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
         answerImage:url
       }
     ).then((doc) => {
-       //const publicGroups = snapshot.docs.map((doc) => ({ ...doc.data() }));
+      
        db.collection("TreatmentTests").doc(doc.id).update({
       uid:doc.id
        })
@@ -722,9 +773,88 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
 });
         });
     }
-  );
+  );*/
 
 
+
+
+
+
+
+ };
+
+
+ export const addSubjectReferral = (addObject) => async (dispatch) => {
+
+
+  db.collection("TreatmentTests")
+  .where("title", "==", addObject.title)
+  .where("treatmentCategoryId", "==", addObject.treatmentCategoryId)
+  .get()
+  .then((snapshot) => {
+    const existingSubject = snapshot.docs.map((doc) => ({ ...doc.data() }));
+  if (existingSubject.length) {
+   
+    notifyErrorFxn(`This test already exists,consider changing the subject name`)
+
+  } else {
+     
+    
+    db.collection("TreatmentCategory").add(
+      {
+        body:addObject.body?addObject.body:"lorem ipsum",
+        title:addObject.title,
+        treatmentId:addObject.treatmentId
+       
+      }
+    ).then((doc) => {
+      
+       db.collection("TreatmentCategory").doc(doc.id).update({
+      uid:doc.id
+       })
+  
+      return doc.id
+  
+   }).then((id) => {
+      
+    db.collection("TreatmentTests").add({
+      body:addObject.body?addObject.body:"lorem ipsum",
+      title:addObject.title,
+      treatmentId:addObject.treatmentId,
+      treatmentCategoryId:id,
+      specific:addObject.specific?addObject.specific:"lorem ipsum",
+      responseTime:addObject.response,
+      answerImage:addObject.answerImage,
+    })
+    .then((doc) => {
+      
+      db.collection("TreatmentTests").doc(doc.id).update({
+     uid:doc.id
+      })
+    
+     console.log("the documents id is",doc.id)
+      notifySuccessFxn(` ${addObject.title} added!`)
+    
+    })
+
+   
+   
+})
+
+.catch((error) => {
+     console.log(`Error adding ${addObject.title} :`, error);
+     notifyErrorFxn(error)
+  
+  
+   });
+
+  }
+}).catch((error) => {
+  console.log("Error adding treatment test OUTSIDE ERROR:", error);
+  notifyErrorFxn(error)
+
+
+});
 
 
 

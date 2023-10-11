@@ -158,10 +158,11 @@ function CategoriesRowCard ({ uid, title, body, img}) {
             margin: 'auto',
             // maxWidth: 500,
             border: '0px solid black',
+            
             borderBottom:"1px solid lightgray",
             flexGrow: 1,
             backgroundColor: (theme) =>
-              theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+              theme.palette.mode === 'dark' ? '#1A2027' : '#b0d4f4',
           }}
         >
           <Grid container spacing={2}>
@@ -184,7 +185,7 @@ function CategoriesRowCard ({ uid, title, body, img}) {
                 <Grid item xs>
                   <div style={{display: 'flex',justifyContent:"center" ,alignItems:"flex-start",flexDirection: 'column', border: '0px solid red',marginLeft: '4rem', marginTop: '40px'}}>
                   
-                    <h2 style={{ fontSize: '22px', margin: '0',  }}>{title.toUpperCase()}</h2>
+                    <h2 style={{ color:"black",fontSize: '22px', margin: '0',  }}>{title.toUpperCase()}</h2>
                     </div>
                 </Grid>
                 </Grid>
@@ -202,12 +203,12 @@ function CategoriesRowCard ({ uid, title, body, img}) {
                 {loading?"Loading...":"View"}
             </Button>
 
-            <Button variant="contained" style={{minHeight: '45px', minWidth: '145px', backgroundColor: 'white',color:"black" ,border:"1px solid black",marginTop:"0.5rem"}}
+            <Button variant="contained" style={{minHeight: '45px', minWidth: '145px',color:"black", backgroundColor: 'white',color:"black" ,border:"1px solid black",marginTop:"0.5rem"}}
               onClick={() => {
                
                   sendToAddTreatment(title,uid)
               }}>
-                {wait?"Please Wait...":<span><b style={{fontSize:"1.5rem"}}>+</b> Add</span> }
+                {wait?"Please Wait...":<span style={{color:"black"}}><b style={{fontSize:"1.5rem",color:"black"}}>+</b> Add</span> }
             </Button>
               </Grid> 
               </Grid>

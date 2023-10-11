@@ -171,7 +171,7 @@ const handleDelete = (tbr,tbrId) => {
    
              
              <div style={{backgroundColor: "#A160E4",padding:"0.1rem", borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}}>
-             <Link to={'/dashboard/add-patient-bloodinv'}> 
+             <Link to={'/dashboard/add-patient-prescription'}> 
                <img src={IMG4} style={{marginBottom:"5px",marginLeft:"5px"}} alt="blood inv icon"  />
                </Link>
             </div>
@@ -181,7 +181,7 @@ const handleDelete = (tbr,tbrId) => {
           
              
            <div style={{backgroundColor: '#E5EEF9', padding:"0.1rem",border:'4.5px solid #4C4E37',borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}}>
-             <Link to={'/dashboard/add-patient-radiology'}>  
+             <Link to={'/dashboard/add-patient-referral'}>  
                <img src={IMG5} style={{marginBottom:"5px"}} alt="radiology icon"  />
                </Link> 
           </div> 

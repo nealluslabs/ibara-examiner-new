@@ -116,9 +116,9 @@ const SubSectionCard = ({data,index,user}) => {
     <div className={classes.row}>
       <div className={classes.text}>
         <div style={{ color: 'black' }}>
-          <b>{ `${index + 1}.) `/*data.id*/} {data && data.title} </b>
+          <b style={{color:"black"}}>{ `${index + 1}.) `/*data.id*/} {data && data.title} </b>
         </div>{' '}
-        <span style={{ marginLeft: '20px' }}>{data && data.body}</span>
+        <span style={{ marginLeft: '20px' ,color:"black"}}>{data && data.body}</span>
       </div>
 
       <div className={classes.buttonSpacer}>

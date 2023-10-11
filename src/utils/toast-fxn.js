@@ -3,6 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 export const notifySuccessFxn = (message) =>
 toast.success(message, {
   position: 'bottom-right',
+  theme:"dark",
   autoClose: 3000,
   hideProgressBar: false,
   closeOnClick: true,
@@ -15,6 +16,7 @@ export const notifyErrorFxn = (message) =>
 toast.error(message, {
   position: 'bottom-right',
   autoClose: 3000,
+  theme:"dark",
   hideProgressBar: false,
   closeOnClick: true,
   pauseOnHover: true,

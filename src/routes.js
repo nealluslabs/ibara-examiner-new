@@ -65,6 +65,9 @@ import AddPatientHistory from './pages/AddPatientHistory';
 import AddPatientReferral from './pages/AddPatientReferral';
 import AddPatientPrescription from './pages/AddPatientPrescription';
 import AddPatientECG from './pages/AddPatientECG';
+import AddConditionsRadiology from './pages/AddCondiitonsRadiology';
+import AddConditionsReferral from './pages/AddCondiitonsReferral';
+import AddConditionsBloodInv from './pages/AddConditionsBloodInv';
 
 export default function Router() {
   const routes = useRoutes([
@@ -115,7 +118,11 @@ export default function Router() {
         { path: 'add-patient-prescription', element: <AddPatientPrescription/> },
         { path: 'add-patient-referral', element: <AddPatientReferral/> },
 
+        { path: 'add-conditions-bloodinv', element: <AddConditionsBloodInv/> },
+        { path: 'add-conditions-radiology', element: <AddConditionsRadiology/> },
+        { path: 'add-conditions-referral', element: <AddConditionsReferral/> },
 
+     
 
 
         { path: 'edit-patient', element: <EditTeacher /> },
