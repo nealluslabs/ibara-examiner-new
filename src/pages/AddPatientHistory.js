@@ -2,7 +2,7 @@ import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,
 import { useRef, useState} from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
-import { addTeacher} from 'src/redux/actions/group.action';
+import { addTeacher, fetchPatientProcessSteps} from 'src/redux/actions/group.action';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { notifyErrorFxn } from 'src/utils/toast-fxn';
@@ -59,33 +59,25 @@ function AddPatientHistory() {
 
 
   const addObject ={
-    firstName,
-    lastName,
-    history,
-    screenTime,
-    icon,
-    age:Number(age) && Number(age),
-    complaint,
-    complaintId
-  }
+    ...patientProcessSteps,
+      history,
+    }
 
-  const addThisTeacher = async(addObject,navigate) => {
+  const addToPatientProcess = async(addObject,navigate,navigateUrl)=> {
     
-    if(!firstName||!lastName||!history || !screenTime ||!icon||!complaint||!age ){
+    if(!history ){
       notifyErrorFxn("Please make sure to fill in all fields.")
     }
     else{
 
     setLoading(true)
-    dispatch(addTeacher(addObject,navigate))
+    dispatch(fetchPatientProcessSteps(addObject,navigate,navigateUrl))
    
-    // console.log("identity is",identity)
-    // console.log("update this subject is updating.........")
+    
     setTimeout(()=>{setLoading(false)},1800)
     
   } 
   }
- 
 
 
   return (
@@ -136,8 +128,8 @@ function AddPatientHistory() {
        multiline
        rows={14}
        /*maxRows={2}*/
-       value= {firstName}
-       onChange = {(e)=>{setFirstName(e.target.value)}}
+       value= {history}
+       onChange = {(e)=>{setHistory(e.target.value)}}
        style={{position:"relative",left:"-10%",backgroundColor:"#FFFFFF",borderRadius:"3rem",height:"100%",width:"120%"}}
       // InputProps={style={borderRadius:"3rem"}}
       InputProps={{
@@ -162,7 +154,7 @@ function AddPatientHistory() {
     Back
   </Button>
  
-  <Button   variant="contained" onClick={() => {navigate('/dashboard/add-patient-bloodinv') }}
+  <Button   variant="contained" onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/add-patient-bloodInv') }}
   style={{ backgroundColor: "#000000"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >

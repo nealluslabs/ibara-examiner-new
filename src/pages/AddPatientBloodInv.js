@@ -2,7 +2,7 @@ import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,
 import { useRef, useState} from 'react';
 import { useNavigate,useLocation, Link } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
-import { addTeacher} from 'src/redux/actions/group.action';
+import { addTeacher,fetchPatientProcessSteps} from 'src/redux/actions/group.action';
 import {CardMedia,CssBaseline,FormControlLabel, Checkbox, makeStyles, Chip} from '@material-ui/core';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,6 +26,15 @@ function AddPatientBloodInv() {
 
   const [bloodInv,setBloodInv] = useState([])
   const [bloodInvId,setBloodInvId] =  useState([])
+
+  const [bloodInvCategory,setBloodInvCategory] = useState('')
+  const [bloodInvCategoryId,setBloodInvCategoryId] = useState('')
+ 
+  const [bloodInvTestArray,setBloodInvTestArray] = useState([])
+  const [bloodInvTestIdArray,setBloodInvTestIdArray] = useState('')
+  const [bloodInvTestIdFake,setBloodInvTestIdFake] = useState('')
+
+  const [bloodInvResponseTime,setBloodInvResponseTime]= useState('')
 
   const [selectedFile, setSelectedFile] = useState({selectedFile: [], selectedFileName: []});
   const [file,setFile] = useState('')
@@ -78,10 +87,13 @@ const handleDelete = (tbr,tbrId) => {
   const { complaints } = useSelector((state) => state.jobs);
   const [complaintArr, setComplaintArr] = useState(complaints?complaints:[]/*teachers*/);
   
-  console.log("user details are:",user)
 
+
+  const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state) => state.group);
+  const { patientProcessSteps } = useSelector((state) => state.group);
 
   const addObject ={
+    ...patientProcessSteps,
     firstName,
     lastName,
     history,
@@ -92,18 +104,17 @@ const handleDelete = (tbr,tbrId) => {
     complaintId
   }
 
-  const addThisTeacher = async(addObject,navigate) => {
+  const addToPatientProcess = async(addObject,navigate,navigateUrl)=> {
     
-    if(!firstName||!lastName||!history || !screenTime ||!icon||!complaint||!age ){
+    if(true === false ){
       notifyErrorFxn("Please make sure to fill in all fields.")
     }
     else{
 
     setLoading(true)
-    dispatch(addTeacher(addObject,navigate))
+    dispatch(fetchPatientProcessSteps(addObject,navigate,navigateUrl))
    
-    // console.log("identity is",identity)
-    // console.log("update this subject is updating.........")
+    
     setTimeout(()=>{setLoading(false)},1800)
     
   } 
@@ -122,13 +133,45 @@ const handleDelete = (tbr,tbrId) => {
     const returnArray =  prescriptionString.split(',')
    
     const finalReturnArray = returnArray.map((item)=>(item.trim()))
-    //setPrescriptionArray(finalReturnArray)
+    
 
     setBloodInv([...finalReturnArray])
      
     console.log("our trimmed return array", finalReturnArray)
    
      }
+
+
+     const bloodInv1Setup = (e)=>{
+
+
+      let   targetCategory =  categoryVideos.filter((item)=>(item.uid === e.target.value )).length > 0? categoryVideos.filter((item)=>(item.uid === e.target.value )):[{title:null}]
+     
+         setBloodInvCategory(targetCategory[0].title)
+       
+        /* setState({
+           ...state,
+           bloodInv2: '',
+         });*/
+     
+        /* setBloodInv2([])
+         setBloodInv2IdArray([])*/
+        
+     
+     
+       }
+     
+       const bloodInv2Setup = (e)=>{
+     
+         let   targetCategoryTest =  allTreatmentCategories.filter((item)=>(item.uid === e.target.value )).length > 0 ? allTreatmentCategories.filter((item)=>(item.uid === e.target.value )):[{title:null}]
+        
+       if(!bloodInvTestArray.includes(targetCategoryTest[0].title)){  setBloodInvTestArray([...bloodInvTestArray,targetCategoryTest[0].title])}
+     
+       if(!bloodInvTestIdArray.includes(targetCategoryTest[0].uid)){  setBloodInvTestIdArray([...bloodInvTestIdArray,targetCategoryTest[0].uid])}
+         console.log("bloodInvTestArray is set as",bloodInvTestArray )
+      
+      
+       }
  
 
 
@@ -181,16 +224,20 @@ const handleDelete = (tbr,tbrId) => {
         
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={icon}
-          label="icon"
+          value={bloodInvCategoryId}
+          label="blood inv category"
           onChange={(event) => {
-            setIcon(event.target.value);
+            setBloodInvCategoryId(event.target.value);
+            bloodInv1Setup(event.target.value)
           }}
         >
        
-            <MenuItem style={{color:"black"}} value={"Male"}>{"Male"}</MenuItem>
-            <MenuItem style={{color:"black"}} value={"Female"}>{"Female"}</MenuItem>
-            <MenuItem style={{color:"black"}} value={"Kid"}>{"Kid"}</MenuItem>
+             
+       {categoryVideos && categoryVideos.length >0 && categoryVideos.filter((me)=>(me.treatmentId === '7aHB3TreYQYh3bzBS65K')).length > 0 ? categoryVideos.filter((me)=>(me.treatmentId === '7aHB3TreYQYh3bzBS65K')).map((kiwi)=>(
+  <MenuItem style={{color:"black",display:"block"}} value={kiwi.uid}>{kiwi.title}</MenuItem>
+)):
+<MenuItem style={{color:"black",display:"block"}}  value={null}>{"No items listed!"}</MenuItem>
+}
        
        
         </Select>
@@ -216,18 +263,28 @@ const handleDelete = (tbr,tbrId) => {
 
                 </Grid>
        
-          <Grid item xs={7}>
-            <TextField
-            style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
-            fullWidth
-            placeholder=" Add last name"
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {lastName}
-            onChange = {(e)=>{bloodInvHandler(e.target.value)}}
-            
-            />
+                <Grid item xs={7}>
+          <Select
+         style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+        
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={bloodInvTestIdFake}
+          label="blood inv category"
+          onChange={(event) => {
+            setBloodInvTestIdFake(event.target.value)
+            bloodInv2Setup(event);
+
+          }}
+        >
+       
+       {allTreatmentCategories && allTreatmentCategories.length >0 && allTreatmentCategories.filter((me)=>(me.treatmentCategoryId === bloodInvCategoryId)).length > 0 ? allTreatmentCategories.filter((me)=>(me.treatmentCategoryId === bloodInvCategoryId)).map((kiwi)=>(
+  <MenuItem style={{color:"black",display:"block"}} value={kiwi.uid}>{kiwi.title}</MenuItem>
+)):
+<MenuItem style={{color:"black",display:"block"}}  value={null}>{"No items listed!"}</MenuItem>
+}
+       
+        </Select>
             
             
           </Grid>
@@ -250,12 +307,12 @@ const handleDelete = (tbr,tbrId) => {
 
          
           <Grid item xs={7}>
-{bloodInv  &&
+   {bloodInvTestArray  &&
      <div style={{padding: '10px', border: '1px solid #00000033',width:"100%" }}>
               <> 
                  &nbsp; 
-               {  bloodInv.map((chipItem,index)=>(
-              <Chip  style={{backgroundColor:"#081B85"}} label={chipItem} onClick={()=>{}} onDelete={()=>{handleDelete(chipItem,bloodInvId[index])}} />
+               {  bloodInvTestArray.map((chipItem,index)=>(
+              <Chip  style={{backgroundColor:"#081B85"}} label={chipItem} onClick={()=>{}} onDelete={()=>{handleDelete(chipItem,bloodInvTestIdArray[index])}} />
               ))
                 }
 
@@ -289,10 +346,10 @@ const handleDelete = (tbr,tbrId) => {
             variant="outlined"
             multiline
             maxRows={2}
-            value= {age}
+            value= {bloodInvResponseTime}
             onChange = {(e)=>{
               if(Number(e.target.value) ||e.target.value=== ''){
-              setAge(e.target.value)}
+              setBloodInvResponseTime(e.target.value)}
               }
             }
             
@@ -354,7 +411,7 @@ const handleDelete = (tbr,tbrId) => {
     Back
   </Button>
  
-  <Button   variant="contained" onClick={() => {navigate('/dashboard/add-patient-radiology') }}
+  <Button   variant="contained" onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/add-patient-radiology')}}
   style={{ backgroundColor: "#000000"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >

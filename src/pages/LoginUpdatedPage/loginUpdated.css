@@ -91,7 +91,7 @@ position: relative;
 .intro-box {
     margin:0 auto;
     margin-top: 72%;
-    width:90%;
+    width:90% !important;
     background:rgba(0,0,0,0.1);
     backdrop-filter:blur(15px);
     color: white;
@@ -267,6 +267,8 @@ border-bottom-right-radius:2rem ;
 width: 50%;*/
 flex:1;
 position: relative;
+margin-top: -2rem;
+margin-bottom: 2rem;
 }
 
 .barcode {

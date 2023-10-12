@@ -68,7 +68,7 @@ function LoginForm(props) {
 
 
   return (
-    <div  style={{paddingLeft: '15%', paddingRight: '15%', scale:"0.85"}}>
+    <div  style={{paddingLeft: '15%', paddingRight: '15%', scale:"0.85",color:"black"}}>
         {error && <div><Alert
         severity="error" color="error"
         action={
