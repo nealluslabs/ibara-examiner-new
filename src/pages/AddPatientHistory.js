@@ -52,8 +52,10 @@ function AddPatientHistory() {
   const { user } = useSelector((state) => state.auth);
   const { complaints } = useSelector((state) => state.jobs);
   const [complaintArr, setComplaintArr] = useState(complaints?complaints:[]/*teachers*/);
+
+  const { patientProcessSteps } = useSelector((state) => state.group);
   
-  console.log("user details are:",user)
+  console.log("patint Process steps-->:",patientProcessSteps)
 
 
   const addObject ={

@@ -2,7 +2,7 @@ import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,
 import { useRef, useState} from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
-import { addTeacher} from 'src/redux/actions/group.action';
+import { addTeacher, fetchPatientProcessSteps} from 'src/redux/actions/group.action';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { notifyErrorFxn } from 'src/utils/toast-fxn';
@@ -35,13 +35,13 @@ function AddPatientBioData() {
   const [body,setBody] = useState('')
   const [imageUrl,setImageUrl] =useState('')
 
-  const [screenTime,setScreenTime] = useState('')
-  const [history,setHistory] = useState()
+
+ 
   const [firstName,setFirstName] =useState()
   const [lastName,setLastName] =useState()
   const [icon,setIcon]=useState()
   const [age,setAge]=useState('')
-  const [complaint,setComplaint] =useState()
+  const [complaint,setComplaint] =useState('')
   const [complaintId,setComplaintId] =useState()
  
 
@@ -50,32 +50,32 @@ function AddPatientBioData() {
  const [teachersArr,setTeacherArr]=useState([...teachers.map((item)=>(item.firstName + " " + item.lastName))])
 
   const { user } = useSelector((state) => state.auth);
+  const { patientProcessSteps } = useSelector((state) => state.group);
   const { complaints } = useSelector((state) => state.jobs);
   const [complaintArr, setComplaintArr] = useState(complaints?complaints:[]/*teachers*/);
   
-  console.log("user details are:",user)
+
 
 
   const addObject ={
+  ...patientProcessSteps,
     firstName,
     lastName,
-    history,
-    screenTime,
     icon,
     age:Number(age) && Number(age),
-    complaint,
-    complaintId
+    complaint
+    
   }
 
-  const addThisTeacher = async(addObject,navigate) => {
+  const addToPatientProcess = async(addObject,navigate,navigateUrl) => {
     
-    if(!firstName||!lastName||!history || !screenTime ||!icon||!complaint||!age ){
+    if(!firstName||!lastName ||!icon||!complaint||!age ){
       notifyErrorFxn("Please make sure to fill in all fields.")
     }
     else{
 
     setLoading(true)
-    dispatch(addTeacher(addObject,navigate))
+    dispatch(fetchPatientProcessSteps(addObject,navigate,navigateUrl))
    
     // console.log("identity is",identity)
     // console.log("update this subject is updating.........")
@@ -259,25 +259,22 @@ function AddPatientBioData() {
           </Grid>
 
           <Grid item xs={7}>
-          <Select
-        style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={complaint}
-          label="complaint"
-          onChange={(event) => {
-            setComplaint(event.target.value.complaint);
-            setComplaintId(event.target.value.uid);
-          }}
-        >
-       {complaintArr.map((item)=>(
-
-<MenuItem style={{color:"black"}} value={item}>{item.complaint}</MenuItem>
-
-)
-)}
-       
-        </Select>
+          <TextField
+            
+            fullWidth
+            style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem"}}
+            placeholder=" Add age"
+            variant="outlined"
+            multiline
+            maxRows={2}
+            value= {complaint}
+            onChange = {(e)=>{
+             
+              setComplaint(e.target.value)
+              }
+            }
+            
+            />
           </Grid>
         </Grid>
 
@@ -370,7 +367,7 @@ function AddPatientBioData() {
     Back
   </Button>
  
-  <Button   variant="contained" onClick={() => {navigate('/dashboard/add-patient-arrival') }}
+  <Button   variant="contained" onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/add-patient-arrival') }}
   style={{ backgroundColor: "#000000"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >

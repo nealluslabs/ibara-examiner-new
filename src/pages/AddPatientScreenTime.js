@@ -2,7 +2,7 @@ import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,
 import { useRef, useState} from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
-import { addTeacher} from 'src/redux/actions/group.action';
+import { addTeacher, fetchPatientProcessSteps} from 'src/redux/actions/group.action';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { notifyErrorFxn } from 'src/utils/toast-fxn';
@@ -36,14 +36,7 @@ function AddPatientScreenTime() {
   const [imageUrl,setImageUrl] =useState('')
 
   const [screenTime,setScreenTime] = useState('')
-  const [history,setHistory] = useState()
-  const [firstName,setFirstName] =useState()
-  const [lastName,setLastName] =useState()
-  const [icon,setIcon]=useState()
-  const [age,setAge]=useState('')
-  const [complaint,setComplaint] =useState()
-  const [complaintId,setComplaintId] =useState()
- 
+  
 
   const { teachers } = useSelector((state) => state.jobs);
 
@@ -51,38 +44,30 @@ function AddPatientScreenTime() {
 
   const { user } = useSelector((state) => state.auth);
   const { complaints } = useSelector((state) => state.jobs);
-  const [complaintArr, setComplaintArr] = useState(complaints?complaints:[]/*teachers*/);
-  
-  console.log("user details are:",user)
+
+  const { patientProcessSteps } = useSelector((state) => state.group);
 
 
   const addObject ={
-    firstName,
-    lastName,
-    history,
-    screenTime,
-    icon,
-    age:Number(age) && Number(age),
-    complaint,
-    complaintId
-  }
-
-  const addThisTeacher = async(addObject,navigate) => {
-    
-    if(!firstName||!lastName||!history || !screenTime ||!icon||!complaint||!age ){
-      notifyErrorFxn("Please make sure to fill in all fields.")
+    ...patientProcessSteps,
+      screenTime:Number(screenTime) && Number(screenTime),
     }
-    else{
 
-    setLoading(true)
-    dispatch(addTeacher(addObject,navigate))
-   
-    // console.log("identity is",identity)
-    // console.log("update this subject is updating.........")
-    setTimeout(()=>{setLoading(false)},1800)
+    const addToPatientProcess = async(addObject,navigate,navigateUrl)=> {
     
-  } 
-  }
+      if(!screenTime ){
+        notifyErrorFxn("Please make sure to fill in all fields.")
+      }
+      else{
+  
+      setLoading(true)
+      dispatch(fetchPatientProcessSteps(addObject,navigate,navigateUrl))
+     
+      
+      setTimeout(()=>{setLoading(false)},1800)
+      
+    } 
+    }
  
 
 
@@ -133,8 +118,13 @@ function AddPatientScreenTime() {
             variant="outlined"
             multiline
             maxRows={2}
-            value= {firstName}
-            onChange = {(e)=>{setFirstName(e.target.value)}}
+            value= {screenTime}
+            onChange = {(e)=>{
+              if(Number(e.target.value) ||e.target.value=== ''){
+              setScreenTime(e.target.value)}
+              }
+            }
+
             style={{position:"relative",left:"-10%",backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
             />
             
@@ -155,7 +145,7 @@ function AddPatientScreenTime() {
     Back
   </Button>
  
-  <Button   variant="contained" onClick={() => {navigate('/dashboard/add-patient-history') }}
+  <Button   variant="contained"onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/add-patient-history') }}
   style={{ backgroundColor: "#000000"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >

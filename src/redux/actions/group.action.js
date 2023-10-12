@@ -9,7 +9,7 @@ import { isItLoading, saveAllGroup ,saveEmployeer,
         saveChapterSessions,saveChapterQuizzes,
         saveSubjectInfo,saveLessonInfo,saveQuizInfo,
         saveChapterInfo,saveTeacherInfo,
-        saveComplaintInfo,saveAllTreatmentCategories} from '../reducers/group.slice';
+        saveComplaintInfo,saveAllTreatmentCategories, savePatientProcessSteps} from '../reducers/group.slice';
 import firebase from "firebase/app";
 
 import { getTeachers } from './job.action';
@@ -1300,6 +1300,22 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
 
 
 
+/*========== saving and updating our large process steps object ABOVE HERE ======================= */
+
+export const fetchPatientProcessSteps = (stepsObject,navigate,navigateUrl) => async (dispatch) => {
+ 
+new Promise((resolve,reject)=>{
+    resolve(dispatch(savePatientProcessSteps(stepsObject)));
+  }
+).then(()=>{
+  navigate(navigateUrl)
+}).catch((error)=>{
+  notifyErrorFxn(error)
+})
+};
+
+
+/*=============== saving and updating our large process steps object ABOVE ===================== */
  
 
 

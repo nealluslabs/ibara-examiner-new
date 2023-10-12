@@ -2,7 +2,7 @@ import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,
 import { useRef, useState} from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
-import { addTeacher} from 'src/redux/actions/group.action';
+import { addTeacher, fetchPatientProcessSteps} from 'src/redux/actions/group.action';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { notifyErrorFxn } from 'src/utils/toast-fxn';
@@ -35,50 +35,39 @@ function AddPatientArrival() {
   const [body,setBody] = useState('')
   const [imageUrl,setImageUrl] =useState('')
 
-  const [screenTime,setScreenTime] = useState('')
-  const [history,setHistory] = useState()
-  const [firstName,setFirstName] =useState()
-  const [lastName,setLastName] =useState()
-  const [icon,setIcon]=useState()
-  const [age,setAge]=useState('')
-  const [complaint,setComplaint] =useState()
-  const [complaintId,setComplaintId] =useState()
- 
+  const [arrivalTime,setArrivalTime] = useState('')
+  
 
   const { teachers } = useSelector((state) => state.jobs);
 
  const [teachersArr,setTeacherArr]=useState([...teachers.map((item)=>(item.firstName + " " + item.lastName))])
 
   const { user } = useSelector((state) => state.auth);
+
+  const { patientProcessSteps } = useSelector((state) => state.group);
   const { complaints } = useSelector((state) => state.jobs);
+
   const [complaintArr, setComplaintArr] = useState(complaints?complaints:[]/*teachers*/);
   
-  console.log("user details are:",user)
+  console.log("patient process steps are:",patientProcessSteps)
 
 
   const addObject ={
-    firstName,
-    lastName,
-    history,
-    screenTime,
-    icon,
-    age:Number(age) && Number(age),
-    complaint,
-    complaintId
-  }
+    ...patientProcessSteps,
+      arrivalTime:Number(arrivalTime) && Number(arrivalTime),
+    }
 
-  const addThisTeacher = async(addObject,navigate) => {
+  const addToPatientProcess = async(addObject,navigate,navigateUrl)=> {
     
-    if(!firstName||!lastName||!history || !screenTime ||!icon||!complaint||!age ){
+    if(!arrivalTime ){
       notifyErrorFxn("Please make sure to fill in all fields.")
     }
     else{
 
     setLoading(true)
-    dispatch(addTeacher(addObject,navigate))
+    dispatch(fetchPatientProcessSteps(addObject,navigate,navigateUrl))
    
-    // console.log("identity is",identity)
-    // console.log("update this subject is updating.........")
+    
     setTimeout(()=>{setLoading(false)},1800)
     
   } 
@@ -135,8 +124,14 @@ function AddPatientArrival() {
             variant="outlined"
             multiline
             maxRows={2}
-            value= {firstName}
-            onChange = {(e)=>{setFirstName(e.target.value)}}
+            value= {arrivalTime}
+            onChange = {(e)=>{
+              if(Number(e.target.value) ||e.target.value=== ''){
+              setArrivalTime(e.target.value)}
+              }
+            }
+
+
             style={{position:"relative",left:"-10%",backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
             />
             
@@ -148,74 +143,6 @@ function AddPatientArrival() {
        
 
 
-       
-     {/*
-         <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             SCREEN TIME
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={6}>
-            <TextField
-            fullWidth
-            placeholder=" add screen time"
-            variant="outlined"
-            multiline
-            type="number"
-            maxRows={2}
-            value= {screenTime}
-            onChange = {(e)=>{
-              if(Number(e.target.value)|| e.target.value=== ''){
-              setScreenTime(e.target.value)
-              }
-            }}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-
-
-
-       
-      
-
-
-
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             HISTORY
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={6}>
-            <TextField
-            fullWidth
-            placeholder=" Medical history"
-            variant="outlined"
-            multiline
-            rows={8}
-            value= {history}
-            onChange = {(e)=>{setHistory(e.target.value)}}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-       */}
 
    
         
@@ -237,7 +164,7 @@ function AddPatientArrival() {
     Back
   </Button>
  
-  <Button   variant="contained" onClick={() => {navigate('/dashboard/add-patient-screen') }}
+  <Button   variant="contained" onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/add-patient-screen') }}
   style={{ backgroundColor: "#000000"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >
