@@ -94,8 +94,9 @@ const allIncubatorVideos = data?.length ? (
 
         <Button variant="contained" style={{maxHeight: '45px', minWidth: '145px', backgroundColor: 'black',position:"relative",left:"-5px",top:"5px" }}
               onClick={() => {
-                console.log("will push later")
-                /* navigate('/dashboard/add-treatment')*/
+               
+                 navigate('/dashboard/add-conditions-bloodinv')
+                
               }}>
                 {"ADD TREATMENT"}
             </Button>
