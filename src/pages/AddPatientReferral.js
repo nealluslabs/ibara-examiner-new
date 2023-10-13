@@ -28,33 +28,12 @@ function AddPatientReferral() {
   
   const dispatch = useDispatch();
 
-  const [bloodInv,setBloodInv] = useState([])
-  const [bloodInvId,setBloodInvId] =  useState([])
 
 
   const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state) => state.group);
   const { patientProcessSteps ,isItLoading} = useSelector((state) => state.group);
  
   console.log("our patient process steps->",patientProcessSteps)
-
-
-
-
-
-
-
-
-
-const handleDelete = (tbr,tbrId) => {
-    
-
-  let placeholder =   referralArray.filter((item)=>(item !== tbr))
- let placeholder2 =   referralIdArray.filter((item)=>(item !== tbrId))
-
-
-   setReferralArray([...placeholder])
-  setReferralIdArray([...placeholder2])
-};
 
 
   const [loading,setLoading] = useState(isItLoading)
@@ -74,8 +53,8 @@ const handleDelete = (tbr,tbrId) => {
 
  
  
-  const [referralArray,setReferralArray] = useState([])
-  const [referralIdArray,setReferralIdArray] = useState('')
+  const [referralArray,setReferralArray] = useState(patientProcessSteps && patientProcessSteps.referralArray?patientProcessSteps.referralArray:[])
+  const [referralIdArray,setReferralIdArray] = useState(patientProcessSteps && patientProcessSteps.referralIdArray?patientProcessSteps.referralIdArray:[])
   const [bloodInvTestIdFake,setReferralIdFake] = useState('')
 
 
@@ -86,7 +65,7 @@ const handleDelete = (tbr,tbrId) => {
   if(!referralArray.includes(targetCategoryTest[0].title)){  setReferralArray([...referralArray,targetCategoryTest[0].title])}
 
   if(!referralIdArray.includes(targetCategoryTest[0].uid)){  setReferralIdArray([...referralIdArray,targetCategoryTest[0].uid])}
-    console.log("referralArray is set as",referralArray )
+    console.log("referralArray is set as-->",referralArray )
  
  
   }
@@ -97,6 +76,18 @@ const handleDelete = (tbr,tbrId) => {
     referralArray,
     referralIdArray
   }
+
+
+  const handleDelete = (tbr,tbrId) => {
+    
+
+    let placeholder =   referralArray.filter((item)=>(item !== tbr))
+   let placeholder2 =   referralIdArray.filter((item)=>(item !== tbrId))
+  
+  
+     setReferralArray([...placeholder])
+    setReferralIdArray([...placeholder2])
+  };
 
 
   useEffect(()=>{
@@ -164,9 +155,9 @@ const handleDelete = (tbr,tbrId) => {
    
              
              <div style={{backgroundColor: "#A160E4",padding:"0.1rem", borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}}>
-             <Link to={'/dashboard/add-patient-prescription'}> 
-               <img src={IMG4} style={{marginBottom:"5px",marginLeft:"5px"}} alt="blood inv icon"  />
-               </Link>
+              {/*<Link to={'/dashboard/add-patient-prescription'}>*/} 
+               <img src={IMG4} style={{marginBottom:"5px",marginLeft:"5px"}} alt="prescription icon"  />
+               {/*</Link>*/}
             </div>
 
          
@@ -174,9 +165,9 @@ const handleDelete = (tbr,tbrId) => {
           
              
            <div style={{backgroundColor: '#E5EEF9', padding:"0.1rem",border:'4.5px solid #4C4E37',borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}}>
-             <Link to={'/dashboard/add-patient-referral'}>  
-               <img src={IMG5} style={{marginBottom:"5px"}} alt="radiology icon"  />
-               </Link> 
+             {/*<Link to={'/dashboard/add-patient-referral'}> */} 
+               <img src={IMG5} style={{marginBottom:"5px"}} alt="referral icon"  />
+               {/*</Link> */}
           </div> 
 
            

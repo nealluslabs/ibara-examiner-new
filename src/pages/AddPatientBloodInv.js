@@ -19,7 +19,7 @@ import DEFAULTIMG from 'src/assets/images/cooler-img.png'
 function AddPatientBloodInv() {
   const navigate = useNavigate();
   const location = useLocation()
- // console.log("location is",location.state.levelName,location.state.uid)
+  
 
  
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ function AddPatientBloodInv() {
   const [bloodInvResponseTime,setBloodInvResponseTime]= useState(patientProcessSteps &&patientProcessSteps.bloodInvResponseTime?patientProcessSteps.bloodInvResponseTime:'')
 
   const [selectedFile, setSelectedFile] = useState({selectedFile:patientProcessSteps &&patientProcessSteps.bloodInvAnswerImage?patientProcessSteps.bloodInvAnswerImage:[], selectedFileName:patientProcessSteps &&patientProcessSteps.bloodInvAnswerImage?patientProcessSteps.bloodInvAnswerImage.name: []});
-  const [file,setFile] = useState(patientProcessSteps && patientProcessSteps.bloodInvAnswerImage?URL.createObjectURL(patientProcessSteps.bloodInvAnswerImage):null)
+  const [file,setFile] = useState(patientProcessSteps && patientProcessSteps.bloodInvAnswerImage?patientProcessSteps.bloodInvAnswerImage:null)
 
 
   const handleselectedFile = event => {
@@ -182,10 +182,10 @@ const handleDelete = (tbr,tbrId) => {
               >
                   
                  
-                  <Link to={'/dashboard/add-patient-bloodinv'}>   
+                 {/* <Link to={'/dashboard/add-patient-bloodinv'}> */}  
                     <img src={IMG1} style={{marginBottom:"5px",marginLeft:"5px"}} alt="blood inv icon"  />
                  
-                    </Link>
+                  { /* </Link>*/}
                 </Grid>
     
        
@@ -227,10 +227,10 @@ const handleDelete = (tbr,tbrId) => {
         <Grid item xs={1.5} style={{backgroundColor: '#21D0C3', borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}} 
               >
                   
-                  <Link to={'/dashboard/add-patient-radiology'}>
+                 {/* <Link to={'/dashboard/add-patient-radiology'}>*/}
                     
                     <img src={IMG2} style={{marginBottom:"5px"}} alt="radiology icon"  />
-                    </Link>
+                    {/*</Link>*/}
 
                 </Grid>
        
@@ -268,10 +268,10 @@ const handleDelete = (tbr,tbrId) => {
         <Grid item xs={1.5} style={{backgroundColor: '#00B8D4', borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}} 
               >
                   
-                  <Link to={'/dashboard/add-patient-ecg'}>
+                  {/*<Link to={'/dashboard/add-patient-ecg'}>*/}
                     
                     <img src={IMG3} style={{marginBottom:"10px"}} alt="ecg icon"  />
-                    </Link>  
+                   {/*</Link>  */}
 
                 </Grid>
           

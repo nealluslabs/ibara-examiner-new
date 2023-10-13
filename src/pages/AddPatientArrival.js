@@ -16,26 +16,15 @@ function AddPatientArrival() {
   const location = useLocation()
  // console.log("location is",location.state.levelName,location.state.uid)
 
-  const [file, setFile] = useState();
-  const [file2, setFile2] = useState();
-  const [fileSize, setFileSize] = useState();
-  const [fileSize2, setFileSize2] = useState();
-  const [selectedFile, setSelectedFile] = useState({selectedFile: [], selectedFileName: []});
-  const [selectedFile2, setSelectedFile2] = useState({selectedFile2: [], selectedFileName2: []});
+ 
   const dispatch = useDispatch();
-
-  const [newPassword,setNewPassword] =useState('')
-  const [confirmPassword,setConfirmPassword] =useState('')
-  const [companySize,setCompanySize] =useState('')
 
 
   const [loading,setLoading] = useState(false)
 
-  const [level,setLevel] = useState('')
-  const [body,setBody] = useState('')
-  const [imageUrl,setImageUrl] =useState('')
+  
 
-  const [arrivalTime,setArrivalTime] = useState('')
+  
   
 
   const { teachers } = useSelector((state) => state.jobs);
@@ -47,7 +36,9 @@ function AddPatientArrival() {
   const { patientProcessSteps } = useSelector((state) => state.group);
   const { complaints } = useSelector((state) => state.jobs);
 
-  const [complaintArr, setComplaintArr] = useState(complaints?complaints:[]/*teachers*/);
+
+
+  const [arrivalTime,setArrivalTime] = useState(patientProcessSteps && patientProcessSteps.arrivalTime?patientProcessSteps.arrivalTime:"")
   
   console.log("patient process steps are:",patientProcessSteps)
 

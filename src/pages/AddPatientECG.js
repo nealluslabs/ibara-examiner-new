@@ -24,11 +24,12 @@ function AddPatientECG() {
  
   const dispatch = useDispatch();
 
+  const { patientProcessSteps } = useSelector((state) => state.group);
 
-  const [ecgResponseTime,setEcgResponseTime]= useState('')
+  const [ecgResponseTime,setEcgResponseTime]= useState(patientProcessSteps &&patientProcessSteps.ecgResponseTime?patientProcessSteps.ecgResponseTime:'')
 
-  const [selectedFile, setSelectedFile] = useState({selectedFile: [], selectedFileName: []});
-  const [file,setFile] = useState('')
+  const [selectedFile, setSelectedFile] = useState({selectedFile:patientProcessSteps &&patientProcessSteps.ecgAnswerImage?patientProcessSteps.ecgAnswerImage:[], selectedFileName:patientProcessSteps &&patientProcessSteps.ecgAnswerImage?patientProcessSteps.ecgAnswerImage.name: []});
+  const [file,setFile] = useState(patientProcessSteps && patientProcessSteps.ecgAnswerImage?patientProcessSteps.ecgAnswerImage:null)
 
 
   const handleselectedFile = event => {
@@ -62,7 +63,7 @@ function AddPatientECG() {
   
 
 
-  const { patientProcessSteps } = useSelector((state) => state.group);
+ 
 
   const addObject ={
     ...patientProcessSteps,

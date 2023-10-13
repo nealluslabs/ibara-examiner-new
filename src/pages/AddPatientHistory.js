@@ -35,15 +35,9 @@ function AddPatientHistory() {
   const [body,setBody] = useState('')
   const [imageUrl,setImageUrl] =useState('')
 
-  const [screenTime,setScreenTime] = useState('')
-  const [history,setHistory] = useState()
-  const [firstName,setFirstName] =useState()
-  const [lastName,setLastName] =useState()
-  const [icon,setIcon]=useState()
-  const [age,setAge]=useState('')
-  const [complaint,setComplaint] =useState()
-  const [complaintId,setComplaintId] =useState()
  
+ 
+
 
   const { teachers } = useSelector((state) => state.jobs);
 
@@ -54,6 +48,7 @@ function AddPatientHistory() {
   const [complaintArr, setComplaintArr] = useState(complaints?complaints:[]/*teachers*/);
 
   const { patientProcessSteps } = useSelector((state) => state.group);
+  const [history,setHistory] = useState(patientProcessSteps && patientProcessSteps.history?patientProcessSteps.history:"")
   
   console.log("patint Process steps-->:",patientProcessSteps)
 

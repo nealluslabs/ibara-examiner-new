@@ -28,31 +28,16 @@ function AddPatientPrescription() {
   
   const dispatch = useDispatch();
 
-  const [bloodInv,setBloodInv] = useState([])
-  const [bloodInvId,setBloodInvId] =  useState([])
 
-  const [selectedFile, setSelectedFile] = useState({selectedFile: [], selectedFileName: []});
-  const [file,setFile] = useState('')
+  const { patientProcessSteps } = useSelector((state) => state.group);
+  console.log("patient process steps so far--->:",patientProcessSteps)
 
-  const  [prescription,setPrescription] = useState([])
+  const  [prescription,setPrescription] = useState(patientProcessSteps && patientProcessSteps.prescription?patientProcessSteps.prescription:[])
 
 
-  const handleselectedFile = event => {
-    setSelectedFile({
-        selectedFile: event.target.files[0],
-        selectedFileName: event.target.files[0].name
-    });
 
-    setFile(URL.createObjectURL(event.target.files[0]));
-    
-};
 
-const bloodInvHandlerSub = (e)=>{
-  if(!bloodInv.includes(e.target.value)) {
-    setBloodInv([...bloodInv,e.target.value])
-   
-     }
-}
+
 
 
 const prescriptionHandler = (prescriptionString)=>{
@@ -69,8 +54,7 @@ const prescriptionHandler = (prescriptionString)=>{
    }
 
 
-   const { patientProcessSteps } = useSelector((state) => state.group);
-   console.log("patient process steps so far--->:",patientProcessSteps)
+
 
 
    const addObject ={
@@ -175,9 +159,9 @@ const prescriptionHandler = (prescriptionString)=>{
           
              
            <div style={{backgroundColor: '#E5EEF9', padding:"0.1rem",borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}}>
-             <Link to={'/dashboard/add-patient-referral'}>  
+             {/*<Link to={'/dashboard/add-patient-referral'}> */} 
                <img src={IMG5} style={{marginBottom:"5px"}} alt="referral icon"  />
-               </Link> 
+               {/*</Link> */}
           </div> 
 
            
@@ -192,7 +176,7 @@ const prescriptionHandler = (prescriptionString)=>{
        multiline
        //maxRows={2}
        rows={9}
-       value= {lastName}
+       value= {prescription.toString()}
        onChange = {(e)=>{prescriptionHandler(e.target.value)}}
        
        />

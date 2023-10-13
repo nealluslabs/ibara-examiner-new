@@ -25,20 +25,18 @@ function AddPatientRadiology() {
   
   const dispatch = useDispatch();
 
-  const [bloodInv,setBloodInv] = useState([])
-  const [bloodInvId,setBloodInvId] =  useState([])
-
-  const [radiologyCategory,setRadiologyCategory] = useState('')
-  const [radiologyCategoryId,setRadiologyCategoryId] = useState('')
+  const { patientProcessSteps } = useSelector((state) => state.group);
+  const [radiologyCategory,setRadiologyCategory] = useState(patientProcessSteps &&patientProcessSteps.radiologyCategory?patientProcessSteps.radiologyCategory:"")
+  const [radiologyCategoryId,setRadiologyCategoryId] = useState(patientProcessSteps &&patientProcessSteps.radiologyCategoryId?patientProcessSteps.radiologyCategoryId:"")
  
-  const [radiologyTestArray,setRadiologyTestArray] = useState([])
-  const [radiologyTestIdArray,setRadiologyTestIdArray] = useState([])
+  const [radiologyTestArray,setRadiologyTestArray] = useState(patientProcessSteps &&patientProcessSteps.radiologyTestArray?patientProcessSteps.radiologyTestArray:[])
+  const [radiologyTestIdArray,setRadiologyTestIdArray] = useState(patientProcessSteps &&patientProcessSteps.radiologyTestIdArray?patientProcessSteps.radiologyTestIdArray:[])
   const [radiologyTestIdFake,setRadiologyTestIdFake] = useState('')
 
-  const [radiologyResponseTime,setRadiologyResponseTime]= useState('')
+  const [radiologyResponseTime,setRadiologyResponseTime]= useState(patientProcessSteps &&patientProcessSteps.radiologyResponseTime?patientProcessSteps.radiologyResponseTime:'')
 
-  const [selectedFile, setSelectedFile] = useState({selectedFile: [], selectedFileName: []});
-  const [file,setFile] = useState('')
+  const [selectedFile, setSelectedFile] = useState({selectedFile:patientProcessSteps &&patientProcessSteps.radiologyAnswerImage?patientProcessSteps.radiologyAnswerImage:[], selectedFileName:patientProcessSteps &&patientProcessSteps.radiologyAnswerImage?patientProcessSteps.radiologyAnswerImage.name: []});
+  const [file,setFile] = useState(patientProcessSteps && patientProcessSteps.radiologyAnswerImage?patientProcessSteps.radiologyAnswerImage:null)
 
 
   const handleselectedFile = event => {
@@ -94,7 +92,7 @@ const handleDelete = (tbr,tbrId) => {
   const [complaintArr, setComplaintArr] = useState(complaints?complaints:[]/*teachers*/);
   
   const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state) => state.group);
-  const { patientProcessSteps } = useSelector((state) => state.group);
+  
 
 console.log("patient process steps so far--->",patientProcessSteps)
 
@@ -197,9 +195,9 @@ console.log("patient process steps so far--->",patientProcessSteps)
          >
              
             
-             <Link to={'/dashboard/add-patient-bloodinv'}> 
+             {/*<Link to={'/dashboard/add-patient-bloodinv'}> */}
                <img src={IMG1} style={{marginBottom:"5px",marginLeft:"5px"}} alt="blood inv icon"  />
-               </Link>
+               {/*</Link>*/}
 
            </Grid>
   
@@ -243,9 +241,9 @@ console.log("patient process steps so far--->",patientProcessSteps)
    <Grid item xs={1.5} style={{backgroundColor: '#21D0C3',border:'4.5px solid #4C4E37', borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}}  >
              
             
-             <Link to={'/dashboard/add-patient-radiology'}>  
+             {/*<Link to={'/dashboard/add-patient-radiology'}>*/} 
                <img src={IMG2} style={{marginBottom:"5px"}} alt="radiology icon"  />
-              </Link> 
+              {/*</Link> */}
 
            </Grid>
     
@@ -283,9 +281,9 @@ console.log("patient process steps so far--->",patientProcessSteps)
          >
              
             
-             <Link to={'/dashboard/add-patient-ecg'}> 
+             {/*<Link to={'/dashboard/add-patient-ecg'}>*/} 
                <img src={IMG3} style={{marginBottom:"10px"}} alt="ecg icon"  />
-               </Link>
+               {/*</Link>*/}
 
            </Grid>
     
