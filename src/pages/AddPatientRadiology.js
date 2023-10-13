@@ -2,7 +2,7 @@ import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,
 import { useRef, useState} from 'react';
 import { useNavigate,useLocation, Link } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
-import { addTeacher} from 'src/redux/actions/group.action';
+import { addTeacher, fetchPatientProcessSteps} from 'src/redux/actions/group.action';
 import {CardMedia,CssBaseline,FormControlLabel, Checkbox, makeStyles, Chip} from '@material-ui/core';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,6 +28,15 @@ function AddPatientRadiology() {
   const [bloodInv,setBloodInv] = useState([])
   const [bloodInvId,setBloodInvId] =  useState([])
 
+  const [radiologyCategory,setRadiologyCategory] = useState('')
+  const [radiologyCategoryId,setRadiologyCategoryId] = useState('')
+ 
+  const [radiologyTestArray,setRadiologyTestArray] = useState([])
+  const [radiologyTestIdArray,setRadiologyTestIdArray] = useState([])
+  const [radiologyTestIdFake,setRadiologyTestIdFake] = useState('')
+
+  const [radiologyResponseTime,setRadiologyResponseTime]= useState('')
+
   const [selectedFile, setSelectedFile] = useState({selectedFile: [], selectedFileName: []});
   const [file,setFile] = useState('')
 
@@ -42,37 +51,21 @@ function AddPatientRadiology() {
     
 };
 
-const bloodInvHandlerSub = (e)=>{
-  if(!bloodInv.includes(e.target.value)) {
-    setBloodInv([...bloodInv,e.target.value])
-   
-     }
-}
 
 
-const bloodInvHandler= (prescriptionString)=>{
-  
-  const returnArray =  prescriptionString.split(',')
- 
-  const finalReturnArray = returnArray.map((item)=>(item.trim()))
-  //setPrescriptionArray(finalReturnArray)
 
-  setBloodInv([...finalReturnArray])
-   
-  console.log("our trimmed return array", finalReturnArray)
- 
-   }
+
 
 
 const handleDelete = (tbr,tbrId) => {
     
 
-  let placeholder =   bloodInv.filter((item)=>(item !== tbr))
- let placeholder2 =   bloodInvId.filter((item)=>(item !== tbrId))
+  let placeholder =   radiologyTestArray.filter((item)=>(item !== tbr))
+ let placeholder2 =   radiologyTestIdArray.filter((item)=>(item !== tbrId))
 
 
-   setBloodInv([...placeholder])
-  setBloodInvId([...placeholder2])
+   setRadiologyTestArray([...placeholder])
+  setRadiologyTestIdArray([...placeholder2])
 };
 
 
@@ -100,36 +93,71 @@ const handleDelete = (tbr,tbrId) => {
   const { complaints } = useSelector((state) => state.jobs);
   const [complaintArr, setComplaintArr] = useState(complaints?complaints:[]/*teachers*/);
   
-  console.log("user details are:",user)
+  const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state) => state.group);
+  const { patientProcessSteps } = useSelector((state) => state.group);
 
+console.log("patient process steps so far--->",patientProcessSteps)
 
   const addObject ={
-    firstName,
-    lastName,
-    history,
-    screenTime,
-    icon,
-    age:Number(age) && Number(age),
-    complaint,
-    complaintId
+    ...patientProcessSteps,
+   radiologyCategory,
+   radiologyCategoryId,
+   radiologyTestArray,
+   radiologyTestIdArray,
+   radiologyResponseTime,
+   radiologyAnswerImage:selectedFile && selectedFile.selectedFile ?selectedFile.selectedFile :''
+
   }
 
-  const addThisTeacher = async(addObject,navigate) => {
+  const addToPatientProcess = async(addObject,navigate,navigateUrl)=> {
     
-    if(!firstName||!lastName||!history || !screenTime ||!icon||!complaint||!age ){
+    if(!radiologyResponseTime||!radiologyCategory||!radiologyCategoryId||radiologyTestArray.length <1||radiologyTestIdArray.length <1 ||(selectedFile.selectedFile.length <1)  ){
+      
+      
       notifyErrorFxn("Please make sure to fill in all fields.")
     }
     else{
 
     setLoading(true)
-    dispatch(addTeacher(addObject,navigate))
+    dispatch(fetchPatientProcessSteps(addObject,navigate,navigateUrl))
    
-    // console.log("identity is",identity)
-    // console.log("update this subject is updating.........")
+    
     setTimeout(()=>{setLoading(false)},1800)
     
-  } 
+   } 
   }
+
+
+  const bloodInv1Setup = (e)=>{
+
+
+    let   targetCategory =  categoryVideos.filter((item)=>(item.uid === e.target.value )).length > 0? categoryVideos.filter((item)=>(item.uid === e.target.value )):[{title:null}]
+   
+       setRadiologyCategory(targetCategory[0].title)
+     
+      /* setState({
+         ...state,
+         bloodInv2: '',
+       });*/
+   
+      /* setBloodInv2([])
+       setBloodInv2IdArray([])*/
+      
+   
+   
+     }
+   
+     const bloodInv2Setup = (e)=>{
+   
+       let   targetCategoryTest =  allTreatmentCategories.filter((item)=>(item.uid === e.target.value )).length > 0 ? allTreatmentCategories.filter((item)=>(item.uid === e.target.value )):[{title:null}]
+      
+     if(!radiologyTestArray.includes(targetCategoryTest[0].title)){  setRadiologyTestArray([...radiologyTestArray,targetCategoryTest[0].title])}
+   
+     if(!radiologyTestIdArray.includes(targetCategoryTest[0].uid)){  setRadiologyTestIdArray([...radiologyTestIdArray,targetCategoryTest[0].uid])}
+       console.log("radiologyTestArray is set as",radiologyTestArray )
+    
+    
+     }
  
 
 
@@ -178,23 +206,27 @@ const handleDelete = (tbr,tbrId) => {
   
      <Grid item xs={7}>
      <Select
-    style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
-   
-     labelId="demo-simple-select-label"
-     id="demo-simple-select"
-     value={icon}
-     label="icon"
-     onChange={(event) => {
-       setIcon(event.target.value);
-     }}
-   >
-  
-       <MenuItem style={{color:"black"}} value={"Male"}>{"Male"}</MenuItem>
-       <MenuItem style={{color:"black"}} value={"Female"}>{"Female"}</MenuItem>
-       <MenuItem style={{color:"black"}} value={"Kid"}>{"Kid"}</MenuItem>
-  
-  
-   </Select>
+         style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+        
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={radiologyCategoryId}
+          label="blood inv category"
+          onChange={(event) => {
+            setRadiologyCategoryId(event.target.value);
+            bloodInv1Setup(event)
+          }}
+        >
+       
+             
+       {categoryVideos && categoryVideos.length >0 && categoryVideos.filter((me)=>(me.treatmentId === 'j7ib7pKNXMCNWqnHRacC')).length > 0 ? categoryVideos.filter((me)=>(me.treatmentId === 'j7ib7pKNXMCNWqnHRacC')).map((kiwi)=>(
+  <MenuItem style={{color:"black",display:"block"}} value={kiwi.uid}>{kiwi.title}</MenuItem>
+)):
+<MenuItem style={{color:"black",display:"block"}}  value={null}>{"No items listed!"}</MenuItem>
+}
+       
+       
+        </Select>
        
        
      </Grid>
@@ -213,26 +245,34 @@ const handleDelete = (tbr,tbrId) => {
             
              <Link to={'/dashboard/add-patient-radiology'}>  
                <img src={IMG2} style={{marginBottom:"5px"}} alt="radiology icon"  />
-               </Link> 
+              </Link> 
 
            </Grid>
     
+           <Grid item xs={7}>
+           <Select
+         style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+        
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={radiologyTestIdFake}
+          label="radiology category"
+          onChange={(event) => {
+            setRadiologyTestIdFake(event.target.value)
+            bloodInv2Setup(event);
 
-     <Grid item xs={7}>
-       <TextField
-       style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
-       fullWidth
-       placeholder=" Add last name"
-       variant="outlined"
-       multiline
-       maxRows={2}
-       value= {lastName}
-       onChange = {(e)=>{bloodInvHandler(e.target.value)}}
+          }}
+        >
        
-       />
+       {allTreatmentCategories && allTreatmentCategories.length >0 && allTreatmentCategories.filter((me)=>(me.treatmentCategoryId === radiologyCategoryId)).length > 0 ? allTreatmentCategories.filter((me)=>(me.treatmentCategoryId === radiologyCategoryId)).map((kiwi)=>(
+  <MenuItem style={{color:"black",display:"block"}} value={kiwi.uid}>{kiwi.title}</MenuItem>
+)):
+<MenuItem style={{color:"black",display:"block"}}  value={null}>{"No items listed!"}</MenuItem>
+}
        
-       
-     </Grid>
+        </Select>
+        </Grid>
+
    </Grid>
 
 
@@ -251,18 +291,18 @@ const handleDelete = (tbr,tbrId) => {
     
     
      <Grid item xs={7}>
-{bloodInv  &&
-<div style={{padding: '10px', border: '1px solid #00000033',width:"100%" }}>
-         <> 
-            &nbsp; 
-          {  bloodInv.map((chipItem,index)=>(
-         <Chip  style={{backgroundColor:"#081B85"}} label={chipItem} onClick={()=>{}} onDelete={()=>{handleDelete(chipItem,bloodInvId[index])}} />
-         ))
-           }
-
-         </>
-</div>
-         }
+     {radiologyTestArray  &&
+              <div style={{padding: '10px', border: '1px solid #00000033',width:"100%" }}>
+                       <> 
+                          &nbsp; 
+                        {  radiologyTestArray.map((chipItem,index)=>(
+                       <Chip  style={{backgroundColor:"#081B85"}} label={chipItem} onClick={()=>{}} onDelete={()=>{handleDelete(chipItem,radiologyTestIdArray[index])}} />
+                       ))
+                         }
+         
+                       </>
+              </div>
+                       }
 </Grid>
        
        
@@ -290,12 +330,12 @@ const handleDelete = (tbr,tbrId) => {
        variant="outlined"
        multiline
        maxRows={2}
-       value= {age}
-       onChange = {(e)=>{
-         if(Number(e.target.value) ||e.target.value=== ''){
-         setAge(e.target.value)}
-         }
-       }
+       value= {radiologyResponseTime}
+            onChange = {(e)=>{
+              if(Number(e.target.value) ||e.target.value=== ''){
+              setRadiologyResponseTime(e.target.value)}
+              }
+            }
        
        />
        
@@ -355,7 +395,7 @@ alt="IMG"
     Back
   </Button>
  
-  <Button   variant="contained" onClick={() => {navigate('/dashboard/add-patient-ecg') }}
+  <Button   variant="contained" onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/add-patient-ecg') }}
   style={{ backgroundColor: "#000000"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >

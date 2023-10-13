@@ -24,20 +24,19 @@ function AddPatientBloodInv() {
  
   const dispatch = useDispatch();
 
-  const [bloodInv,setBloodInv] = useState([])
-  const [bloodInvId,setBloodInvId] =  useState([])
+  const { patientProcessSteps } = useSelector((state) => state.group);
 
-  const [bloodInvCategory,setBloodInvCategory] = useState('')
-  const [bloodInvCategoryId,setBloodInvCategoryId] = useState('')
+  const [bloodInvCategory,setBloodInvCategory] = useState(patientProcessSteps &&patientProcessSteps.bloodInvCategory?patientProcessSteps.bloodInvCategory:"")
+  const [bloodInvCategoryId,setBloodInvCategoryId] = useState(patientProcessSteps &&patientProcessSteps.bloodInvCategoryId?patientProcessSteps.bloodInvCategoryId:"")
  
-  const [bloodInvTestArray,setBloodInvTestArray] = useState([])
-  const [bloodInvTestIdArray,setBloodInvTestIdArray] = useState('')
+  const [bloodInvTestArray,setBloodInvTestArray] = useState(patientProcessSteps &&patientProcessSteps.bloodInvTestArray?patientProcessSteps.bloodInvTestArray:[])
+  const [bloodInvTestIdArray,setBloodInvTestIdArray] = useState(patientProcessSteps &&patientProcessSteps.bloodInvTestIdArray?patientProcessSteps.bloodInvTestIdArray:[])
   const [bloodInvTestIdFake,setBloodInvTestIdFake] = useState('')
 
-  const [bloodInvResponseTime,setBloodInvResponseTime]= useState('')
+  const [bloodInvResponseTime,setBloodInvResponseTime]= useState(patientProcessSteps &&patientProcessSteps.bloodInvResponseTime?patientProcessSteps.bloodInvResponseTime:'')
 
-  const [selectedFile, setSelectedFile] = useState({selectedFile: [], selectedFileName: []});
-  const [file,setFile] = useState('')
+  const [selectedFile, setSelectedFile] = useState({selectedFile:patientProcessSteps &&patientProcessSteps.bloodInvAnswerImage?patientProcessSteps.bloodInvAnswerImage:[], selectedFileName:patientProcessSteps &&patientProcessSteps.bloodInvAnswerImage?patientProcessSteps.bloodInvAnswerImage.name: []});
+  const [file,setFile] = useState(patientProcessSteps && patientProcessSteps.bloodInvAnswerImage?URL.createObjectURL(patientProcessSteps.bloodInvAnswerImage):null)
 
 
   const handleselectedFile = event => {
@@ -54,29 +53,19 @@ function AddPatientBloodInv() {
 const handleDelete = (tbr,tbrId) => {
     
 
-  let placeholder =   bloodInv.filter((item)=>(item !== tbr))
- let placeholder2 =   bloodInvId.filter((item)=>(item !== tbrId))
+  let placeholder =   bloodInvTestArray.filter((item)=>(item !== tbr))
+ let placeholder2 =   bloodInvTestIdArray.filter((item)=>(item !== tbrId))
 
 
-   setBloodInv([...placeholder])
-  setBloodInvId([...placeholder2])
+   setBloodInvTestArray([...placeholder])
+  setBloodInvTestIdArray([...placeholder2])
 };
 
 
   const [loading,setLoading] = useState(false)
 
-  const [level,setLevel] = useState('')
-  const [body,setBody] = useState('')
-  const [imageUrl,setImageUrl] =useState('')
 
-  const [screenTime,setScreenTime] = useState('')
-  const [history,setHistory] = useState()
-  const [firstName,setFirstName] =useState()
-  const [lastName,setLastName] =useState()
-  const [icon,setIcon]=useState()
-  const [age,setAge]=useState('')
-  const [complaint,setComplaint] =useState()
-  const [complaintId,setComplaintId] =useState()
+
  
 
   const { teachers } = useSelector((state) => state.jobs);
@@ -90,23 +79,24 @@ const handleDelete = (tbr,tbrId) => {
 
 
   const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state) => state.group);
-  const { patientProcessSteps } = useSelector((state) => state.group);
+ 
 
   const addObject ={
     ...patientProcessSteps,
-    firstName,
-    lastName,
-    history,
-    screenTime,
-    icon,
-    age:Number(age) && Number(age),
-    complaint,
-    complaintId
+   bloodInvCategory,
+   bloodInvCategoryId,
+   bloodInvTestArray,
+   bloodInvTestIdArray,
+   bloodInvResponseTime:Number(bloodInvResponseTime),
+   bloodInvAnswerImage:selectedFile && selectedFile.selectedFile ?selectedFile.selectedFile :''
+
   }
 
   const addToPatientProcess = async(addObject,navigate,navigateUrl)=> {
     
-    if(true === false ){
+    if(!bloodInvResponseTime||!bloodInvCategory||!bloodInvCategoryId||bloodInvTestArray.length <1||bloodInvTestIdArray.length <1 ||(selectedFile.selectedFile.length <1) ){
+      
+      
       notifyErrorFxn("Please make sure to fill in all fields.")
     }
     else{
@@ -117,29 +107,10 @@ const handleDelete = (tbr,tbrId) => {
     
     setTimeout(()=>{setLoading(false)},1800)
     
-  } 
-  }
-
-  const bloodInvHandlerSub = (e)=>{
-    if(!bloodInv.includes(e.target.value)) {
-      setBloodInv([...bloodInv,e.target.value])
-     
-       }
+   } 
   }
 
 
-  const bloodInvHandler= (prescriptionString)=>{
-    
-    const returnArray =  prescriptionString.split(',')
-   
-    const finalReturnArray = returnArray.map((item)=>(item.trim()))
-    
-
-    setBloodInv([...finalReturnArray])
-     
-    console.log("our trimmed return array", finalReturnArray)
-   
-     }
 
 
      const bloodInv1Setup = (e)=>{
@@ -211,7 +182,7 @@ const handleDelete = (tbr,tbrId) => {
               >
                   
                  
-                  <Link to={'/dashboard/add-patient-blodinv'}>   
+                  <Link to={'/dashboard/add-patient-bloodinv'}>   
                     <img src={IMG1} style={{marginBottom:"5px",marginLeft:"5px"}} alt="blood inv icon"  />
                  
                     </Link>
@@ -228,7 +199,7 @@ const handleDelete = (tbr,tbrId) => {
           label="blood inv category"
           onChange={(event) => {
             setBloodInvCategoryId(event.target.value);
-            bloodInv1Setup(event.target.value)
+            bloodInv1Setup(event)
           }}
         >
        
@@ -307,18 +278,18 @@ const handleDelete = (tbr,tbrId) => {
 
          
           <Grid item xs={7}>
-   {bloodInvTestArray  &&
-     <div style={{padding: '10px', border: '1px solid #00000033',width:"100%" }}>
-              <> 
-                 &nbsp; 
-               {  bloodInvTestArray.map((chipItem,index)=>(
-              <Chip  style={{backgroundColor:"#081B85"}} label={chipItem} onClick={()=>{}} onDelete={()=>{handleDelete(chipItem,bloodInvTestIdArray[index])}} />
-              ))
-                }
-
-              </>
-     </div>
-              }
+            {bloodInvTestArray  &&
+              <div style={{padding: '10px', border: '1px solid #00000033',width:"100%" }}>
+                       <> 
+                          &nbsp; 
+                        {  bloodInvTestArray.map((chipItem,index)=>(
+                       <Chip  style={{backgroundColor:"#081B85"}} label={chipItem} onClick={()=>{}} onDelete={()=>{handleDelete(chipItem,bloodInvTestIdArray[index])}} />
+                       ))
+                         }
+         
+                       </>
+              </div>
+                       }
      </Grid>
             
             

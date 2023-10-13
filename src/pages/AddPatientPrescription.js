@@ -2,7 +2,7 @@ import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,
 import { useRef, useState} from 'react';
 import { useNavigate,useLocation, Link } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
-import { addTeacher} from 'src/redux/actions/group.action';
+import { addTeacher, fetchPatientProcessSteps} from 'src/redux/actions/group.action';
 import {CardMedia,CssBaseline,FormControlLabel, Checkbox, makeStyles, Chip} from '@material-ui/core';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,6 +34,8 @@ function AddPatientPrescription() {
   const [selectedFile, setSelectedFile] = useState({selectedFile: [], selectedFileName: []});
   const [file,setFile] = useState('')
 
+  const  [prescription,setPrescription] = useState([])
+
 
   const handleselectedFile = event => {
     setSelectedFile({
@@ -53,31 +55,30 @@ const bloodInvHandlerSub = (e)=>{
 }
 
 
-const bloodInvHandler= (prescriptionString)=>{
+const prescriptionHandler = (prescriptionString)=>{
   
   const returnArray =  prescriptionString.split(',')
  
   const finalReturnArray = returnArray.map((item)=>(item.trim()))
   //setPrescriptionArray(finalReturnArray)
 
-  setBloodInv([...finalReturnArray])
+  setPrescription([...finalReturnArray])
    
   console.log("our trimmed return array", finalReturnArray)
  
    }
 
 
-const handleDelete = (tbr,tbrId) => {
-    
-
-  let placeholder =   bloodInv.filter((item)=>(item !== tbr))
- let placeholder2 =   bloodInvId.filter((item)=>(item !== tbrId))
+   const { patientProcessSteps } = useSelector((state) => state.group);
+   console.log("patient process steps so far--->:",patientProcessSteps)
 
 
-   setBloodInv([...placeholder])
-  setBloodInvId([...placeholder2])
-};
+   const addObject ={
+    ...patientProcessSteps,
+   prescription
+  
 
+  }
 
   const [loading,setLoading] = useState(false)
 
@@ -95,43 +96,36 @@ const handleDelete = (tbr,tbrId) => {
   const [complaintId,setComplaintId] =useState()
  
 
-  const { teachers } = useSelector((state) => state.jobs);
+ 
 
- const [teachersArr,setTeacherArr]=useState([...teachers.map((item)=>(item.firstName + " " + item.lastName))])
 
-  const { user } = useSelector((state) => state.auth);
-  const { complaints } = useSelector((state) => state.jobs);
-  const [complaintArr, setComplaintArr] = useState(complaints?complaints:[]/*teachers*/);
+
+
+
+ 
   
-  console.log("user details are:",user)
 
 
-  const addObject ={
-    firstName,
-    lastName,
-    history,
-    screenTime,
-    icon,
-    age:Number(age) && Number(age),
-    complaint,
-    complaintId
-  }
 
-  const addThisTeacher = async(addObject,navigate) => {
+
+ 
+  const addToPatientProcess = async(addObject,navigate,navigateUrl)=> {
     
-    if(!firstName||!lastName||!history || !screenTime ||!icon||!complaint||!age ){
+    if(!prescription ){
+      
+      
       notifyErrorFxn("Please make sure to fill in all fields.")
     }
     else{
 
     setLoading(true)
-    dispatch(addTeacher(addObject,navigate))
-   
-    // console.log("identity is",identity)
-    // console.log("update this subject is updating.........")
+    if(window.confirm("are you sure this prescription is correct ?")){
+    dispatch(fetchPatientProcessSteps(addObject,navigate,navigateUrl))
+    }
+    
     setTimeout(()=>{setLoading(false)},1800)
     
-  } 
+   } 
   }
  
 
@@ -199,155 +193,13 @@ const handleDelete = (tbr,tbrId) => {
        //maxRows={2}
        rows={9}
        value= {lastName}
-       //onChange = {(e)=>{bloodInvHandler(e.target.value)}}
+       onChange = {(e)=>{prescriptionHandler(e.target.value)}}
        
        />
        
        
      </Grid>
    </Grid>
-
-
-
-   
-
-
-  {/* <Grid container item xs={12} spacing={2} style={{marginTop:"1rem"}}>
-
-   
-   <Grid item xs={1.5} style={{backgroundColor: '#21D0C3',border:'4.5px solid #4C4E37', borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}}  >
-             
-            
-             <Link to={'/dashboard/add-patient-radiology'}>  
-               <img src={IMG2} style={{marginBottom:"5px"}} alt="radiology icon"  />
-               </Link> 
-
-           </Grid>
-    
-
-     <Grid item xs={7}>
-       <TextField
-       style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
-       fullWidth
-       placeholder=" Add last name"
-       variant="outlined"
-       multiline
-       maxRows={2}
-       value= {lastName}
-       onChange = {(e)=>{bloodInvHandler(e.target.value)}}
-       
-       />
-       
-       
-     </Grid>
-   </Grid> */}
-
-
-
-  {/* <Grid container item xs={12} spacing={2} style={{marginTop:"1rem"}}>
-  
-   <Grid item xs={1.5} style={{backgroundColor: '#00B8D4', borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}} 
-         >
-             
-            
-             <Link to={'/dashboard/add-patient-ecg'}> 
-               <img src={IMG3} style={{marginBottom:"10px"}} alt="ecg icon"  />
-               </Link>
-
-           </Grid>
-    
-    
-     <Grid item xs={7}>
-{bloodInv  &&
-<div style={{padding: '10px', border: '1px solid #00000033',width:"100%" }}>
-         <> 
-            &nbsp; 
-          {  bloodInv.map((chipItem,index)=>(
-         <Chip  style={{backgroundColor:"#081B85"}} label={chipItem} onClick={()=>{}} onDelete={()=>{handleDelete(chipItem,bloodInvId[index])}} />
-         ))
-           }
-
-         </>
-</div>
-         }
-</Grid>
-       
-       
-    
-   </Grid>*/}
-
-
-
-   {/*<Grid container item xs={12} spacing={2}>
-     <Grid item xs={3}>
-       <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"3rem"}}variant="p" component="p">
-        <div style={{color:"black"}} >
-       
-        </div>
- 
-       </Typography>
-     
-     </Grid>
-
-     <Grid item xs={7}>
-       <TextField
-       style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%",marginLeft:"1.6rem"}}
-       fullWidth
-       placeholder=" Response time in minutes"
-       variant="outlined"
-       multiline
-       maxRows={2}
-       value= {age}
-       onChange = {(e)=>{
-         if(Number(e.target.value) ||e.target.value=== ''){
-         setAge(e.target.value)}
-         }
-       }
-       
-       />
-       
-       
-     </Grid>
-   </Grid>*/}
-
-
-
-   {/*<Grid container item xs={12} spacing={2} style={{marginTop:"3rem"}}>
-
-<Grid item xs={3}>
-<Typography  style={{display:"flex",flexDirection:"column",alignItems:"flex-start",justifyContent:"flex-end",marginTop:"3rem"}}variant="p" component="p">
-<div  style={{color:"black"}}>
-ADD IMAGE:
-</div>
-
-</Typography>
-
-</Grid>
-
-
-
-<Grid item xs={7}  style={{border: '0px solid red'}}>
-<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }}>
-<CardMedia
-style={{ border: '0.2px solid black', backgroundColor: '#fff', width: '240px' }}
-component="img"
-height="240"
-width="540"
-image={file?file : DEFAULTIMG}
-alt="IMG"
-/> 
-<p style={{color:"black"}}> {selectedFile && selectedFile.selectedFileName ?selectedFile.selectedFileName  :" "} </p>
-<Button component="label" variant="contained" style={{ minHeight: '45px', minWidth: '145px', backgroundColor: '#000000', marginTop: '15px' }}>
-<b>UPLOAD</b>
-<input
- type="file"
- style={{ display: 'none' }}
- onChange={handleselectedFile}
-/>
-</Button>
-</div>
-</Grid>
-</Grid>*/}
 
 
 
@@ -362,7 +214,7 @@ alt="IMG"
     Back
   </Button>
  
-  <Button   variant="contained" onClick={() => {navigate('/dashboard/add-patient-referral') }}
+  <Button   variant="contained" onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/add-patient-referral') }}
   style={{ backgroundColor: "#000000"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >

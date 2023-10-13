@@ -613,14 +613,14 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
 
       }
     ).then((doc) => {
-       //const publicGroups = snapshot.docs.map((doc) => ({ ...doc.data() }));
+       
        db.collection("Complaints").doc(doc.id).update({
       uid:doc.id
        })
   
       console.log("the new  Complaints id is",doc.id)
       dispatch(getTeachers())
-       notifySuccessFxn(`new Complaint ${addObject.complaint} added!`)
+      // notifySuccessFxn(`new Complaint ${addObject.complaint} added!`)
        setTimeout(()=>{navigate('/dashboard/complaint-list')},1000)
    }).catch((error) => {
      console.log("Error adding cOMPLAINT:", error);
@@ -1300,7 +1300,7 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
 
 
 
-/*========== saving and updating our large process steps object ABOVE HERE ======================= */
+/*========== saving and updating our large process steps object  HERE ======================= */
 
 export const fetchPatientProcessSteps = (stepsObject,navigate,navigateUrl) => async (dispatch) => {
  
@@ -1316,8 +1316,319 @@ new Promise((resolve,reject)=>{
 
 
 /*=============== saving and updating our large process steps object ABOVE ===================== */
+
+
+/*========== saving and updating our large process steps object  HERE ======================= */
+
+export const fetchFinalProcessSteps = (stepsObject) => async (dispatch) => {
  
 
+      dispatch(savePatientProcessSteps(stepsObject));
+ 
+  };
+  
+  
+  /*=============== saving and updating our large process steps object ABOVE ===================== */
+ 
+
+/*========== saving the final step(referral) to process steps and then submitting to FIREBASE HERE ======================= */
+
+export const fetchFinalProcessAndSubmit = (stepsObject,navigate,navigateUrl) => async (dispatch) => {
+  let savedPatientId;
+ 
+  dispatch(isItLoading(true));
+
+  new Promise((resolve,reject)=>{
+      resolve(dispatch(savePatientProcessSteps(stepsObject)));
+    }
+  ).then(()=>{
+
+    
+/*================== ADDING PATIENT START   ========================== */
+    db.collection("Patients")
+    .where("firstName", "==", stepsObject.firstName)
+    .where("lastName", "==", stepsObject.lastName)
+    .get()
+    .then((snapshot) => {
+      const existingTeacher = snapshot.docs.map((doc) => ({ ...doc.data() }));
+    if (existingTeacher.length) {
+     
+      notifyErrorFxn(`This Patient already exists,consider changing the name(s)`)
+  
+    } else {
+       
+      
+      db.collection("Patients").add(
+        {
+          
+        firstName:stepsObject.firstName,
+        lastName:stepsObject.lastName,
+        icon:stepsObject.icon,
+        age:stepsObject.age,
+        history:stepsObject.history,
+        complaint:stepsObject.complaint,
+        //complaintId:stepsObject.complaintId,
+        screenTime:stepsObject.screenTime,
+        arrivalTime:stepsObject.arrivalTime,
+          registeredOn:new Date()
+  
+        }
+
+      ).then((doc) => {
+         //const publicGroups = snapshot.docs.map((doc) => ({ ...doc.data() }));
+         savedPatientId = doc.id
+         db.collection("Patients").doc(doc.id).update({
+        uid:doc.id
+         })
+    
+        console.log("the new  Patient's id is",doc.id)
+       
+         //notifySuccessFxn(`new Patient ${stepsObject.firstName + " " + stepsObject.lastName} added!`)
+         //setTimeout(()=>{navigate('/dashboard/patient-list')},1000)
+     }).catch((error) => {
+       console.log("Error adding Patient:", error);
+       notifyErrorFxn(error)
+    
+    
+     })
+
+
+/*================== ADDING PATIENT END   ========================== */
+
+
+/*================== ADDING COMPLAINT START  ========================== */
+
+
+db.collection("Complaints")
+  .where("name", "==", stepsObject.complaint)
+  .get()
+  .then((snapshot) => {
+    const existingTeacher = snapshot.docs.map((doc) => ({ ...doc.data() }));
+  if (existingTeacher.length) {
+   
+    notifyErrorFxn(`This complaint already exists,consider changing the name(s)`)
+
+  } else {
+     
+    
+    db.collection("Complaints").add(
+      {
+        
+      complaint:stepsObject.complaint,
+      treatment:{
+        //ECG:stepsObject["ECG"],this is the name of the ecg,(there's no actual name for now) consider putting this field for consistency sakes
+        bloodInvestigation:stepsObject.bloodInvCategory,
+        //referral:stepsObject.Referrals, consider putting this field for consistency sakes
+        radiology:stepsObject.radiologyCategory,
+        correctPrescriptionArray:stepsObject.prescription/*[stepsObject.prescription1,stepsObject.prescription2,stepsObject.prescription3,stepsObject.prescription4]*/,
+      
+        chosenBloodInvestigationArray:stepsObject.bloodInvTestArray,
+        chosenBloodInvestigationIdArray:stepsObject.bloodInvTestIdArray,
+        chosenRadiologyArray:stepsObject.radiologyTestArray,
+        chosenRadiologyIdArray:stepsObject.radiologyTestIdArray,
+
+        chosenReferralsArray:stepsObject.referralArray,
+        chosenReferralsIdArray:stepsObject.referralIdArray,
+
+
+      },
+        registeredOn:new Date()
+
+      }
+    ).then((doc) => {
+       
+       db.collection("Complaints").doc(doc.id).update({
+      uid:doc.id
+       })
+
+       db.collection("Patients").doc(savedPatientId).update({
+        complaintId:doc.id
+         })
+  
+      console.log("the new  Complaints id is",doc.id)
+      dispatch(getTeachers())
+       notifySuccessFxn(`new Complaint ${stepsObject.complaint} added!`)
+      
+       setTimeout(()=>{navigate('/dashboard/complaint-list')},1000)
+   }).catch((error) => {
+     console.log("Error adding cOMPLAINT:", error);
+    
+     notifyErrorFxn(error)
+  
+  
+   });
+
+
+
+
+
+  }
+}).catch((error) => {
+  console.log("Error adding complaint OUTER ERROR:", error);
+  notifyErrorFxn(error)
+
+
+});
+
+
+
+  
+/*================= ADDING COMPLAINT END=========================*/
+
+
+
+/*======== ADDING PICTURES TO THE RIGHT ANSWERS START================== */
+
+/*stepsObject.bloodInvTestIdArray.forEach((item,index)=>{*/
+
+  const bloodInvImageName = uuidv4() + '.' + stepsObject.bloodInvAnswerImage?.name?.split('.')?.pop();
+  console.log('blood inv File Name: ', bloodInvImageName);
+
+  const uploadTask1 = storage.ref(`treatment_images/${bloodInvImageName}`).put(stepsObject.bloodInvAnswerImage);
+  uploadTask1.on(
+    "state_changed",
+    snapshot => {
+      const progress = Math.round(
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      );
+      // setProgress(progress);
+    },
+    error => {
+      console.log(error);
+    },
+    () => {
+      storage
+        .ref("treatment_images")
+        .child(bloodInvImageName)
+        .getDownloadURL()
+        .then(url => {
+          console.log('blood inv Image URL is: ', url);
+          stepsObject.bloodInvTestIdArray.forEach((item)=>{
+          db.collection("TreatmentTests").doc(item).update({
+            answerImage:url
+             })
+          })
+        });
+    }
+  );
+
+
+/*})*/
+
+/*stepsObject.radiologyTestIdArray.forEach((item,index)=>{*/
+
+  const radiologyImageName = uuidv4() + '.' + stepsObject.radiologyAnswerImage?.name?.split('.')?.pop();
+  console.log(' radiology File Name: ', radiologyImageName);
+
+  const uploadTask2 = storage.ref(`treatment_images/${radiologyImageName}`).put(stepsObject.radiologyAnswerImage);
+  uploadTask2.on(
+    "state_changed",
+    snapshot => {
+      const progress = Math.round(
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      );
+      // setProgress(progress);
+    },
+    error => {
+      console.log(error);
+    },
+    () => {
+      storage
+        .ref("treatment_images")
+        .child(radiologyImageName)
+        .getDownloadURL()
+        .then(url => {
+          console.log('radiology Image URL is: ', url);
+          stepsObject.radiologyTestIdArray.forEach((item,index)=>{ 
+          db.collection("TreatmentTests").doc(item).update({
+            answerImage:url
+             })
+          })
+        });
+    }
+  );
+/*})*/
+
+//ecg image logic
+
+const ecgImageName = uuidv4() + '.' + stepsObject.ecgAnswerImage?.name?.split('.')?.pop();
+console.log(' radiology File Name: ', ecgImageName);
+
+const uploadTask3 = storage.ref(`treatment_images/${ecgImageName}`).put(stepsObject.ecgAnswerImage);
+uploadTask3.on(
+  "state_changed",
+  snapshot => {
+    const progress = Math.round(
+      (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+    );
+    // setProgress(progress);
+  },
+  error => {
+    console.log(error);
+  },
+  () => {
+    storage
+      .ref("treatment_images")
+      .child(ecgImageName)
+      .getDownloadURL()
+      .then(url => {
+        console.log('ecg Image URL is: ', url);
+
+
+        db.collection('TreatmentTests')
+    .where('treatmentId', '==', '4NkmGHbkJ6Bj6GiQtoAE')
+    .get()
+    .then((snapshot) => {
+     
+   let batch = db.batch()
+
+   snapshot.docs.forEach((doc) => {
+    const docRef = db.collection("TreatmentTests").doc(doc.id)
+    batch.update(docRef, {answerImage:url})
+})
+    
+  batch.commit()
+    
+    })
+    .catch((error) => {
+      var errorMessage = error.message;
+      console.log('Error fetching the patients', errorMessage);
+    });
+
+
+
+
+      });
+  }
+);
+
+
+/*adding pics to ecg */
+
+
+
+
+/*======== ADDING PICTURES TO THE RIGHT ANSWERS END ================== */
+
+
+
+
+    
+  }
+}).then(()=>{
+
+    navigate(navigateUrl)
+    notifySuccessFxn('Successfully Submitted')
+    dispatch(isItLoading(false));
+  }).catch((error)=>{
+    dispatch(isItLoading(false));
+    notifyErrorFxn(error)
+  })
+  
+});
+  
+} 
+  /*=============== saving and updating our large process steps object ABOVE ===================== */
 
 
 

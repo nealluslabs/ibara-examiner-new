@@ -37,12 +37,7 @@ function AddPatientBioData() {
 
 
  
-  const [firstName,setFirstName] =useState()
-  const [lastName,setLastName] =useState()
-  const [icon,setIcon]=useState()
-  const [age,setAge]=useState('')
-  const [complaint,setComplaint] =useState('')
-  const [complaintId,setComplaintId] =useState()
+  
  
 
   const { teachers } = useSelector((state) => state.jobs);
@@ -51,9 +46,16 @@ function AddPatientBioData() {
 
   const { user } = useSelector((state) => state.auth);
   const { patientProcessSteps } = useSelector((state) => state.group);
+   console.log("patient pp",patientProcessSteps)
+
   const { complaints } = useSelector((state) => state.jobs);
   const [complaintArr, setComplaintArr] = useState(complaints?complaints:[]/*teachers*/);
   
+  const [firstName,setFirstName] =useState(patientProcessSteps && patientProcessSteps.firstName)
+  const [lastName,setLastName] =useState(patientProcessSteps && patientProcessSteps.lastName)
+  const [icon,setIcon]=useState(patientProcessSteps && patientProcessSteps.icon)
+  const [age,setAge]=useState(patientProcessSteps && patientProcessSteps.age)
+  const [complaint,setComplaint] =useState(patientProcessSteps && patientProcessSteps.complaint)
 
 
 
@@ -263,7 +265,7 @@ function AddPatientBioData() {
             
             fullWidth
             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem"}}
-            placeholder=" Add age"
+            placeholder=" Add complaint"
             variant="outlined"
             multiline
             maxRows={2}
