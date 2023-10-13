@@ -109,7 +109,7 @@ function EditCourse() {
            
           </Grid>
    
-     <div style={{height:"2px", width:"80%",borderBottom:"1px solid black",position:"absolute",left:"20rem",top:"18rem"}}></div>
+    {/* <div style={{height:"2px", width:"80%",borderBottom:"1px solid black",position:"absolute",left:"20rem",top:"18rem"}}></div>*/}
      <br/> <br/> <br/>
 
      <Grid container spacing={2}>

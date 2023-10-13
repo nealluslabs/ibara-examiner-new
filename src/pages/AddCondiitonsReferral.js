@@ -158,7 +158,7 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
               <Typography variant="h4" component="p">
               Add Referral:
               </Typography>
-              <div style={{height:"2px", width:"80%",borderBottom:"1px solid black",position:"absolute",left:"20rem",top:"18rem"}}></div>
+             {/* <div style={{height:"2px", width:"80%",borderBottom:"1px solid black",position:"absolute",left:"20rem",top:"18rem"}}></div>*/}
             </Box>
             <br/> <br/> <br/>
         </Grid>
@@ -262,7 +262,7 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
                 <Grid item xs={7}>
             <center>
                <Button  onClick={() => { addThisInvestigation(addObject)}}
-               component="label" variant="contained" style={{ minHeight: '45px', minWidth: '145px', backgroundColor: '#000000', marginTop: '15px' }}>
+               component="label" variant="contained" style={{ minHeight: '45px', minWidth: '145px', backgroundColor: '#081B85', marginTop: '15px' }}>
                  <b>SUBMIT</b>
                  
               </Button>
@@ -283,14 +283,14 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
   <div style={{ display: 'flex',margin:"0 auto", justifyContent: 'space-between',width:"60%",gap:"1rem" }}>
  
   <Button  onClick={() => {navigate(-1) }} variant="contained" 
-  style={{ backgroundColor: "#000000"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
+  style={{ backgroundColor: "#081B85"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >
     Back
   </Button>
  
   <Button   variant="contained" onClick={() => {navigate('/dashboard/home') }}
-  style={{ backgroundColor: "#000000"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
+  style={{ backgroundColor: "#081B85"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >
    {loading?"loading..." :"Finish"}

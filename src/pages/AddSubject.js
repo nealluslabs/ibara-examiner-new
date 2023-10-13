@@ -113,7 +113,7 @@ const [file,setFile] = useState('')
               <Typography variant="h4" component="p">
               ADD {treatment.toUpperCase()}
               </Typography>
-              <div style={{height:"2px", width:"80%",borderBottom:"1px solid black",position:"absolute",left:"20rem",top:"18rem"}}></div>
+             {/* <div style={{height:"2px", width:"80%",borderBottom:"1px solid black",position:"absolute",left:"20rem",top:"18rem"}}></div>*/}
             </Box>
             <br/> <br/> <br/>
         </Grid>
