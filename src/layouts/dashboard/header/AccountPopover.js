@@ -97,18 +97,11 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        {/* <MenuItem sx={{ pt: 1 }}>
-          Accounts
+       <MenuItem onClick={() => dispatch(navigate('/dashboard/settings'))} sx={{ pt: 1 }}>
+          Settings
         </MenuItem>
-        <Divider />
-        <Stack sx={{color: '#828D9F' }}>
-          {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} onClick={handleClose}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </Stack> */}
-
+      
+       
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <MenuItem onClick={() => dispatch(logout(navigate))} sx={{ m: 1 }} >

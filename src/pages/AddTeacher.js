@@ -92,15 +92,6 @@ function AddTeacher() {
 
 
 
-    <div style={{display:"flex",justifyContent:"space-between",marginBottom:"6rem"}}>
-       
-      
-       </div>
-
-
-
-    <h1 style={{position:"relative",fontWeight:"bold",marginBottom:"40px",fontSize:"30px"}}>NEW PATIENT</h1>
-
     <Grid item xs={12} sx={{ display: 'flex' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Typography variant="h4" component="p">

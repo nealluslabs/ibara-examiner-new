@@ -84,7 +84,7 @@ export default function StudentListPage() {
        }  
      }, [jobs])
 
-  console.log('cmc user data is: ', jobArr);
+  console.log('cmc user data is->: ', jobArr);
 
   return (
       

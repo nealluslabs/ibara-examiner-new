@@ -17,7 +17,7 @@ import DocsPage from './pages/DocsPage';
 //import CoolersPage from './pages/CoolersPage';
 //import JoinCoolerPage from './pages/JoinCoolerPage';
 import InboxPage from './pages/InboxPage';
-import SettingsPage from './pages/AddCourse';
+//import SettingsPage from './pages/AddCourse';
 import UserListPage from './pages/UserListPage';
 import IncubatorVideoPage from './pages/IncubatorVideosPage';
 import OperationsVideoPage from './pages/OperationsVideosPage';
@@ -70,6 +70,7 @@ import AddConditionsReferral from './pages/AddCondiitonsReferral';
 import AddConditionsBloodInv from './pages/AddConditionsBloodInv';
 
 import AddCandidate from './pages/AddCandidate';
+import SettingsPage from './pages/SettingsPage';
 
 export default function Router() {
   const routes = useRoutes([
@@ -126,7 +127,7 @@ export default function Router() {
 
         { path: 'add-candidate', element: <AddCandidate/> },
 
-     
+        { path: 'settings', element: <SettingsPage/> },
 
 
         { path: 'edit-patient', element: <EditTeacher /> },

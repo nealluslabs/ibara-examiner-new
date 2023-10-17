@@ -2,7 +2,7 @@ import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,
 import { useRef, useState} from 'react';
 import { useNavigate,useLocation } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
-import { addTeacher, fetchPatientProcessSteps} from 'src/redux/actions/group.action';
+import { addTeacher, fetchAddCandidate} from 'src/redux/actions/group.action';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { notifyErrorFxn } from 'src/utils/toast-fxn';
@@ -11,29 +11,20 @@ import users from 'src/_mock/user';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
-function AddPatientBioData() {
+function SettingsPage() {
   const navigate = useNavigate();
   const location = useLocation()
  // console.log("location is",location.state.levelName,location.state.uid)
 
-  const [file, setFile] = useState();
-  const [file2, setFile2] = useState();
-  const [fileSize, setFileSize] = useState();
-  const [fileSize2, setFileSize2] = useState();
-  const [selectedFile, setSelectedFile] = useState({selectedFile: [], selectedFileName: []});
-  const [selectedFile2, setSelectedFile2] = useState({selectedFile2: [], selectedFileName2: []});
+ 
   const dispatch = useDispatch();
 
-  const [newPassword,setNewPassword] =useState('')
-  const [confirmPassword,setConfirmPassword] =useState('')
-  const [companySize,setCompanySize] =useState('')
+
 
 
   const [loading,setLoading] = useState(false)
 
-  const [level,setLevel] = useState('')
-  const [body,setBody] = useState('')
-  const [imageUrl,setImageUrl] =useState('')
+ 
 
 
  
@@ -51,11 +42,11 @@ function AddPatientBioData() {
   const { complaints } = useSelector((state) => state.jobs);
   const [complaintArr, setComplaintArr] = useState(complaints?complaints:[]/*teachers*/);
   
-  const [firstName,setFirstName] =useState(patientProcessSteps && patientProcessSteps.firstName)
-  const [lastName,setLastName] =useState(patientProcessSteps && patientProcessSteps.lastName)
-  const [icon,setIcon]=useState(patientProcessSteps && patientProcessSteps.icon)
-  const [age,setAge]=useState(patientProcessSteps && patientProcessSteps.age)
-  const [complaint,setComplaint] =useState(patientProcessSteps && patientProcessSteps.complaint)
+  const [firstName,setFirstName] =useState('')
+  const [lastName,setLastName] =useState('')
+ 
+  const [email,setEmail]=useState('')
+  const [password,setPassword] =useState('')
 
 
 
@@ -63,21 +54,20 @@ function AddPatientBioData() {
   ...patientProcessSteps,
     firstName,
     lastName,
-    icon,
-    age:Number(age) && Number(age),
-    complaint
+   email,
+   password
     
   }
 
-  const addToPatientProcess = async(addObject,navigate,navigateUrl) => {
+  const addCandidate = async(addObject,navigate,navigateUrl) => {
     
-    if(!firstName||!lastName ||!icon||!complaint||!age ){
+    if(!firstName||!lastName ||!password||!email ){
       notifyErrorFxn("Please make sure to fill in all fields.")
     }
     else{
 
     setLoading(true)
-    dispatch(fetchPatientProcessSteps(addObject,navigate,navigateUrl))
+    dispatch(fetchAddCandidate(addObject,navigate,navigateUrl))
    
     // console.log("identity is",identity)
     // console.log("update this subject is updating.........")
@@ -94,28 +84,23 @@ function AddPatientBioData() {
 
 
 
+
+
+
+    <br/><br/><br/>
+
+    
    
 
-    <Grid item xs={12} sx={{ display: 'flex' }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <Typography variant="h4" component="p">
-              Enter Patient Bio Data:
-              </Typography>
-             {/* <div style={{height:"2px", width:"80%",borderBottom:"1px solid black",position:"absolute",left:"20rem",top:"18rem"}}></div>*/}
-            </Box>
-            <br/> <br/> <br/>
-        </Grid>
-   
-
-     <Grid container spacing={2} style={{height:"450px",margin:"0 auto",backgroundColor:"#081B85",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
+     <Grid container spacing={2} >
 
 
-
+     <Grid container spacing={2} style={{margin:"0 auto",backgroundColor:"#081B85",width:"80%",padding:"1rem",borderRadius:"3rem"}}>
      <Grid container item xs={12} spacing={1}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
             <div >
-             FIRST NAME:
+             OLD PASSWORD:
              </div>
       
             </Typography>
@@ -144,7 +129,7 @@ function AddPatientBioData() {
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
             <div >
-             LAST NAME:
+             NEW PASSWORD:
              </div>
       
             </Typography>
@@ -174,7 +159,7 @@ function AddPatientBioData() {
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
             <div >
-             AGE:
+             CONFIRM NEW PASSWORD:
              </div>
       
             </Typography>
@@ -190,10 +175,10 @@ function AddPatientBioData() {
             variant="outlined"
             multiline
             maxRows={2}
-            value= {age}
+            value= {email}
             onChange = {(e)=>{
               if(Number(e.target.value) ||e.target.value=== ''){
-              setAge(e.target.value)}
+              setEmail(e.target.value)}
               }
             }
             
@@ -203,42 +188,8 @@ function AddPatientBioData() {
           </Grid>
         </Grid>
 
+       </Grid>
 
-
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
-            <div>
-              ICON:
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={7}>
-          <Select
-         
-         style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={icon}
-          label="icon"
-          onChange={(event) => {
-            setIcon(event.target.value);
-          }}
-        >
-       
-            <MenuItem style={{color:"black"}}  value={"Male"}>{"Male"}</MenuItem>
-            <MenuItem  style={{color:"black"}}value={"Female"}>{"Female"}</MenuItem>
-            <MenuItem style={{color:"black"}} value={"Kid"}>{"Kid"}</MenuItem>
-       
-       
-        </Select>
-            
-            
-          </Grid>
-        </Grid>
 
 
 
@@ -246,7 +197,7 @@ function AddPatientBioData() {
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
             <div >
-             COMPLAINT(S):
+             PASSWORD:
              </div>
       
             </Typography>
@@ -262,10 +213,10 @@ function AddPatientBioData() {
             variant="outlined"
             multiline
             maxRows={2}
-            value= {complaint}
+            value= {password}
             onChange = {(e)=>{
              
-              setComplaint(e.target.value)
+              setPassword(e.target.value)
               }
             }
             
@@ -273,83 +224,9 @@ function AddPatientBioData() {
           </Grid>
         </Grid>
 
-       
-     {/*
-         <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             SCREEN TIME
-             </div>
-      
-            </Typography>
-          
-          </Grid>
+     
 
-          <Grid item xs={6}>
-            <TextField
-            fullWidth
-            placeholder=" add screen time"
-            variant="outlined"
-            multiline
-            type="number"
-            maxRows={2}
-            value= {screenTime}
-            onChange = {(e)=>{
-              if(Number(e.target.value)|| e.target.value=== ''){
-              setScreenTime(e.target.value)
-              }
-            }}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-
-
-
-       
-      
-
-
-
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
-             HISTORY
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={6}>
-            <TextField
-            fullWidth
-            placeholder=" Medical history"
-            variant="outlined"
-            multiline
-            rows={8}
-            value= {history}
-            onChange = {(e)=>{setHistory(e.target.value)}}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-       */}
-
-   
-        
-      
-
-
-
-
-
+  
       
       </Grid>
       <br/><br/><br/><br/>
@@ -359,14 +236,14 @@ function AddPatientBioData() {
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >
-    Back
+    Cancel
   </Button>
  
-  <Button   variant="contained" onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/add-patient-arrival') }}
+  <Button   variant="contained" onClick={() => {addCandidate(addObject,navigate,'/dashboard/candidate-list') }}
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >
-   {loading?"loading..." :"Next"}
+   {loading?"loading..." :"Submit"}
   </Button>
 </div>
 </Container>
@@ -374,4 +251,4 @@ function AddPatientBioData() {
   );
 }
 
-export default AddPatientBioData;
+export default SettingsPage;
