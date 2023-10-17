@@ -215,7 +215,7 @@ export default function TeacherList({teachers}) {
            
             variant="contained"
             style={{
-              backgroundColor: '#000000' ,
+             backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))" ,
               color: "white",
               fontSize: "15px",
             }}
@@ -231,23 +231,30 @@ export default function TeacherList({teachers}) {
       </div>*/}
       
       <br/>
-      <p style={{fontSize: '26px', marginLeft: '5px',marginBottom:"1rem", color: 'black',display:"flex",justifyContent:"space-between"}}><b>ALL PATIENTS</b>   <Button
+      <p style={{fontSize: '26px', marginLeft: '5px',marginBottom:"1rem", color: 'black',display:"flex",justifyContent:"space-between"}}>
+        <b>ALL PATIENTS</b> 
+         
+         {/*
+          <Button
                    
-                   type="button"
-                    // fullWidth
-                    variant="contained"
-                    style={{
-                      backgroundColor: '#000000' ,
-                      color: "white",
-                      width: "17%",
+              type="button"
+              
+               variant="contained"
+               style={{
+                backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))" ,
+                 color: "white",
+                 width: "17%",
+                 fontSize: "15px",
+               }}
+               sx={{ mt: 7, mb: 2 }}
+               onClick={() => {navigate('/dashboard/add-patient-bio')}}
+             >
+               ADD PATIENT
+                  </Button> */}
+        </p>
 
-                      fontSize: "15px",
-                    }}
-                    sx={{ mt: 7, mb: 2 }}
-                    onClick={() => {navigate('/dashboard/add-patient-bio')}}
-                  >
-                    ADD PATIENT
-                  </Button></p><br/>
+
+        <br/>
       <hr />
       <TableContainer component={Paper}>
         <Table sx={{ maxWidth: 1500,tableLayout:"fixed",backgroundImage:"linear-gradient(#5c7ef4, #5c7ef4)" }} aria-label="custom pagination table">
@@ -296,7 +303,7 @@ export default function TeacherList({teachers}) {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: '#000000' /*"#60A1EC"*/,
+                     backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))" /*"#60A1EC"*/,
                       color: "white",
                       width: "70%",
                       fontSize: "15px",
@@ -315,7 +322,7 @@ export default function TeacherList({teachers}) {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: '#000000' ,
+                     backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))" ,
                       color: "white",
                       width: "70%",
                       fontSize: "15px",

@@ -127,11 +127,13 @@ function AddPatientECG() {
          <Grid item xs={1.5} style={{backgroundColor: '#D7DBA5' ,borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}} 
               >
                   
+                  
+                  <div style={{padding:"0.3rem"}}>
+                   
+                   <img src={IMG1}  alt="blood inv icon"  />
+                   
+                   </div>
                  
-                  <Link to={'/dashboard/add-patient-bloodinv'}>   
-                    <img src={IMG1} style={{marginBottom:"5px",marginLeft:"5px"}} alt="blood inv icon"  />
-                 
-                    </Link>
                 </Grid>
     
        
@@ -163,14 +165,18 @@ function AddPatientECG() {
 
         <Grid container item xs={12} spacing={2} style={{marginTop:"1rem"}}>
        
-    <Grid container item xs={4} spacing={1} style={{display:"flex",alignItems:"center",justifyContent:"center"}} >
+    <Grid container item xs={4} spacing={1} style={{display:"flex",alignItems:"center",justifyContent:"center",gap:"2rem"}} >
         <div  style={{display:"flex",justifyContent:"center",alignItems:"center",height:"110px",width:"110px",backgroundColor: '#21D0C3', borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"-2rem"}} 
               >
                   
-                  <Link to={'/dashboard/add-patient-radiology'}>
+                  
                     
-                    <img src={IMG2} style={{marginBottom:"5px"}} alt="radiology icon"  />
-                    </Link>
+                  <div style={{padding:"0.3rem"}}>
+                   
+                   <img src={IMG2}  alt="radiology icon"  />
+                   
+                   </div>
+                   
 
           </div>
 
@@ -178,10 +184,14 @@ function AddPatientECG() {
           <div  style={{display:"flex",justifyContent:"center",alignItems:"center",height:"110px",width:"110px",backgroundColor: '#00B8D4',border:'4.5px solid #4C4E37', borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"-2rem"}} 
               >
                   
-                  <Link to={'/dashboard/add-patient-ecg'}>
+                
                     
-                    <img src={IMG3} style={{marginBottom:"10px"}} alt="ecg icon"  />
-                    </Link>  
+                  <div style={{padding:"0.3rem"}}>
+                   
+                   <img src={IMG3}  alt="ecg icon"  />
+                   
+                   </div>
+                  
 
           </div>
       
@@ -244,14 +254,14 @@ function AddPatientECG() {
   <div style={{ display: 'flex',margin:"0 auto", justifyContent: 'space-between',width:"60%",gap:"1rem" }}>
  
   <Button  onClick={() => {navigate(-1) }} variant="contained" 
-  style={{ backgroundColor: "#081B85"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
+  style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >
     Back
   </Button>
  
   <Button   variant="contained" onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/add-patient-prescription')}}
-  style={{ backgroundColor: "#081B85"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
+  style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >
    {loading?"loading..." :"Next"}

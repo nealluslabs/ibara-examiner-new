@@ -69,6 +69,8 @@ import AddConditionsRadiology from './pages/AddCondiitonsRadiology';
 import AddConditionsReferral from './pages/AddCondiitonsReferral';
 import AddConditionsBloodInv from './pages/AddConditionsBloodInv';
 
+import AddCandidate from './pages/AddCandidate';
+
 export default function Router() {
   const routes = useRoutes([
    
@@ -121,6 +123,8 @@ export default function Router() {
         { path: 'add-conditions-bloodinv', element: <AddConditionsBloodInv/> },
         { path: 'add-conditions-radiology', element: <AddConditionsRadiology/> },
         { path: 'add-conditions-referral', element: <AddConditionsReferral/> },
+
+        { path: 'add-candidate', element: <AddCandidate/> },
 
      
 

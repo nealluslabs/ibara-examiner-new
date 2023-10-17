@@ -149,9 +149,11 @@ const prescriptionHandler = (prescriptionString)=>{
    
              
              <div style={{backgroundColor: "#A160E4",padding:"0.1rem",border:'4.5px solid #4C4E37', borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}}>
-             <Link to={'/dashboard/add-patient-prescription'}> 
-               <img src={IMG4} style={{marginBottom:"5px",marginLeft:"5px"}} alt="prescription icon"  />
-               </Link>
+             <div style={{padding:"0.3rem"}}>
+                   
+                   <img src={IMG4}  alt="prescription icon"  />
+                   
+                   </div>
             </div>
 
          
@@ -159,9 +161,11 @@ const prescriptionHandler = (prescriptionString)=>{
           
              
            <div style={{backgroundColor: '#E5EEF9', padding:"0.1rem",borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}}>
-             {/*<Link to={'/dashboard/add-patient-referral'}> */} 
-               <img src={IMG5} style={{marginBottom:"5px"}} alt="referral icon"  />
-               {/*</Link> */}
+           <div style={{padding:"0.3rem"}}>
+                   
+                   <img src={IMG5}  alt="referrals icon"  />
+                   
+                   </div>
           </div> 
 
            
@@ -192,14 +196,14 @@ const prescriptionHandler = (prescriptionString)=>{
   <div style={{ display: 'flex',margin:"0 auto", justifyContent: 'space-between',width:"60%",gap:"1rem" }}>
  
   <Button  onClick={() => {navigate(-1) }} variant="contained" 
-  style={{ backgroundColor: "#081B85"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
+  style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >
     Back
   </Button>
  
   <Button   variant="contained" onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/add-patient-referral') }}
-  style={{ backgroundColor: "#081B85"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
+  style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >
    {loading?"loading..." :"Next"}

@@ -108,7 +108,7 @@ function EditTeacher() {
           {/* <div style={{ display: 'flex', justifyContent: 'center', gap:'1rem'}}>
         
             <Button   variant="contained" 
-          style={{ backgroundColor: "#000000", paddingTop: '10px', paddingBottom: '10px', 
+          style={{backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))", paddingTop: '10px', paddingBottom: '10px', 
           paddingRight: '30px', paddingLeft: '30px'}}   onClick={() => {  navigate('/dashboard/add-chapter')}}
           >
            ADD CHAPTER
@@ -116,7 +116,7 @@ function EditTeacher() {
         
         
           <Button   variant="contained" 
-          style={{ backgroundColor: "#000000", paddingTop: '10px', paddingBottom: '10px', 
+          style={{backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))", paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}   onClick={() => {  navigate('/dashboard/add-lesson')}}
           >
            ADD LESSON
@@ -130,7 +130,7 @@ function EditTeacher() {
     {/* <div style={{height:"2px", width:"80%",borderBottom:"1px solid black",position:"absolute",left:"20rem",top:"18rem"}}></div>*/}
      <br/> <br/> <br/>
 
-     <Grid container spacing={2}>
+     <Grid container spacing={2} style={{margin:"0 auto",backgroundColor:"#081B85",width:"70%",padding:"1rem",borderRadius:"3rem"}}>
         
      <Grid container item xs={12} spacing={2}>
           <Grid item xs={3}>
@@ -145,6 +145,7 @@ function EditTeacher() {
 
           <Grid item xs={7}>
             <TextField
+             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
             type="number"
             fullWidth
             placeholder=" add screen time"
@@ -179,6 +180,7 @@ function EditTeacher() {
 
           <Grid item xs={7}>
             <TextField
+             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
             fullWidth
             placeholder=" enter first name."
             variant="outlined"
@@ -209,6 +211,7 @@ function EditTeacher() {
 
           <Grid item xs={7}>
             <TextField
+             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
             fullWidth
             placeholder=" enter last name."
             variant="outlined"
@@ -236,6 +239,7 @@ function EditTeacher() {
 
           <Grid item xs={7}>
             <TextField
+             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
             fullWidth
             placeholder=" enter last name."
             variant="outlined"
@@ -267,7 +271,7 @@ function EditTeacher() {
 
           <Grid item xs={7}>
           <Select
-         style={{width:"100%"}}
+          style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={icon}
@@ -292,34 +296,6 @@ function EditTeacher() {
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
              <div >
-              HISTORY
-             </div>
-      
-            </Typography>
-          
-          </Grid>
-
-          <Grid item xs={7}>
-            <TextField
-            fullWidth
-            placeholder=" Medical history"
-            variant="outlined"
-            multiline
-            rows={8}
-            value= {history}
-            onChange = {(e)=>{setHistory(e.target.value)}}
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-
-
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
-             <div >
              COMPLAINT
              </div>
       
@@ -329,7 +305,8 @@ function EditTeacher() {
 
           <Grid item xs={7}>
           <Select
-         style={{width:"100%"}}
+           style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+           
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={complaint}
@@ -349,16 +326,49 @@ function EditTeacher() {
         </Select>
           </Grid>
         </Grid>
-        {/* upload section */}
+
+
+
+        <Grid container item xs={12} spacing={2}>
+          <Grid item xs={3}>
+            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"center"}}variant="p" component="p">
+             <div >
+              HISTORY
+             </div>
+      
+            </Typography>
+          
+          </Grid>
+
+          <Grid item xs={7}>
+            <TextField
+             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+            fullWidth
+            placeholder=" Medical history"
+            variant="outlined"
+            multiline
+            rows={8}
+            value= {history}
+            onChange = {(e)=>{setHistory(e.target.value)}}
+            
+            />
+            
+            
+          </Grid>
+        </Grid>
+
+
+       
+        
         
 
 
       
       </Grid>
       <br/><br/><br/><br/>
-  <div style={{ display: 'flex', justifyContent: 'center' , gap:"1rem" }}>
+  <div style={{ display: 'flex',margin:"0 auto", justifyContent: 'space-between',width:"60%",gap:"1rem" }}>
   <Button  onClick={() => {navigate(-1) }} variant="contained" 
-  style={{ backgroundColor: "#000000"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
+  style={{backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >
     CANCEL
@@ -368,7 +378,7 @@ function EditTeacher() {
   
   
   <Button  onClick={() => {updateThisSubject(uid,updateObject,navigate)}} variant="contained"  disabled={loading}
-  style={{ backgroundColor: "#000000"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
+  style={{backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >
    {loading?"Loading...": "SUBMIT"}

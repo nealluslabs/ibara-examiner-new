@@ -170,10 +170,11 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
               >
                   
                  
-                  <Link to={'/dashboard/add-conditions-bloodinv'}>   
-                    <img src={IMG1} style={{marginBottom:"5px",marginLeft:"5px"}} alt="blood inv icon"  />
-                 
-                    </Link>
+                  <div style={{padding:"0.3rem"}}>
+                   
+                   <img src={IMG1}  alt="blood inv icon"  />
+                   
+                   </div>
                 </Grid>
     
        
@@ -214,10 +215,11 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
         <Grid item xs={1.5} style={{backgroundColor: '#21D0C3',border:'4.5px solid #4C4E37', borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}} 
               >
                   
-                  <Link to={'/dashboard/add-conditions-radiology'}>
+                  <div style={{padding:"0.3rem"}}>
+                   
+                    <img src={IMG2}  alt="radiology icon"  />
                     
-                    <img src={IMG2} style={{marginBottom:"5px"}} alt="radiology icon"  />
-                    </Link>
+                    </div>
 
                 </Grid>
        
@@ -245,10 +247,11 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
         <Grid item xs={1.5} style={{backgroundColor: '#E5EEF9', borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}} 
               >
                   
-                  <Link to={'/dashboard/add-conditions-referral'}>
-                    
-                    <img src={IMG3} style={{marginBottom:"10px"}} alt="ecg icon"  />
-                    </Link>  
+                  <div style={{padding:"0.3rem"}}>
+                   
+                   <img src={IMG3}  alt="ecg icon"  />
+                   
+                   </div>
 
                 </Grid>
           
@@ -281,14 +284,14 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
   <div style={{ display: 'flex',margin:"0 auto", justifyContent: 'space-between',width:"60%",gap:"1rem" }}>
  
   <Button  onClick={() => {navigate(-1) }} variant="contained" 
-  style={{ backgroundColor: "#081B85"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
+  style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >
     Back
   </Button>
  
   <Button   variant="contained" onClick={() => {navigate('/dashboard/add-conditions-referral') }}
-  style={{ backgroundColor: "#081B85"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
+  style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
   paddingRight: '30px', paddingLeft: '30px'}}
 >
    {loading?"loading..." :"Next"}

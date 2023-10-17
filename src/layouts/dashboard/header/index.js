@@ -99,14 +99,14 @@ export default function Header({ onOpenNav }) {
           </Box>
 
           <Box sx={{ width: '100%' }}>
-          <Link to={"/dashboard/add-conditions-bloodinv"}>
+          <Link to={"/dashboard/add-patient-bio"}>
         <img style={{height:"4rem"}}  src={settings} />
         <p style={{color:"black",width:"max-content"}}>Set Conditions </p>
         </Link>
           </Box>
 
           <Box sx={{ width: '100%' }}>
-          <Link to={"/dashboard/treatments"}>
+          <Link to={"/dashboard/add-conditions-bloodinv"}>
         <img style={{height:"4rem"}}  src={injection} />
         <p style={{color:"black"}}>Treatments </p>
         </Link>

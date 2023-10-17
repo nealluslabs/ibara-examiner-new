@@ -12,7 +12,7 @@ import { isItLoading, saveAllGroup ,saveEmployeer,
         saveComplaintInfo,saveAllTreatmentCategories, savePatientProcessSteps} from '../reducers/group.slice';
 import firebase from "firebase/app";
 
-import { getTeachers } from './job.action';
+import { getJobs, getTeachers } from './job.action';
 
 
 export const uploadUserSettings = (groupData = 0, file = 0, user = 0) => async (dispatch) => {
@@ -508,6 +508,41 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
 
 
  };
+
+
+
+ export const fetchAddCandidate = (addObject,navigate) => async (dispatch) => {
+
+
+ db.collection("Candidates").add(
+  {
+    
+  firstName:addObject.firstName,
+  lastName:addObject.lastName,
+  email:addObject.email,
+  password:addObject.password,
+  registeredOn:new Date()
+
+  }
+).then((doc) => {
+   
+   db.collection("Candidates").doc(doc.id).update({
+  uid:doc.id
+   })
+
+  console.log("the new  Candidate's id is",doc.id)
+  dispatch(getJobs())
+   notifySuccessFxn(`new Candidate: ${addObject.firstName + " " + addObject.lastName} added!`)
+   setTimeout(()=>{navigate('/dashboard/candidate-list')},1000)
+}).catch((error) => {
+ console.log("Error adding Candidate:", error);
+ notifyErrorFxn(error)
+
+
+});
+
+
+ }
 
 
  export const addTeacher = (addObject,navigate) => async (dispatch) => {
