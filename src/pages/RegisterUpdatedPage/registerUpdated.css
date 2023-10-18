@@ -20,7 +20,8 @@ text-decoration: none;
    
     font-family: 'Arial', serif !important;
     color:white;
-  
+    
+    
     }
 
     body {
@@ -29,7 +30,8 @@ text-decoration: none;
         background-repeat: no-repeat;
         background-attachment: fixed;
       /* background-color: #3EA4EE !important;*/
-        
+     
+    
     }
 
 .container-center-horizontal {

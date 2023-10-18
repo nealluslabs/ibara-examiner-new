@@ -36,8 +36,11 @@ const StyledRoot = styled(AppBar)(({ theme }) => ({
   ...bgBlur({ color: theme.palette.background.default }),
   backgroundColor: '#081B85',
   boxShadow: 'none',
+ 
+ 
   [theme.breakpoints.up('lg')]: {
     width: `calc(100% - ${NAV_WIDTH + 1}px)`,
+   
   },
 }));
 
@@ -46,6 +49,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   [theme.breakpoints.up('lg')]: {
     minHeight: HEADER_DESKTOP,
     padding: theme.spacing(0, 5),
+    
   },
 }));
 
@@ -68,7 +72,7 @@ export default function Header({ onOpenNav }) {
             display: { lg: 'none' },
           }}
         >
-          <Iconify icon="eva:menu-2-fill" />
+         
         </IconButton>
         <Typography variant="h4" sx={{color: '#000000', fontSize: '36px' }}>
        
@@ -84,14 +88,14 @@ export default function Header({ onOpenNav }) {
        
        
         <Grid item xs={12} sx={{ display: 'flex',justifyContent:"space-between",gap:"4rem"  ,alignItems: 'center' }}>
-         <Box sx={{ width: '100%' }}>
+         <Box sx={{ width: '100%',paddingTop:"0.8rem" }}>
           <Link to={"/dashboard/candidate-list"}>
         <img  style={{height:"4rem"}} src={doctor} />
         <p  style={{color:"white",marginTop:"1.1rem"}}>Candidates </p>
         </Link>
           </Box>
 
-          <Box sx={{ width: '100%' }}>
+          <Box sx={{ width: '100%',paddingTop:"0.8rem" }}>
           <Link to={"/dashboard/patient-list"}>
         <img style={{height:"4rem"}}  src={patient} />
         <p style={{color:"white",marginTop:"1.1rem"}}>Patients </p>
@@ -100,14 +104,14 @@ export default function Header({ onOpenNav }) {
 
 
 
-          <Box sx={{ width: '100%' }}>
+          <Box sx={{ width: '100%',paddingTop:"0.8rem" }}>
           <Link to={"/dashboard/add-conditions-bloodinv"}>
         <img style={{height:"4rem"}}  src={injection} />
         <p style={{color:"white",marginTop:"1.1rem"}}>Treatments </p>
         </Link>
           </Box>
 
-          <Box sx={{ width: '100%' }}>
+          <Box sx={{ width: '100%',paddingTop:"0.8rem" }}>
           <Link to={"/dashboard/settings"}>
         <img style={{height:"4rem"}}  src={settings} />
         <p style={{color:"white",marginTop:"1.1rem",width:"max-content"}}>Settings </p>

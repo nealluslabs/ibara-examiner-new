@@ -189,7 +189,7 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
 
      <Grid container item xs={12} spacing={1} style={{marginTop:"1rem"}}>
      
-         <Grid item xs={1.5} style={{backgroundColor: '#D7DBA5',border:'4.5px solid #4C4E37' ,borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}} 
+         <Grid item xs={1.5} style={{backgroundColor: '#D7DBA5',border:'4.5px solid #4C4E37' ,borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem",position:"relative",top:"-0.3rem"}} 
               >
                   
                  
@@ -239,7 +239,7 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
 
         <Grid container item xs={12} spacing={2} style={{marginTop:"1rem"}}>
        
-        <Grid item xs={1.5} style={{backgroundColor: '#21D0C3', borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}} 
+        <Grid item xs={1.5} style={{backgroundColor: '#21D0C3', borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem",position:"relative",top:"-0.3rem"}} 
               >
                   
                   <div style={{padding:"0.3rem"}}>
@@ -250,7 +250,7 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
 
                 </Grid>
        
-          <Grid item xs={7}>
+          <Grid item xs={7} style={{marginTop:"-0.5rem"}}>
             <TextField
             style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
             fullWidth
@@ -284,7 +284,7 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
           
 
          
-          <Grid item xs={7} style={{position:"relative",top:"-3rem"}}> 
+          <Grid item xs={7} style={{position:"relative",top:"-3.3rem"}}> 
             <center>
  <Button onClick={() => { addThisInvestigation(addObject,allTreatmentCategories)}}
  component="label" variant="contained" style={{ minHeight: '45px', minWidth: '195px',borderRadius:"1rem", backgroundColor: '#081B85', marginTop: '15px' }}>
@@ -309,7 +309,7 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
 
  </Grid>
       <br/><br/><br/><br/>
-  <div style={{ display: 'flex',margin:"0 auto", justifyContent: 'space-between',width:"60%",gap:"1rem" }}>
+  <div style={{ display: 'flex',margin:"0 auto", justifyContent: 'space-between',width:"60%",gap:"1rem",position:"relative",top:"-0.22rem" }}>
  
   <Button  onClick={() => {navigate(-1) }} variant="contained" 
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 

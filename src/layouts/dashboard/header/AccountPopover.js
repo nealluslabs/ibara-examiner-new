@@ -71,6 +71,10 @@ export default function AccountPopover() {
             '& .MuiMenuItem-root': {
               typography: 'body2',
               borderRadius: 0.75,
+              display:"flex",
+              justifyContent:"center",
+              alignItems:"center",
+              
             },
           },
         }}
@@ -86,7 +90,11 @@ export default function AccountPopover() {
           </Grid>
           <Box sx={{ my: 1.5, px: 1 }}>
           <Typography variant="subtitle2" style={{color:"black"}} noWrap>
-            {user?user.firstName + " " + user.lastName:"Globus Contractors"}
+            
+            
+            {user?user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1) + " " + user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1):"Examiner Ibara"}
+          
+          
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
             {user?user.email:'ut1@ibara.com'}
@@ -97,16 +105,19 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-       <MenuItem onClick={() => dispatch(navigate('/dashboard/settings'))} sx={{ pt: 1 }}>
+       <MenuItem onClick={() => dispatch(navigate('/dashboard/settings'))} sx={{ pt: 1 ,ml:2}}>
           Settings
         </MenuItem>
       
        
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={() => dispatch(logout(navigate))} sx={{ m: 1 }} >
-          Logout
+        <MenuItem  sx={{m: 1 ,padding:"1rem"}} onClick={() => dispatch(logout(navigate))} >
+      
+            Logout
+       
         </MenuItem>
+
       </Popover>
     </>
   );

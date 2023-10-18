@@ -37,7 +37,7 @@ function SettingsPage() {
 
   const { user } = useSelector((state) => state.auth);
   const { patientProcessSteps } = useSelector((state) => state.group);
-   console.log("patient pp",patientProcessSteps)
+   console.log("patient process",patientProcessSteps)
 
   const { complaints } = useSelector((state) => state.jobs);
   const [complaintArr, setComplaintArr] = useState(complaints?complaints:[]/*teachers*/);
@@ -97,7 +97,7 @@ function SettingsPage() {
 
   return (
     <>
-    <Container maxWidth="xl" >
+    <Container maxWidth="xl"  >
 
 
 
@@ -109,7 +109,7 @@ function SettingsPage() {
     
    
 
-     <Grid container spacing={2} >
+     <Grid container spacing={2}>
 
         <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginBottom:"1rem"}}variant="p" component="p">

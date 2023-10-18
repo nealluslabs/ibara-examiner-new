@@ -303,11 +303,11 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
           
 
          
-          <Grid item xs={7} style={{position:"relative",top:"-3rem"}}>
+          <Grid item xs={7} style={{position:"relative",top:"-3.1rem"}}>
             <center>
                <Button onClick={() => { addThisInvestigation(addObject,allTreatmentCategories)}}
                component="label" variant="contained" style={{ minHeight: '45px', minWidth: '195px',borderRadius:"1rem", backgroundColor: '#081B85', marginTop: '15px' }}>
-                 <b>ADD</b>
+                 <b style={{position:"relative",top:"1px"}}>ADD</b>
                 
               </Button>
           </center>
