@@ -1429,7 +1429,11 @@ export const fetchFinalProcessAndSubmit = (stepsObject,navigate,navigateUrl) => 
         complaint:stepsObject.complaint,
         //complaintId:stepsObject.complaintId,
         screenTime:stepsObject.screenTime,
-        arrivalTime:stepsObject.arrivalTime,
+        waitTime:stepsObject.arrivalTime,
+        elapsed:false,
+        waitElapsed:false,
+        bedNumber:null,
+
           registeredOn:new Date()
   
         }
@@ -1507,9 +1511,9 @@ db.collection("Complaints")
   
       console.log("the new  Complaints id is",doc.id)
       dispatch(getTeachers())
-       notifySuccessFxn(`new Complaint ${stepsObject.complaint} added!`)
+       //notifySuccessFxn(`new Complaint ${stepsObject.complaint} added!`)
       
-       setTimeout(()=>{navigate('/dashboard/complaint-list')},1000)
+       setTimeout(()=>{navigate('/dashboard/patient-list')},1000)
    }).catch((error) => {
      console.log("Error adding cOMPLAINT:", error);
     

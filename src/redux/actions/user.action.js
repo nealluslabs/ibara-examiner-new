@@ -360,7 +360,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                       usedConnection: 0
                     })
                     .then(() => {
-                        console.log('Reset sucessfully');
+                        console.log('Reset successfully');
                       })
                       .catch((error) => {
                         var errorMessage = error.message;

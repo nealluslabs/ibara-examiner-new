@@ -340,7 +340,7 @@ function AddTeacher() {
           </Grid>
 
           <Grid item xs={7}>
-           <p style={{fontSize:"25px"}}>Succesfully Treated</p>
+          <p style={{fontSize:"25px"}}> {patient && (patient.overallGrade && Number(patient.overallGrade) >= 80 ? 'Successfully Treated':'Not Successfully Treated') } </p>
             
             
           </Grid>
