@@ -17,11 +17,63 @@ import IMG3 from 'src/assets/images/intervention.png'
 import DEFAULTIMG from 'src/assets/images/cooler-img.png'
 
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: '4rem',
+    paddingRight: '4rem',
+    color:"black"
+  },
+  searchInput: {
+    background: '#FFFFFF',
+   
+    border: '1px solid #00000026',
+    padding: '10px',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    // marginRight: theme.spacing(2),
+    width: '100%',
+    minWidth: '100%',
+    '& .MuiInputBase-input': {
+      color: 'grey',
+    },
+    '& .MuiInputBase-input::placeholder': {
+      color: 'grey',
+    },
+    '& .MuiInput-underline:before': {
+      borderBottomColor: 'grey',
+    },
+    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+      borderBottomColor: 'grey',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'grey',
+    },
+  },
+
+  select: {
+    '&:before': {
+        borderColor: "black",
+    },
+    '&:after': {
+        borderColor: "black",
+    }
+  },
+  icon: {
+    fill: "black",
+}
+
+
+
+}));
+
+
 function AddPatientRadiology() {
   const navigate = useNavigate();
   const location = useLocation()
  // console.log("location is",location.state.levelName,location.state.uid)
-
+const classes = useStyles()
   
   const dispatch = useDispatch();
 
@@ -196,8 +248,13 @@ console.log("patient process steps so far--->",patientProcessSteps)
   
   
      <Grid item xs={7}>
-     <Select
-         style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+      <Select
+     style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
+         inputProps={{
+          classes: {
+              icon: classes.icon,
+          },
+      }}
         
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -242,10 +299,15 @@ console.log("patient process steps so far--->",patientProcessSteps)
 
            </Grid>
     
-           <Grid item xs={7}>
-           <Select
-         style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+           <Grid item xs={7}  style={{marginTop:"-3rem"}}>
+            <Select
+           style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
         
+         inputProps={{
+          classes: {
+              icon: classes.icon,
+          },
+      }}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={radiologyTestIdFake}
@@ -285,9 +347,9 @@ console.log("patient process steps so far--->",patientProcessSteps)
            </Grid>
     
     
-     <Grid item xs={7}>
+     <Grid item xs={7}  style={{marginTop:"-6rem"}}>
      {radiologyTestArray  &&
-              <div style={{padding: '10px', border: '1px solid #00000033',width:"100%" }}>
+              <div style={{padding: '10px', border: '1px solid #00000033',width:"100%",backgroundColor:"white",borderRadius:"1.3rem" }}>
                        <> 
                           &nbsp; 
                         {  radiologyTestArray.map((chipItem,index)=>(
@@ -317,9 +379,9 @@ console.log("patient process steps so far--->",patientProcessSteps)
      
      </Grid>
 
-     <Grid item xs={7}>
+     <Grid item xs={7} style ={{marginTop:"-6rem"}}>
        <TextField
-       style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%",marginLeft:"1.6rem"}}
+       style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%",marginLeft:"1.6rem"}}
        fullWidth
        placeholder=" Response time in minutes"
        variant="outlined"
@@ -340,39 +402,36 @@ console.log("patient process steps so far--->",patientProcessSteps)
 
 
 
-   <Grid container item xs={12} spacing={2} style={{marginTop:"3rem"}}>
-
-<Grid item xs={3}>
-<Typography  style={{display:"flex",flexDirection:"column",alignItems:"flex-start",justifyContent:"flex-end",marginTop:"3rem"}}variant="p" component="p">
-<div  style={{color:"black"}}>
-ADD IMAGE:
-</div>
-
-</Typography>
-
-</Grid>
+   <Grid container item xs={12} spacing={2} style={{marginTop:"-3rem"}}>
 
 
+   <Grid item xs={3}>
+    <Typography  style={{display:"flex",flexDirection:"column",alignItems:"flex-start",justifyContent:"flex-end",marginTop:"1rem"}}variant="p" component="p">
+     <div  style={{color:"white"}}>
+     ADD IMAGE:
+     </div>
 
-<Grid item xs={7}  style={{border: '0px solid red'}}>
-<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }}>
-<CardMedia
-style={{ border: '0.2px solid black', backgroundColor: '#fff', width: '240px' }}
-component="img"
-height="240"
-width="540"
-image={file?file : DEFAULTIMG}
-alt="IMG"
-/> 
-<p style={{color:"black"}}> {selectedFile && selectedFile.selectedFileName ?selectedFile.selectedFileName  :" "} </p>
-<Button component="label" variant="contained" style={{ minHeight: '45px', minWidth: '145px', backgroundColor: '#081B85', marginTop: '15px' }}>
-<b>UPLOAD</b>
-<input
- type="file"
- style={{ display: 'none' }}
- onChange={handleselectedFile}
-/>
-</Button>
+    </Typography>
+  
+  </Grid>
+
+
+
+
+<Grid item xs={7}  style={{border: '0px solid red', marginTop:"0rem"}}>
+<div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', gap:"1.1rem" }}>
+  
+ 
+  <Button component="label" variant="contained" style={{ minHeight: '45px', minWidth: '195px',borderRadius:"1rem", backgroundColor: '#081B85', marginTop: '15px' }}>
+    <b>UPLOAD</b>
+    <input
+      type="file"
+      style={{ display: 'none' }}
+      onChange={handleselectedFile}
+    />
+  </Button>
+
+  <p style={{color:"white"}}> {selectedFile && selectedFile.selectedFileName ?selectedFile.selectedFileName  :" "} </p>
 </div>
 </Grid>
 </Grid>
@@ -385,14 +444,14 @@ alt="IMG"
  
   <Button  onClick={() => {navigate(-1) }} variant="contained" 
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
     Back
   </Button>
  
   <Button   variant="contained" onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/add-patient-ecg') }}
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
    {loading?"loading..." :"Next"}
   </Button>

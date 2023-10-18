@@ -16,12 +16,64 @@ import IMG2 from 'src/assets/images/radiology.png'
 import IMG3 from 'src/assets/images/referrals.png'
 import DEFAULTIMG from 'src/assets/images/cooler-img.png'
 
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: '4rem',
+    paddingRight: '4rem',
+    color:"black"
+  },
+  searchInput: {
+    background: '#FFFFFF',
+   
+    border: '1px solid #00000026',
+    padding: '10px',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    // marginRight: theme.spacing(2),
+    width: '100%',
+    minWidth: '100%',
+    '& .MuiInputBase-input': {
+      color: 'grey',
+    },
+    '& .MuiInputBase-input::placeholder': {
+      color: 'grey',
+    },
+    '& .MuiInput-underline:before': {
+      borderBottomColor: 'grey',
+    },
+    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+      borderBottomColor: 'grey',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'grey',
+    },
+  },
+
+  select: {
+    '&:before': {
+        borderColor: "black",
+    },
+    '&:after': {
+        borderColor: "black",
+    }
+  },
+  icon: {
+    fill: "black",
+}
+
+
+
+}));
+
 function AddConditionsReferral() {
   const navigate = useNavigate();
   const location = useLocation()
  // console.log("location is",location.state.levelName,location.state.uid)
-
- 
+const classes = useStyles()
   const dispatch = useDispatch();
 
   const [bloodInv,setBloodInv] = useState([])
@@ -99,7 +151,7 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
   }
 
  
-  const addThisInvestigation = async(addObject) => {
+  const addThisInvestigation = async(addObject,allTreatmentCategories) => {
     
     if(!title){
       notifyErrorFxn("Please make sure to fill in all fields.")
@@ -107,7 +159,7 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
     else{
     
     setLoading(true)
-    dispatch(addSubjectReferral(addObject))
+    dispatch(addSubjectReferral(addObject,allTreatmentCategories))
    
     // console.log("identity is",identity)
     // console.log("update this subject is updating.........")
@@ -175,8 +227,7 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
     
        
           <Grid item xs={7}>
-          {/*<Select
-         style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+          {/*style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
         
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -222,7 +273,7 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
        
           <Grid item xs={7}>
             <TextField
-            style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+            style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
             fullWidth
             placeholder=" Add Referral"
             variant="outlined"
@@ -254,11 +305,11 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
 
          
         
-                <Grid item xs={7}>
+                <Grid item xs={7} style={{position:"relative",top:"-3rem"}}>
             <center>
-               <Button  onClick={() => { addThisInvestigation(addObject)}}
-               component="label" variant="contained" style={{ minHeight: '45px', minWidth: '145px', backgroundColor: '#081B85', marginTop: '15px' }}>
-                 <b>SUBMIT</b>
+               <Button  onClick={() => { addThisInvestigation(addObject,allTreatmentCategories)}}
+               component="label" variant="contained" style={{ minHeight: '45px', minWidth: '195px',borderRadius:"1rem", backgroundColor: '#081B85', marginTop: '15px' }}>
+                 <b>ADD</b>
                  
               </Button>
           </center>
@@ -279,16 +330,16 @@ const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state
  
   <Button  onClick={() => {navigate(-1) }} variant="contained" 
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
     Back
   </Button>
  
   <Button   variant="contained" onClick={() => {navigate('/dashboard/home') }}
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
-   {loading?"loading..." :"Finish"}
+   {loading?"loading..." :"Submit"}
   </Button>
 </div>
 </Container>

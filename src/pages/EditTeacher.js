@@ -145,7 +145,7 @@ function EditTeacher() {
 
           <Grid item xs={7}>
             <TextField
-             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+             style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
             type="number"
             fullWidth
             placeholder=" add screen time"
@@ -180,7 +180,7 @@ function EditTeacher() {
 
           <Grid item xs={7}>
             <TextField
-             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+             style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
             fullWidth
             placeholder=" enter first name."
             variant="outlined"
@@ -211,7 +211,7 @@ function EditTeacher() {
 
           <Grid item xs={7}>
             <TextField
-             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+             style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
             fullWidth
             placeholder=" enter last name."
             variant="outlined"
@@ -239,7 +239,7 @@ function EditTeacher() {
 
           <Grid item xs={7}>
             <TextField
-             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+             style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
             fullWidth
             placeholder=" enter last name."
             variant="outlined"
@@ -271,7 +271,7 @@ function EditTeacher() {
 
           <Grid item xs={7}>
           <Select
-          style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+          style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={icon}
@@ -305,7 +305,7 @@ function EditTeacher() {
 
           <Grid item xs={7}>
           <Select
-           style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+           style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
            
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -342,7 +342,7 @@ function EditTeacher() {
 
           <Grid item xs={7}>
             <TextField
-             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+             style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
             fullWidth
             placeholder=" Medical history"
             variant="outlined"

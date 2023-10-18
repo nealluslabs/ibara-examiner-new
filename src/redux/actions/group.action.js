@@ -683,7 +683,7 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
 
 
 
- export const addSubject = (addObject) => async (dispatch) => {
+ export const addSubject = (addObject,allTreatmentCategories) => async (dispatch) => {
 
 
   db.collection("TreatmentTests")
@@ -715,6 +715,18 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
       uid:doc.id
        })
   
+       dispatch((saveAllTreatmentCategories([...allTreatmentCategories,{
+
+        body:addObject.body?addObject.body:"lorem ipsum",
+        title:addObject.title,
+        treatmentId:addObject.treatmentId,
+        treatmentCategoryId:addObject.treatmentCategoryId,
+        specific:addObject.specific?addObject.specific:"lorem ipsum",
+        responseTime:addObject.response,
+        answerImage:addObject.answerImage,
+        uid:doc.id
+
+       }])))
       console.log("the documents id is",doc.id)
        notifySuccessFxn(` ${addObject.title} added!`)
   
@@ -819,7 +831,7 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
  };
 
 
- export const addSubjectReferral = (addObject) => async (dispatch) => {
+ export const addSubjectReferral = (addObject,allTreatmentCategories) => async (dispatch) => {
 
 
   db.collection("TreatmentTests")
@@ -859,13 +871,26 @@ export const fetchComplaintInfo = (uid) =>async (dispatch) => {
       treatmentCategoryId:id,
       specific:addObject.specific?addObject.specific:"lorem ipsum",
       responseTime:addObject.response,
-      answerImage:addObject.answerImage,
+      
     })
     .then((doc) => {
       
       db.collection("TreatmentTests").doc(doc.id).update({
      uid:doc.id
       })
+
+
+      dispatch((saveAllTreatmentCategories([...allTreatmentCategories,{
+
+        body:addObject.body?addObject.body:"lorem ipsum",
+        title:addObject.title,
+        treatmentId:addObject.treatmentId,
+        treatmentCategoryId:addObject.treatmentCategoryId,
+        specific:addObject.specific?addObject.specific:"lorem ipsum",
+        responseTime:addObject.response,
+        uid:doc.id
+
+       }])))
     
      console.log("the documents id is",doc.id)
       notifySuccessFxn(` ${addObject.title} added!`)

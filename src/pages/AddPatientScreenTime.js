@@ -121,14 +121,14 @@ function AddPatientScreenTime() {
  
   <Button  onClick={() => {navigate(-1) }} variant="contained" 
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
     Back
   </Button>
  
   <Button   variant="contained"onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/add-patient-history') }}
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
    {loading?"loading..." :"Next"}
   </Button>

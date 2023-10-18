@@ -50,6 +50,23 @@ function SettingsPage() {
 
 
 
+  const [selectedFile, setSelectedFile] = useState({selectedFile:patientProcessSteps &&patientProcessSteps.bloodInvAnswerImage?patientProcessSteps.bloodInvAnswerImage:[], selectedFileName:patientProcessSteps &&patientProcessSteps.bloodInvAnswerImage?patientProcessSteps.bloodInvAnswerImage.name: []});
+  const [file,setFile] = useState(patientProcessSteps && patientProcessSteps.bloodInvAnswerImage?patientProcessSteps.bloodInvAnswerImage:null)
+
+
+  const handleselectedFile = event => {
+    setSelectedFile({
+        selectedFile: event.target.files[0],
+        selectedFileName: event.target.files[0].name
+    });
+
+    setFile(URL.createObjectURL(event.target.files[0]));
+    
+};
+
+
+
+
   const addObject ={
   ...patientProcessSteps,
     firstName,
@@ -94,8 +111,17 @@ function SettingsPage() {
 
      <Grid container spacing={2} >
 
+        <Grid item xs={3}>
+            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginBottom:"1rem"}}variant="p" component="p">
+            <div>
+             RESET PASSWORD
+             </div>
+      
+            </Typography>
+          
+          </Grid>
 
-     <Grid container spacing={2} style={{margin:"0 auto",backgroundColor:"#081B85",width:"80%",padding:"1rem",borderRadius:"3rem"}}>
+     <Grid container item xs={9}spacing={2} style={{margin:"0 auto",backgroundColor:"#081B85",width:"70%",padding:"1rem",borderRadius:"1rem",marginBottom:"4rem",paddingBottom:"2rem"}}>
      <Grid container item xs={12} spacing={1}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
@@ -110,7 +136,7 @@ function SettingsPage() {
           <Grid item xs={7}>
             <TextField
             fullWidth
-            placeholder=" Add first name."
+            placeholder=" enter old password."
             variant="outlined"
             multiline
             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem"}}
@@ -140,7 +166,7 @@ function SettingsPage() {
             <TextField
             fullWidth
             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem"}}
-            placeholder=" Add last name"
+            placeholder=" Add new password"
             variant="outlined"
             multiline
             maxRows={2}
@@ -153,51 +179,25 @@ function SettingsPage() {
           </Grid>
         </Grid>
 
+       </Grid>
 
 
-        <Grid container item xs={12} spacing={2}>
-          <Grid item xs={3}>
-            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
+       <Grid item xs={3}>
+            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginBottom:"2rem"}}variant="p" component="p">
             <div >
-             CONFIRM NEW PASSWORD:
+             EXAM PASS MARK
              </div>
       
             </Typography>
           
           </Grid>
 
-          <Grid item xs={7}>
-            <TextField
-            
-            fullWidth
-            style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem"}}
-            placeholder=" Add age"
-            variant="outlined"
-            multiline
-            maxRows={2}
-            value= {email}
-            onChange = {(e)=>{
-              if(Number(e.target.value) ||e.target.value=== ''){
-              setEmail(e.target.value)}
-              }
-            }
-            
-            />
-            
-            
-          </Grid>
-        </Grid>
-
-       </Grid>
-
-
-
-
-        <Grid container item xs={12} spacing={2}>
+         
+        <Grid container item xs={12}  spacing={2} style={{margin:"0 auto",backgroundColor:"#081B85",maxWidth:"76%",padding:"1rem",borderRadius:"1rem",marginBottom:"4rem",paddingBottom:"2rem"}}>
           <Grid item xs={3}>
             <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginRight:"2rem"}}variant="p" component="p">
             <div >
-             PASSWORD:
+             SUCCESS MARK:
              </div>
       
             </Typography>
@@ -209,7 +209,7 @@ function SettingsPage() {
             
             fullWidth
             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem"}}
-            placeholder=" Add complaint"
+            placeholder=" change success mark"
             variant="outlined"
             multiline
             maxRows={2}
@@ -225,7 +225,34 @@ function SettingsPage() {
         </Grid>
 
      
+        <Grid item xs={3}>
+            <Typography  style={{display:"flex",alignItems:"center",justifyContent:"flex-end",marginBottom:"1rem"}}variant="p" component="p">
+            <div >
+             PROFILE IMAGE
+             </div>
+      
+            </Typography>
+          
+          </Grid>
 
+        <Grid container item xs={12} spacing={2} style={{margin:"0 auto",backgroundColor:"#081B85",maxWidth:"76%",padding:"1rem",borderRadius:"1rem",marginBottom:"4rem",paddingBottom:"2rem"}}>
+        <Grid item xs={12}  style={{border: '0px solid red', display: 'flex',alignItems: 'center', justifyContent: 'center'}}>
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center',gap:"1rem" }}>
+            
+                 
+                  <Button component="label" variant="contained" style={{ minHeight: '45px', minWidth: '145px', backgroundColor: '#081BC5', marginTop: '15px' }}>
+                    <b>UPLOAD</b>
+                    <input
+                      type="file"
+                      style={{ display: 'none' }}
+                      onChange={handleselectedFile}
+                    />
+                  </Button>
+
+                  <p style={{color:"white"}}> {selectedFile && selectedFile.selectedFileName ?selectedFile.selectedFileName  :" "} </p>
+          </div>
+       </Grid>
+        </Grid>
   
       
       </Grid>
@@ -234,14 +261,14 @@ function SettingsPage() {
  
   <Button  onClick={() => {navigate(-1) }} variant="contained" 
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
     Cancel
   </Button>
  
-  <Button   variant="contained" onClick={() => {addCandidate(addObject,navigate,'/dashboard/candidate-list') }}
+  <Button   variant="contained" onClick={() => {}}
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
    {loading?"loading..." :"Submit"}
   </Button>

@@ -20,11 +20,63 @@ import IMG5 from '../assets/images/referrals.png';
 import DEFAULTIMG from 'src/assets/images/cooler-img.png'
 
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: '4rem',
+    paddingRight: '4rem',
+    color:"black"
+  },
+  searchInput: {
+    background: '#FFFFFF',
+   
+    border: '1px solid #00000026',
+    padding: '10px',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    // marginRight: theme.spacing(2),
+    width: '100%',
+    minWidth: '100%',
+    '& .MuiInputBase-input': {
+      color: 'grey',
+    },
+    '& .MuiInputBase-input::placeholder': {
+      color: 'grey',
+    },
+    '& .MuiInput-underline:before': {
+      borderBottomColor: 'grey',
+    },
+    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+      borderBottomColor: 'grey',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'grey',
+    },
+  },
+
+  select: {
+    '&:before': {
+        borderColor: "black",
+    },
+    '&:after': {
+        borderColor: "black",
+    }
+  },
+  icon: {
+    fill: "black",
+}
+
+
+
+}));
+
+
 function AddPatientReferral() {
   const navigate = useNavigate();
   const location = useLocation()
  // console.log("location is",location.state.levelName,location.state.uid)
-
+const classes = useStyles()
   
   const dispatch = useDispatch();
 
@@ -168,9 +220,14 @@ function AddPatientReferral() {
            
    </Grid>
   
-   <Grid item xs={7} style={{display:"flex",flexDirection:"column",justifyContent:"space-between",height:"16rem"}}>
+   <Grid item xs={7} style={{display:"flex",flexDirection:"column",justifyContent:"center",gap:"1rem",height:"16rem"}}>
    <Select
-         style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+   style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
+         inputProps={{
+          classes: {
+              icon: classes.icon,
+          },
+      }}
         
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -194,7 +251,7 @@ function AddPatientReferral() {
 
 
         {referralArray  &&
-             <div style={{padding: '10px', border: '1px solid #00000033',width:"100%" }}>
+             <div style={{padding: '10px', border: '1px solid #00000033',width:"100%" ,backgroundColor:"white",borderRadius:"1.3rem"}}>
                       <> 
                          &nbsp; 
                        {  referralArray.map((chipItem,index)=>(
@@ -222,16 +279,16 @@ function AddPatientReferral() {
  
   <Button  onClick={() => {navigate(-1) }} variant="contained" 
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
     Back
   </Button>
  
   <Button   variant="contained" onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/candidate-list')}}
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
-   {isItLoading?"loading..." :"Finish"}
+   {isItLoading?"loading..." :"Submit"}
   </Button>
 </div>
 </Container>

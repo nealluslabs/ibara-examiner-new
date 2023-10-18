@@ -34,7 +34,7 @@ const HEADER_DESKTOP = 92;
 
 const StyledRoot = styled(AppBar)(({ theme }) => ({
   ...bgBlur({ color: theme.palette.background.default }),
-  backgroundColor: '#5B8DDE',
+  backgroundColor: '#081B85',
   boxShadow: 'none',
   [theme.breakpoints.up('lg')]: {
     width: `calc(100% - ${NAV_WIDTH + 1}px)`,
@@ -83,34 +83,38 @@ export default function Header({ onOpenNav }) {
         <Box sx={{ flexGrow: 1 }} />
        
        
-        <Grid item xs={12} sx={{ display: 'flex',justifyContent:"space-between",gap:"4rem" ,alignItems: 'center' }}>
+        <Grid item xs={12} sx={{ display: 'flex',justifyContent:"space-between",gap:"4rem"  ,alignItems: 'center' }}>
          <Box sx={{ width: '100%' }}>
           <Link to={"/dashboard/candidate-list"}>
         <img  style={{height:"4rem"}} src={doctor} />
-        <p  style={{color:"black"}}>Candidates </p>
+        <p  style={{color:"white",marginTop:"1.1rem"}}>Candidates </p>
         </Link>
           </Box>
 
           <Box sx={{ width: '100%' }}>
           <Link to={"/dashboard/patient-list"}>
         <img style={{height:"4rem"}}  src={patient} />
-        <p style={{color:"black"}}>Patients </p>
+        <p style={{color:"white",marginTop:"1.1rem"}}>Patients </p>
         </Link>
           </Box>
 
-          <Box sx={{ width: '100%' }}>
-          <Link to={"/dashboard/add-patient-bio"}>
-        <img style={{height:"4rem"}}  src={settings} />
-        <p style={{color:"black",width:"max-content"}}>Set Conditions </p>
-        </Link>
-          </Box>
+
 
           <Box sx={{ width: '100%' }}>
           <Link to={"/dashboard/add-conditions-bloodinv"}>
         <img style={{height:"4rem"}}  src={injection} />
-        <p style={{color:"black"}}>Treatments </p>
+        <p style={{color:"white",marginTop:"1.1rem"}}>Treatments </p>
         </Link>
           </Box>
+
+          <Box sx={{ width: '100%' }}>
+          <Link to={"/dashboard/settings"}>
+        <img style={{height:"4rem"}}  src={settings} />
+        <p style={{color:"white",marginTop:"1.1rem",width:"max-content"}}>Settings </p>
+        </Link>
+          </Box>
+
+         
       &nbsp; &nbsp;
       <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
       
@@ -121,7 +125,7 @@ export default function Header({ onOpenNav }) {
         {/* <Searchbar /> */}
         {/* <Searchbar2 /> */}
         <Box sx={{ flexGrow: 1 }} />
-        <Typography variant="h6" sx={{color: '#000000', fontSize: '16px' }}>
+        <Typography variant="h6" sx={{color: '#ffffff', fontSize: '16px' }}>
         Examiner Module &nbsp;
         </Typography>
         <Stack

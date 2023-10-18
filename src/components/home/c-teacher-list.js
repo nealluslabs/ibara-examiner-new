@@ -98,7 +98,7 @@ function TablePaginationActions(props) {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor:'#000000'/* "#60A1EC"*/,
+    backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))",
     color: theme.palette.common.white,
     width:150
   },
@@ -234,7 +234,7 @@ export default function TeacherList({teachers}) {
       <p style={{fontSize: '26px', marginLeft: '5px',marginBottom:"1rem", color: 'black',display:"flex",justifyContent:"space-between"}}>
         <b>ALL PATIENTS</b> 
          
-         {/*
+         
           <Button
                    
               type="button"
@@ -250,7 +250,7 @@ export default function TeacherList({teachers}) {
                onClick={() => {navigate('/dashboard/add-patient-bio')}}
              >
                ADD PATIENT
-                  </Button> */}
+                  </Button> 
         </p>
 
 

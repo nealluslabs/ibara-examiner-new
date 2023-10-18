@@ -94,7 +94,7 @@ function AddPatientHistory() {
         </Grid>
    
 
-        <Grid container spacing={2} style={{display:"flex",justifyContent:"flex-start",alignItems:"flex-start",height:"450px",margin:"0 auto",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
+        <Grid container spacing={2} style={{display:"flex",justifyContent:"center",alignItems:"center",height:"450px",margin:"0 auto",backgroundColor:"#081B85",width:"60%",padding:"1rem",borderRadius:"3rem"}}>
 
 <Grid container item xs={12} spacing={1}  style={{height:"100%",width:"100%",display:"flex",justifyContent:"center",alignItems:"center"}} >
     {/*  <Grid item xs={3}>
@@ -118,7 +118,7 @@ function AddPatientHistory() {
        /*maxRows={2}*/
        value= {history}
        onChange = {(e)=>{setHistory(e.target.value)}}
-       style={{position:"relative",left:"-10%",backgroundColor:"#FFFFFF",borderRadius:"3rem",height:"100%",width:"120%"}}
+       style={{position:"relative",left:"-10%",backgroundColor:"#FFFFFF",borderRadius:"1.2rem",height:"100%",width:"120%"}}
       // InputProps={style={borderRadius:"3rem"}}
       InputProps={{
         borderRadius:"3rem"
@@ -137,14 +137,14 @@ function AddPatientHistory() {
  
   <Button  onClick={() => {navigate(-1) }} variant="contained" 
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
     Back
   </Button>
  
   <Button   variant="contained" onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/add-patient-bloodInv') }}
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
    {loading?"loading..." :"Next"}
   </Button>

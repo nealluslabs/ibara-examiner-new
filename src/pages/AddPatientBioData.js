@@ -219,7 +219,7 @@ function AddPatientBioData() {
           <Grid item xs={7}>
           <Select
          
-         style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+         style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={icon}
@@ -357,14 +357,14 @@ function AddPatientBioData() {
  
   <Button  onClick={() => {navigate(-1) }} variant="contained" 
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
     Back
   </Button>
  
   <Button   variant="contained" onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/add-patient-arrival') }}
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
    {loading?"loading..." :"Next"}
   </Button>

@@ -144,7 +144,7 @@ const prescriptionHandler = (prescriptionString)=>{
              <div style={{backgroundColor: "#A160E4",padding:"0.1rem",border:'4.5px solid #4C4E37', borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}}>
              <div style={{padding:"0.3rem"}}>
                    
-                   <img src={IMG4}  alt="prescription icon"  />
+                   <img src={IMG4} style={{width:"5rem",aspectRatio: "2 / 2"}} alt="prescription icon"  />
                    
                    </div>
             </div>
@@ -156,7 +156,7 @@ const prescriptionHandler = (prescriptionString)=>{
            <div style={{backgroundColor: '#E5EEF9', padding:"0.1rem",borderRadius: '9px', cursor: 'pointer',marginRight:"7rem",marginLeft:"1rem"}}>
            <div style={{padding:"0.3rem"}}>
                    
-                   <img src={IMG5}  alt="referrals icon"  />
+                   <img src={IMG5} style={{width:"5rem",aspectRatio: "2 / 2"}}  alt="referrals icon"  />
                    
                    </div>
           </div> 
@@ -166,7 +166,7 @@ const prescriptionHandler = (prescriptionString)=>{
   
            <Grid item xs={7}>
        <TextField
-       style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+       style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
        fullWidth
        placeholder=" Add prescription"
        variant="outlined"
@@ -190,14 +190,14 @@ const prescriptionHandler = (prescriptionString)=>{
  
   <Button  onClick={() => {navigate(-1) }} variant="contained" 
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
     Back
   </Button>
  
   <Button   variant="contained" onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/add-patient-referral') }}
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
    {loading?"loading..." :"Next"}
   </Button>

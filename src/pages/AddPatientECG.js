@@ -127,9 +127,9 @@ function AddPatientECG() {
                 </Grid>
     
        
-                <Grid item xs={7}>
+                <Grid item xs={7} style={{position:"relative",top:"7.5rem"}}>
                  <TextField
-                 style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%",marginLeft:"1.6rem"}}
+                 style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%",marginLeft:"1.6rem"}}
                  fullWidth
                  placeholder=" Response time in minutes"
                  variant="outlined"
@@ -188,26 +188,21 @@ function AddPatientECG() {
          </Grid>
 
        
-                <Grid item xs={7}  style={{border: '0px solid red'}}>
-                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }}>
-                    <CardMedia
-                      style={{ border: '0.2px solid black', backgroundColor: '#fff', width: '240px' }}
-                      component="img"
-                      height="240"
-                      width="540"
-                      image={file?file : DEFAULTIMG}
-                      alt="IMG"
-                    /> 
-                    <p style={{color:"black"}}> {selectedFile && selectedFile.selectedFileName ?selectedFile.selectedFileName  :" "} </p>
-                    <Button component="label" variant="contained" style={{ minHeight: '45px', minWidth: '145px', backgroundColor: '#081B85', marginTop: '15px' }}>
-                      <b>UPLOAD</b>
-                      <input
-                        type="file"
-                        style={{ display: 'none' }}
-                        onChange={handleselectedFile}
-                      />
-                    </Button>
-                  </div>
+                <Grid item xs={7}  style={{border: '0px solid red',position:"relative",top:"4rem"}}>
+                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', gap:"1.1rem" }}>
+  
+             
+              <Button component="label" variant="contained" style={{ minHeight: '45px', minWidth: '195px',borderRadius:"1rem", backgroundColor: '#081B85' }}>
+                <b>UPLOAD</b>
+                <input
+                  type="file"
+                  style={{ display: 'none' }}
+                  onChange={handleselectedFile}
+                />
+              </Button>
+            
+              <p style={{color:"white"}}> {selectedFile && selectedFile.selectedFileName ?selectedFile.selectedFileName  :" "} </p>
+            </div>
               </Grid>
         </Grid>
 
@@ -245,14 +240,14 @@ function AddPatientECG() {
  
   <Button  onClick={() => {navigate(-1) }} variant="contained" 
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
     Back
   </Button>
  
   <Button   variant="contained" onClick={() => {addToPatientProcess(addObject,navigate,'/dashboard/add-patient-prescription')}}
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
    {loading?"loading..." :"Next"}
   </Button>

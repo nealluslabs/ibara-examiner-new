@@ -122,7 +122,7 @@ function AddTeacher() {
 
           <Grid item xs={7}>
             <TextField
-             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+             style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
             fullWidth
             placeholder=" "
             variant="outlined"
@@ -163,7 +163,7 @@ function AddTeacher() {
 
           <Grid item xs={7}>
             <TextField
-             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+             style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
             fullWidth
             placeholder=" "
             variant="outlined"
@@ -199,7 +199,7 @@ function AddTeacher() {
 
           <Grid item xs={7}>
             <TextField
-             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+             style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
             fullWidth
             placeholder=" "
             variant="outlined"
@@ -234,7 +234,7 @@ function AddTeacher() {
 
           <Grid item xs={7}>
             <TextField
-             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+             style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
             fullWidth
             placeholder=" "
             variant="outlined"
@@ -270,7 +270,7 @@ function AddTeacher() {
 
           <Grid item xs={7}>
             <TextField
-             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+             style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
             fullWidth
             placeholder=" "
             variant="outlined"
@@ -305,7 +305,7 @@ function AddTeacher() {
 
           <Grid item xs={7}>
             <TextField
-             style={{backgroundColor:"#FFFFFF",borderRadius:"0.75rem",width:"100%"}}
+             style={{backgroundColor:"#FFFFFF",borderRadius:"0.1rem",width:"100%"}}
             fullWidth
             placeholder=" "
             variant="outlined"
@@ -357,7 +357,7 @@ function AddTeacher() {
  
   <Button  onClick={() => {navigate(-1) }} variant="contained" 
   style={{ backgroundImage:"linear-gradient(rgba(8, 27, 133, 1), rgba(8, 27, 133, 0.9))"/*"#F97D0B"*/, paddingTop: '10px', paddingBottom: '10px', 
-  paddingRight: '30px', paddingLeft: '30px'}}
+  paddingRight: '30px', paddingLeft: '30px',width:"180px",borderRadius:"1rem"}}  
 >
     BACK
   </Button>
