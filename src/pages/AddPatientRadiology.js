@@ -78,14 +78,14 @@ const classes = useStyles()
   const dispatch = useDispatch();
 
   const { patientProcessSteps } = useSelector((state) => state.group);
-  const [radiologyCategory,setRadiologyCategory] = useState(patientProcessSteps &&patientProcessSteps.radiologyCategory?patientProcessSteps.radiologyCategory:"")
-  const [radiologyCategoryId,setRadiologyCategoryId] = useState(patientProcessSteps &&patientProcessSteps.radiologyCategoryId?patientProcessSteps.radiologyCategoryId:"")
+  const [radiologyCategory,setRadiologyCategory] = useState(patientProcessSteps &&patientProcessSteps.radiologyCategory?patientProcessSteps.radiologyCategory:null)
+  const [radiologyCategoryId,setRadiologyCategoryId] = useState(patientProcessSteps &&patientProcessSteps.radiologyCategoryId?patientProcessSteps.radiologyCategoryId:null)
  
   const [radiologyTestArray,setRadiologyTestArray] = useState(patientProcessSteps &&patientProcessSteps.radiologyTestArray?patientProcessSteps.radiologyTestArray:[])
   const [radiologyTestIdArray,setRadiologyTestIdArray] = useState(patientProcessSteps &&patientProcessSteps.radiologyTestIdArray?patientProcessSteps.radiologyTestIdArray:[])
   const [radiologyTestIdFake,setRadiologyTestIdFake] = useState('')
 
-  const [radiologyResponseTime,setRadiologyResponseTime]= useState(patientProcessSteps &&patientProcessSteps.radiologyResponseTime?patientProcessSteps.radiologyResponseTime:'')
+  const [radiologyResponseTime,setRadiologyResponseTime]= useState(patientProcessSteps &&patientProcessSteps.radiologyResponseTime?patientProcessSteps.radiologyResponseTime:null)
 
   const [selectedFile, setSelectedFile] = useState({selectedFile:patientProcessSteps &&patientProcessSteps.radiologyAnswerImage?patientProcessSteps.radiologyAnswerImage:[], selectedFileName:patientProcessSteps &&patientProcessSteps.radiologyAnswerImage?patientProcessSteps.radiologyAnswerImage.name: []});
   const [file,setFile] = useState(patientProcessSteps && patientProcessSteps.radiologyAnswerImage?patientProcessSteps.radiologyAnswerImage:null)
@@ -161,12 +161,18 @@ console.log("patient process steps so far--->",patientProcessSteps)
 
   const addToPatientProcess = async(addObject,navigate,navigateUrl)=> {
     
-    if(!radiologyResponseTime||!radiologyCategory||!radiologyCategoryId||radiologyTestArray.length <1||radiologyTestIdArray.length <1 ||(selectedFile.selectedFile.length <1)  ){
+    /*if( (radiologyCategory  && (!radiologyResponseTime||!radiologyCategoryId||radiologyTestArray.length <1||radiologyTestIdArray.length <1 ||(selectedFile.selectedFile.length <1)) ) ||
+    
+    (radiologyResponseTime  && (!radiologyCategory||!radiologyCategoryId||radiologyTestArray.length <1||radiologyTestIdArray.length <1 ||(selectedFile.selectedFile.length <1)) ) ||
+
+    ((selectedFile.selectedFile.length >0)  && (!radiologyCategory||!radiologyCategoryId||radiologyTestArray.length <1||radiologyTestIdArray.length <1 || !radiologyResponseTime) )
+    ){
       
       
-      notifyErrorFxn("Please make sure to fill in all fields.")
-    }
-    else{
+      notifyErrorFxn("Please fill in all fields if you intend to submit radiology details, otherwise leave all fields blank")
+   /*  } else{*/
+
+    
 
     setLoading(true)
     dispatch(fetchPatientProcessSteps(addObject,navigate,navigateUrl))
@@ -174,7 +180,7 @@ console.log("patient process steps so far--->",patientProcessSteps)
     
     setTimeout(()=>{setLoading(false)},1800)
     
-   } 
+  /* } */
   }
 
 

@@ -87,14 +87,14 @@ function AddPatientBloodInv() {
 
   const { patientProcessSteps } = useSelector((state) => state.group);
 
-  const [bloodInvCategory,setBloodInvCategory] = useState(patientProcessSteps &&patientProcessSteps.bloodInvCategory?patientProcessSteps.bloodInvCategory:"")
-  const [bloodInvCategoryId,setBloodInvCategoryId] = useState(patientProcessSteps &&patientProcessSteps.bloodInvCategoryId?patientProcessSteps.bloodInvCategoryId:"")
+  const [bloodInvCategory,setBloodInvCategory] = useState(patientProcessSteps &&patientProcessSteps.bloodInvCategory?patientProcessSteps.bloodInvCategory:null)
+  const [bloodInvCategoryId,setBloodInvCategoryId] = useState(patientProcessSteps &&patientProcessSteps.bloodInvCategoryId?patientProcessSteps.bloodInvCategoryId:null)
  
   const [bloodInvTestArray,setBloodInvTestArray] = useState(patientProcessSteps &&patientProcessSteps.bloodInvTestArray?patientProcessSteps.bloodInvTestArray:[])
   const [bloodInvTestIdArray,setBloodInvTestIdArray] = useState(patientProcessSteps &&patientProcessSteps.bloodInvTestIdArray?patientProcessSteps.bloodInvTestIdArray:[])
   const [bloodInvTestIdFake,setBloodInvTestIdFake] = useState('')
 
-  const [bloodInvResponseTime,setBloodInvResponseTime]= useState(patientProcessSteps &&patientProcessSteps.bloodInvResponseTime?patientProcessSteps.bloodInvResponseTime:'')
+  const [bloodInvResponseTime,setBloodInvResponseTime]= useState(patientProcessSteps &&patientProcessSteps.bloodInvResponseTime?patientProcessSteps.bloodInvResponseTime:null)
 
   const [selectedFile, setSelectedFile] = useState({selectedFile:patientProcessSteps &&patientProcessSteps.bloodInvAnswerImage?patientProcessSteps.bloodInvAnswerImage:[], selectedFileName:patientProcessSteps &&patientProcessSteps.bloodInvAnswerImage?patientProcessSteps.bloodInvAnswerImage.name: []});
   const [file,setFile] = useState(patientProcessSteps && patientProcessSteps.bloodInvAnswerImage?patientProcessSteps.bloodInvAnswerImage:null)
@@ -155,12 +155,12 @@ const handleDelete = (tbr,tbrId) => {
 
   const addToPatientProcess = async(addObject,navigate,navigateUrl)=> {
     
-    if(!bloodInvResponseTime||!bloodInvCategory||!bloodInvCategoryId||bloodInvTestArray.length <1||bloodInvTestIdArray.length <1 ||(selectedFile.selectedFile.length <1) ){
+   /* if(!bloodInvResponseTime||!bloodInvCategory||!bloodInvCategoryId||bloodInvTestArray.length <1||bloodInvTestIdArray.length <1 ||(selectedFile.selectedFile.length <1) ){
       
       
       notifyErrorFxn("Please make sure to fill in all fields.")
-    }
-    else{
+    }*/
+    /*else{*/
 
     setLoading(true)
     dispatch(fetchPatientProcessSteps(addObject,navigate,navigateUrl))
@@ -168,7 +168,7 @@ const handleDelete = (tbr,tbrId) => {
     
     setTimeout(()=>{setLoading(false)},1800)
     
-   } 
+   /*} */
   }
 
 

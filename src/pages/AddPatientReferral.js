@@ -151,12 +151,12 @@ const classes = useStyles()
 
   const addToPatientProcess = async(addObject,navigate,navigateUrl)=> {
     
-    if(referralArray.length <1||referralIdArray.length <1  ){
+  /*  if(referralArray.length <1||referralIdArray.length <1  ){
       
       
-      notifyErrorFxn("Please make sure to fill in all fields.")
+      notifyErrorFxn("Please fill in all fields if you intend to submit radiology details, otherwise leave all fields blank.")
     }
-    else{
+    else{*/
 
  new Promise((resolve,reject)=>{
    resolve(setLoading(true))
@@ -167,7 +167,7 @@ const classes = useStyles()
     )
     
     
-   } 
+  /* } */
   }
  
 

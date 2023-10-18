@@ -74,12 +74,14 @@ function AddPatientECG() {
 
   const addToPatientProcess = async(addObject,navigate,navigateUrl)=> {
     
-    if(!ecgResponseTime||(selectedFile.selectedFile.length <1) ){
+   /* if( (ecgResponseTime && (selectedFile.selectedFile.length <1)) ||
+    ((selectedFile.selectedFile.length >0) &&  !ecgResponseTime) 
+    ){
       
       
-      notifyErrorFxn("Please make sure to fill in all fields.")
+      notifyErrorFxn("Please fill in all fields if you intend to submit ecg details, otherwise leave all fields blank")
     }
-    else{
+    else{*/
 
     setLoading(true)
     dispatch(fetchPatientProcessSteps(addObject,navigate,navigateUrl))
@@ -87,7 +89,7 @@ function AddPatientECG() {
     
     setTimeout(()=>{setLoading(false)},1800)
     
-   } 
+  /* } */
   }
 
 
