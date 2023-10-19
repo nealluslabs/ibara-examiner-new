@@ -1,5 +1,5 @@
 import { Container,Grid, TextField, Typography, TextareaAutosize, Button, Paper,Divider,Box,InputAdornment} from '@mui/material';
-import { useRef, useState} from 'react';
+import { useRef, useState,useEffect} from 'react';
 import { useNavigate,useLocation, Link } from 'react-router-dom';
 import UPLOADIMG from '../assets/images/upload.png';
 import { addTeacher,fetchPatientProcessSteps} from 'src/redux/actions/group.action';
@@ -139,8 +139,16 @@ const handleDelete = (tbr,tbrId) => {
   
 
 
-  const { categoryVideos,allTreatmentCategories,subjectInfo } = useSelector((state) => state.group);
- 
+  const { categoryVideos,allTreatmentCategories } = useSelector((state) => state.group);
+  const [allTreatmentCategories2,setAllTreatmentCategories2] = useState(allTreatmentCategories && [{title:'',uid:'',treatmentCategoryId:'first',treatmentId:'first'},...allTreatmentCategories])
+  const [categoryVideos2,setCategoryVideos2] = useState(categoryVideos && [{title:'',uid:'',treatmentCategoryId:'first',treatmentId:'first'},...categoryVideos])
+
+  useEffect(()=>{
+
+    setAllTreatmentCategories2( [{title:'',uid:'',treatmentCategoryId:'first',treatmentId:'first'},...allTreatmentCategories])
+    setCategoryVideos2( [{title:'',uid:'',treatmentCategoryId:'first',treatmentId:'first'},...categoryVideos])
+  },[])
+
 
   const addObject ={
     ...patientProcessSteps,
@@ -265,7 +273,7 @@ const handleDelete = (tbr,tbrId) => {
         >
        
              
-       {categoryVideos && categoryVideos.length >0 && categoryVideos.filter((me)=>(me.treatmentId === '7aHB3TreYQYh3bzBS65K')).length > 0 ? categoryVideos.filter((me)=>(me.treatmentId === '7aHB3TreYQYh3bzBS65K')).map((kiwi)=>(
+       {categoryVideos2 && categoryVideos2.length >0 && categoryVideos2.filter((me)=>(me.treatmentId === '7aHB3TreYQYh3bzBS65K'/*||me.treatmentId === 'first'*/)).length > 0 ? categoryVideos2.filter((me)=>(me.treatmentId === '7aHB3TreYQYh3bzBS65K'/*|| me.treatmentId === 'first'*/)).map((kiwi)=>(
   <MenuItem style={{color:"black",display:"block"}} value={kiwi.uid}>{kiwi.title}</MenuItem>
 )):
 <MenuItem style={{color:"black",display:"block"}}  value={null}>{"No items listed!"}</MenuItem>
